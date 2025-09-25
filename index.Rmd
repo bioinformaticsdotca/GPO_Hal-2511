@@ -22,7 +22,7 @@ Welcome to the 2025 Genomics for Precision Oncology Canadian Bioinformatics Work
 
 ## Pre-work
 
-<!--[You can find your pre-work here.](LINK TO PREWORK)-->
+<!--[You can find your pre-work here.](LINK TO PREWORK) -->
 
 ## Class Photo
 
