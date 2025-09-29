@@ -31,7 +31,9 @@ bookdown::gitbook:
         <a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
         <br><br>
         <a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
-
+        <a href="https://oicr.on.ca/"><img src="img/sponsors/hpc4health.png" width=55% style="display:inline-block;" style="padding-bottom: 20px" alt="HPC4Health logo.">
+        <a href="https://oicr.on.ca/"><img src="img/sponsors/BHCRI_logo-transparent.png" width=90% style="display:inline-block;" style="padding-bottom: 20px" alt="Beatrice Hunter Cancer Research Institute logo.">
+        <a href="https://oicr.on.ca/"><img src="img/sponsors/dal-logo-horizontal-colour.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Dalhousie University logo.">
 
     edit: https://github.com/bioinformaticsdotca/GPO_Hal-2511/blob/main/%s
 
