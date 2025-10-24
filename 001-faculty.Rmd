@@ -12,3 +12,69 @@ LOCATION
 
 BIO GOES HERE-->
 
+### Instructors
+
+#### Dr. Dan Gaston (he/him)
+
+<img src="./img/faculty/dan-gaston.jpg" width="200" alt="Photo of Dan Gaston">
+
+>Clinical Bioinformatician/Assistant Professor <br>
+NS Health and Dalhousie University  <br>
+Halifax, NS, Canada 
+>
+> --- daniel.gaston@dal.ca 
+
+Dan Gaston is a Clinical Bioinformatician working at NS Health in the Molecular Diagnostics Lab and an Assistant Professor in the Department of Pathology at Dalhousie University. His work and research focuses on high-throughput genomic and transcriptomic profiling of solid tumours and hematological cancers of patients in Nova Scotia and the rest of Atlantic Canada. He also works on the design and application of bioinformatics tools in clinical care and translational research settings.
+
+#### Dr. Victor Martinez
+
+<img src="./img/faculty/victor-martinez.jpg" width="200" alt="Photo of Vicor Martinez">
+
+>Clinical Genomics Specialist and Lead of Data Analytics/Assistant Professor <br>
+IWK Health and Dalhousie University <br>
+Halifax, NS, Canada
+>
+
+<!--BIO GOES HERE -->
+
+### Teaching Assistants
+
+#### Riley Arseneau (she/her)
+
+<img src="./img/faculty/riley-arseneau.jpeg" width="200" alt="Photo of Riley Arseneau">
+
+>PhD Student <br>
+Dalhousie University <br>
+Halifax, Nova Scotia, Canada 
+>
+> --- Rarseneau@dal.ca
+
+Riley Arseneau (she/her) is a fourth-year PhD Student investigating the correlations between genetics, immune cells, and pancreatic cancer in the Boudreau lab at Dalhousie University. 
+
+#### Sarah Russell (she/her)
+
+<img src="./img/faculty/sarah-russell.png" width="200" alt="Photo of Sarah Russell">
+
+>Genetic Analysis Specialist  <br>
+IWK Health <br>
+Halifax, Nova Scotia, Canada 
+>
+> --- sarah.russell@iwk.nshealth.ca 
+
+Sarah Russell is a Genetic Analysis Specialist at IWK Health, where she applies bioinformatics tools to support the clinical interpretation of genomic data. Her work focuses on developing and maintaining NGS workflows that ensure the accuracy and quality of genetic test results and clinical reporting. Her previous work involved the development and validation of bioinformatic solutions for somatic profiling of solid tumor panels used in clinical diagnostics.
+
+### Facilitator
+
+#### Ben Fisher (he/him)
+
+<img src="./img/faculty/ben-fisher.jpg" width="200" alt="Photo of Ben Fisher">
+
+>Regional Coordinator, CBH Atlantic <br>
+Canadian Bioinformatics Hub, Dalhousie University  <br>
+Halifax, NS, Canada 
+>
+> --- atlantic@bioinformatics.ca 
+
+Ben has a Master of Science degree in Microbiology and Immunology, completing his bioinformatics training under Dr. Morgan Langille at Dalhousie University. Throughout his training, he has instructed others in genetics, molecular biology, and microbiome data science. Ben is passionate about continued education of trainees and professionals, and firmly believes that enhancing bioinformatics and computational biology competencies will support the success of Canada’s current and future scientists.
+
+
