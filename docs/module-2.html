@@ -30,7 +30,7 @@
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="module-1.html"/>
-<link rel="next" href="module-3.html"/>
+<link rel="next" href="module-3-lab-clinical-variant-interpretation-with-franklin.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -76,6 +76,71 @@
 </script>
 
 
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <style type="text/css">
   
@@ -108,7 +173,11 @@
 <li class="part"><span><b>I Introduction</b></span></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#create-a-franklin-account"><i class="fa fa-check"></i>1. Create a Franklin Account</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#download-and-install-igv-integrative-genomics-viewer"><i class="fa fa-check"></i>2. Download and Install IGV (Integrative Genomics Viewer)</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
 </ul></li>
@@ -128,23 +197,171 @@
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-1"><i class="fa fa-check"></i>Lab</a>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-part-1"><i class="fa fa-check"></i>Lab (Part 1)</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#aws-and-unix-basics"><i class="fa fa-check"></i>AWS and Unix Basics</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#docker"><i class="fa fa-check"></i>Docker</a></li>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#investigating-some-genomics-file-formats-and-metadata"><i class="fa fa-check"></i>Investigating Some Genomics File Formats and Metadata</a></li>
-<li><a href="module-2.html#section" id="toc-section"></a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-part-2---implementing-the-gatk-best-practices-workflow"><i class="fa fa-check"></i>Lab (Part 2) - Implementing the GATK Best Practices Workflow</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lecture-2"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html#lab-2"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#fastqc-quality-control"><i class="fa fa-check"></i>FastQC Quality Control</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#alignmentshort-read-mapping-with-bwa-mem"><i class="fa fa-check"></i>Alignment/Short-Read Mapping with BWA-MEM</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#gatk-pre-processing"><i class="fa fa-check"></i>GATK Pre-Processing</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#putting-everything-together"><i class="fa fa-check"></i>Putting Everything Together</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#viewing-bams-in-igv"><i class="fa fa-check"></i>Viewing BAMs in IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#somatic-variant-calling-with-mutect2"><i class="fa fa-check"></i>Somatic Variant Calling with MuTect2</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#variant-annotation-with-vep"><i class="fa fa-check"></i>Variant Annotation with VEP</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html"><i class="fa fa-check"></i>Module 4</a>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#answers-to-guiding-questions"><i class="fa fa-check"></i>Answers to Guiding Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html"><i class="fa fa-check"></i>Module 3 Lab: Clinical Variant Interpretation with Franklin</a>
 <ul>
-<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#lecture-3"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-4.html"><a href="module-4.html#lab-3"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#lab-overview"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-1-account-creation-and-platform-navigation"><i class="fa fa-check"></i>Part 1: Account Creation and Platform Navigation</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-your-franklin-account"><i class="fa fa-check"></i>Creating Your Franklin Account</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#platform-navigation-understanding-the-main-interface"><i class="fa fa-check"></i>Platform Navigation: Understanding the Main Interface</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-and-searching-for-variants"><i class="fa fa-check"></i>Creating and Searching for Variants</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-new-cases"><i class="fa fa-check"></i>Creating New Cases</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#understanding-franklins-automated-classification-logic"><i class="fa fa-check"></i>Understanding Franklin’s Automated Classification Logic</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-2-exploring-variant-classification"><i class="fa fa-check"></i>Part 2: Exploring Variant Classification</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-1-searching-for-a-variant"><i class="fa fa-check"></i>Step 1: Searching for a Variant</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-2-understanding-the-classification-workspace"><i class="fa fa-check"></i>Step 2: Understanding the Classification Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-3-reviewing-automatically-assigned-acmg-codes"><i class="fa fa-check"></i>Step 3: Reviewing Automatically Assigned ACMG Codes</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-4-deep-dive-into-population-data-pm2-example"><i class="fa fa-check"></i>Step 4: Deep Dive into Population Data (PM2 Example)</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-5-editing-evidence-strength"><i class="fa fa-check"></i>Step 5: Editing Evidence Strength</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-6-exploring-additional-evidence-categories"><i class="fa fa-check"></i>Step 6: Exploring Additional Evidence Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-3-uploading-and-classifying-your-case-vcf-45-minutes"><i class="fa fa-check"></i>Part 3: Uploading and Classifying Your Case VCF (45 minutes)</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-1-download-your-case-data"><i class="fa fa-check"></i>Step 1: Download Your Case Data</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-2-create-a-new-case-in-franklin"><i class="fa fa-check"></i>Step 2: Create a New Case in Franklin</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-4-variant-interpretation"><i class="fa fa-check"></i>Part 4: Variant interpretation</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-3-navigating-to-your-case"><i class="fa fa-check"></i>Step 3: Navigating to Your Case</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-4-reviewing-brca2-variants-in-your-case"><i class="fa fa-check"></i>Step 4: Reviewing BRCA2 Variants in Your Case</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-5-adding-patient-phenotype-information"><i class="fa fa-check"></i>Step 5: Adding Patient Phenotype Information</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-6-exploring-case-level-quality-control-and-variant-filtering"><i class="fa fa-check"></i>Step 6: Exploring Case-Level Quality Control and Variant Filtering</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-7-deep-dive-into-variant-classification-brca2c.1813dup"><i class="fa fa-check"></i>Step 7: Deep Dive into Variant Classification: BRCA2:c.1813dup</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#reviewing-the-franklin-acmg-classification"><i class="fa fa-check"></i>Reviewing the Franklin ACMG Classification</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#exploring-the-variant-assessment-tab"><i class="fa fa-check"></i>Exploring the Variant Assessment Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#exploring-associated-conditions"><i class="fa fa-check"></i>Exploring Associated Conditions</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#using-the-publications-tab"><i class="fa fa-check"></i>Using the Publications Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#gene-assessment-tab"><i class="fa fa-check"></i>Gene Assessment Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-8-finalizing-your-classification-and-creating-a-clinical-report"><i class="fa fa-check"></i>Step 8: Finalizing Your Classification and Creating a Clinical Report</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-5-extension-exercise-optional"><i class="fa fa-check"></i>Part 5: Extension Exercise (Optional)</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><i class="fa fa-check"></i>Module 4 Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#learning-objectives-1"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#background"><i class="fa fa-check"></i>Background</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#peutz-jeghers-syndrome"><i class="fa fa-check"></i>Peutz-Jeghers Syndrome</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#the-stk11-gene-and-disease-mechanism"><i class="fa fa-check"></i>The STK11 Gene and Disease Mechanism</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#rationale-for-manual-review"><i class="fa fa-check"></i>Rationale for Manual Review</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-1-installing-the-integrative-genomics-viewer"><i class="fa fa-check"></i>Section 1: Installing the Integrative Genomics Viewer</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#overview-of-igv"><i class="fa fa-check"></i>Overview of IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-download-igv"><i class="fa fa-check"></i>Step 1: Download IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#windows-systems"><i class="fa fa-check"></i>Windows Systems</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-systems"><i class="fa fa-check"></i>macOS Systems</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-installation-procedures"><i class="fa fa-check"></i>Step 2: Installation Procedures</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#windows-installation"><i class="fa fa-check"></i>Windows Installation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-installation"><i class="fa fa-check"></i>macOS Installation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-installation-verification"><i class="fa fa-check"></i>Step 3: Installation Verification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#troubleshooting-common-issues"><i class="fa fa-check"></i>Troubleshooting Common Issues</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#java-runtime-not-found"><i class="fa fa-check"></i>Java Runtime Not Found</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-gatekeeper-restrictions"><i class="fa fa-check"></i>macOS Gatekeeper Restrictions</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#application-launch-failure"><i class="fa fa-check"></i>Application Launch Failure</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-2-acquiring-case-study-data-files"><i class="fa fa-check"></i>Section 2: Acquiring Case Study Data Files</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#binary-alignment-map-bam-files-and-indices"><i class="fa fa-check"></i><strong>Binary Alignment Map (BAM) Files and Indices</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#browser-extensible-data-bed-annotation-tracks"><i class="fa fa-check"></i><strong>Browser Extensible Data (BED) Annotation Tracks</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-accessing-data-files-via-jupyter-notebook"><i class="fa fa-check"></i>Step 1: Accessing Data Files via Jupyter Notebook</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-local-directory-organization"><i class="fa fa-check"></i>Step 2: Local Directory Organization</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-downloading-files-from-jupyter-to-your-local-machine"><i class="fa fa-check"></i>Step 3: Downloading Files from Jupyter to Your Local Machine</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-3-loading-data-into-igv-and-navigating-to-stk11"><i class="fa fa-check"></i>Section 3: Loading Data into IGV and Navigating to STK11</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-verifying-genome-build-selection"><i class="fa fa-check"></i>Step 1: Verifying Genome Build Selection</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-loading-bam-alignment-files"><i class="fa fa-check"></i>Step 2: Loading BAM Alignment Files</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-loading-bed-annotation-files"><i class="fa fa-check"></i>Step 3: Loading BED Annotation Files</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-4-navigating-to-the-stk11-gene-region"><i class="fa fa-check"></i>Step 4: Navigating to the STK11 Gene Region</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-5-normalizing-coverage-scale-across-samples"><i class="fa fa-check"></i>Step 5: Normalizing Coverage Scale Across Samples</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-focused-navigation-to-the-deletion-region"><i class="fa fa-check"></i>Step 6: Focused Navigation to the Deletion Region</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-verification"><i class="fa fa-check"></i>Step 7: Verification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#common-issues-and-troubleshooting"><i class="fa fa-check"></i>Common Issues and Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-4-quality-assessment-of-the-suspected-deletion"><i class="fa fa-check"></i>Section 4: Quality Assessment of the Suspected Deletion</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-configuring-igv-display-settings-for-coverage-analysis"><i class="fa fa-check"></i>Step 1: Configuring IGV Display Settings for Coverage Analysis</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-quantitative-coverage-analysis"><i class="fa fa-check"></i>Step 2: Quantitative Coverage Analysis</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-mapping-quality-assessment"><i class="fa fa-check"></i>Step 3: Mapping Quality Assessment</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-4-deletion-breakpoint-definition"><i class="fa fa-check"></i>Step 4: Deletion Breakpoint Definition</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-5-assessment-of-problematic-genomic-regions"><i class="fa fa-check"></i>Step 5: Assessment of Problematic Genomic Regions</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-evaluation-of-supporting-genetic-evidence"><i class="fa fa-check"></i>Step 6: Evaluation of Supporting Genetic Evidence</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-integrating-evidence-and-reaching-a-quality-assessment-conclusion"><i class="fa fa-check"></i>Step 7: Integrating Evidence and Reaching a Quality Assessment Conclusion</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#proceeding-to-clinical-variant-interpretation"><i class="fa fa-check"></i>Proceeding to Clinical Variant Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-5-clinical-interpretation-of-copy-number-loss-using-clingen-guidelines"><i class="fa fa-check"></i>Section 5: Clinical Interpretation of Copy Number Loss Using ClinGen Guidelines</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#overview-of-clingen-cnv-interpretation-framework"><i class="fa fa-check"></i>Overview of ClinGen CNV Interpretation Framework</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#accessing-the-clingen-cnv-loss-calculator"><i class="fa fa-check"></i>Accessing the ClinGen CNV Loss Calculator</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-1---initial-assessment-of-genomic-content"><i class="fa fa-check"></i>Section 1 - Initial Assessment of Genomic Content</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-1a-does-the-cnv-include-any-protein-coding-or-other-critical-genomic-elements"><i class="fa fa-check"></i>Criterion 1A: Does the CNV include any protein-coding or other critical genomic elements?</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-2---overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Section 2 - Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2a-does-the-cnv-completely-overlap-an-established-hi-gene-or-genomic-region"><i class="fa fa-check"></i><strong>Criterion 2A: Does the CNV completely overlap an established HI gene or genomic region?</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2b-2e-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Criterion 2B-2E: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2f-g-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Criterion 2F-G: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-3---evaluation-of-gene-number"><i class="fa fa-check"></i><strong>Section 3 - Evaluation of Gene Number</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-4---detailed-evaluation-of-genomic-content-using-published-literature-public-databases-andor-internal-lab-data"><i class="fa fa-check"></i><strong>Section 4 - Detailed Evaluation of Genomic Content Using Published Literature, Public Databases, and/or Internal Lab Data</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-5---evaluation-of-inheritance-patternfamily-history-for-patient-being-studied"><i class="fa fa-check"></i>Section 5 - Evaluation of Inheritance Pattern/Family History for Patient Being Studied</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-5h-inheritance-information-unavailable-or-uninformative-with-highly-specific-consistent-phenotype"><i class="fa fa-check"></i>Criterion 5H: Inheritance information unavailable or uninformative, with highly specific consistent phenotype</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-calculating-the-final-classification"><i class="fa fa-check"></i>Step 6: Calculating the Final Classification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-clinical-recommendations-and-validation"><i class="fa fa-check"></i>Step 7: Clinical Recommendations and Validation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#references"><i class="fa fa-check"></i>References</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#primary-literature"><i class="fa fa-check"></i>Primary Literature</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#software-and-databases"><i class="fa fa-check"></i>Software and Databases</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#guidelines-and-standards"><i class="fa fa-check"></i>Guidelines and Standards</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html"><i class="fa fa-check"></i>Module 4 Lab: Microsatellite Instability Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#learning-objectives-2"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#lab-overview-1"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#background-understanding-microsatellite-instability"><i class="fa fa-check"></i>Background: Understanding Microsatellite Instability</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-1-data-download-from-jupyter-notebook"><i class="fa fa-check"></i>Part 1: Data Download from Jupyter Notebook</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#accessing-the-data-directory"><i class="fa fa-check"></i>Accessing the Data Directory</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#downloading-the-bam-files"><i class="fa fa-check"></i>Downloading the BAM Files</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-2-loading-data-into-igv"><i class="fa fa-check"></i>Part 2: Loading Data into IGV</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#installing-and-launching-igv"><i class="fa fa-check"></i>Installing and Launching IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#loading-the-bam-files"><i class="fa fa-check"></i>Loading the BAM Files</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-3-visualizing-microsatellite-instability"><i class="fa fa-check"></i>Part 3: Visualizing Microsatellite Instability</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-1-navigate-to-the-microsatellite-locus"><i class="fa fa-check"></i>Step 1: Navigate to the Microsatellite Locus</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-2-configure-igv-track-display-settings"><i class="fa fa-check"></i>Step 2: Configure IGV Track Display Settings</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-3-observe-and-compare-msi-patterns"><i class="fa fa-check"></i>Step 3: Observe and Compare MSI Patterns</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-4-understanding-what-youre-seeing"><i class="fa fa-check"></i>Step 4: Understanding What You’re Seeing</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-5-lab-deliverable"><i class="fa fa-check"></i>Step 5: Lab Deliverable</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#summary-and-clinical-significance"><i class="fa fa-check"></i>Summary and Clinical Significance</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#clinical-applications-of-msi-testing"><i class="fa fa-check"></i>Clinical Applications of MSI Testing</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#references-1"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <h1 id="sponsors">Sponsors</h1>
@@ -181,8 +398,8 @@
 <div id="lecture-1" class="section level2 hasAnchor">
 <h2>Lecture<a href="module-2.html#lecture-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="lab-1" class="section level2 hasAnchor">
-<h2>Lab<a href="module-2.html#lab-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="lab-part-1" class="section level2 hasAnchor">
+<h2>Lab (Part 1)<a href="module-2.html#lab-part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="aws-and-unix-basics" class="section level3 hasAnchor">
 <h3>AWS and Unix Basics<a href="module-2.html#aws-and-unix-basics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
@@ -194,58 +411,298 @@
 <p>Docker is what is known as a container service. Basically docker containers are like miniature versions of Virtual Machines, containing a base operating system and other code. Most often these exist to run specific programs in a controlled and self-contained environment, allowing you to run programs which may have complex software dependencies without needing to install them.</p>
 <p>In this lab many of the software tools you will use are ones where we will use the version that is distributed in a docker container. Docker itself could be the subject of an entire workshop, but getting started with Docker can be easy. For our purposes we will only need to be able to run a program via Docker and understand how Docker containers interact with the file system of the AWS virtual machine we are using.</p>
 <p>First, verify docker is installed:</p>
-<p>’’’
-which docker
-’’’</p>
+<pre><code>    which docker</code></pre>
+<blockquote>
 <p><strong>Question:</strong> What is the path for the docker executable installed on your system?</p>
+</blockquote>
 <p>Docker containers come in the form of an image, these can be pulled (like code can be pulled with git) from remote repositories. A number of docker images have already been pulled for this AWS instance. You can see what images are already available on a system with the following command:</p>
-<p>’’’ docker image list ’’’</p>
+<pre><code>    docker image list</code></pre>
 <p>There should be three images on the system already. These images are listed as <em>repository</em>/<em>image name</em>. Repositories can have a directory structure, and so everything to the left of the final / is the repository and directory path, while the string to the right of the terminal / is the image name. Images are also tagged with names that may provide version numbers or the names of what is known as a <em>release</em>. The most recent release of an image in a repository is also given the tage <em>latest</em>.</p>
+<blockquote>
 <p><strong>Question</strong>: What are the names of the 3 docker images on the system? What repository did they come from? Can you use this informaton to find where on the internet the repository is for the two images that come from the same repository?</p>
-<p>Docker images/containers are run on a system using the <strong>docker run</strong> command. This takes on the following structure:</p>
-<p>’’’ docker run [repository]/[image name] [command] [command-line options]’’’</p>
+</blockquote>
+<p>Docker images/containers are run on a system using the <code>docker run</code> command. This takes on the following structure, many of these are optional arguments:</p>
+<pre><code>    docker run [docker options] [repository]/[image name]:[tag] [command] [command options]</code></pre>
+<p>As an example, you can run the <code>bwa</code> command in its associated container with the following:</p>
+<pre><code>    docker run pegi3s/bwa bwa</code></pre>
+<p>BWA is an example of a program that when run without any options it prints out a help message and exits, giving you information on how to run the program. These messages often provide other information as well, such as the version of the software being run.</p>
+<blockquote>
+<p><strong>Question</strong>: What is the version of BWA being run with this docker container?</p>
+</blockquote>
+<p>One important aspect of Docker containers is that because they are self-contained pieces of code, they have their own filesystem “inside” the container. This exists in memory as the container is run, and is gone when the container stops running. Without some help a docker container doesn’t “see” your filesystem and can’t read or write files on that filesystem, it can only interact with files in its own system.</p>
+<p>In order for a docker container to interact with your filesystem, you need to mount parts of that filesystem inside the docker container as volumes. This is handled as an option to docker run with the -v command-line flag. This takes the following structure:</p>
+<pre><code>   docker run -v [host path]:[container path] [other docker options] [repository]/[image name]:[tag] [command] [command options]</code></pre>
+<p>You can specify <code>-v [host path]:[container path]`` multiple times to mount multiple different directories inside your running container. It is possible to run a container in interactive mode with the</code>-it<code>commnad-line flag so you can navigate and work "inside" the container. This can be useful for understanding all of the software that may exist within the container as well as its internal filesystem structure. In this tutorial you will be given appropriate examples of volume mounting in order to mount</code><sub>/CourseData<code>and</code></sub>/workspace`.</p>
 </div>
 <div id="investigating-some-genomics-file-formats-and-metadata" class="section level3 hasAnchor">
 <h3>Investigating Some Genomics File Formats and Metadata<a href="module-2.html#investigating-some-genomics-file-formats-and-metadata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="fastq-files" class="section level4 hasAnchor">
 <h4>FastQ Files<a href="module-2.html#fastq-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<ul>
-<li>FastQ File Format</li>
-<li>GZip Compression</li>
-<li>less/zless, cat/zcat, wc -l, grep/zgrep, head, tail</li>
-<li>Counting number of lines and number of reads</li>
-<li>grep for @ symbol</li>
-</ul>
+<p>For most Next-Generation sequencing instruments the primary output is in the form of FastQ files, which are most often encountered in their compressed form: <em>.fastq.gz (remember that Linux doesn’t actually care about filename extensions and several alternatives such as </em>.fq.gz are in common use).</p>
+<p>You can examine FastQ files, gzipped or not, from the command-line of a linux or MacOS system, with standard tools. One commonly used tool for viewing plain-text files from the command-line in chunks instead of loading the whole thing into memory (which would be a bad idea with msot FastQ files as they are very large) is the <code>less</code> command. When dealing with compressed files a version of the tool called <code>zless</code> is used instead. There are several small FastQ files we will use in this Lab in <code>/home/ubuntu/CourseData/Module2/FastQs/</code>.</p>
+<blockquote>
+<p><strong>Note:</strong> these ‘z’ forms exist for many common command-line tools: <code>grep/zgrep</code>, <code>less/zless</code>, and <code>cat/zcat</code> among others.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> If you want to hear a story of deeply nerdy humour, and why the tool less is called less, feel free to ask.</p>
+</blockquote>
+<p>Take a look at the files (one at a time) <code>normal_test_1.fastq.gz</code> and <code>normal_test_1.fastq.gz</code> in that directory using the zless tool. To page through the file hit the spacebar.</p>
+<pre><code>zless normal_test_1.fastq.gz
+zless normal_test_2.fastq.gz</code></pre>
+<blockquote>
+<p><strong>Questions</strong>: How many base pairs are the sequencing reads? What is the instrument ID of the sequencer these sequencing reads were generated on? What sequencing lane were the reads from in the normal and the tumour? What were the flowcell IDs?</p>
+</blockquote>
+<p>Because of the structure of a FastQ File, you can use the number of lines in a file to determine the number of sequencing reads, <code>zcat</code> will output all of the lines to standard out, and we can pass that to <code>wc -l</code> to count the number of lines, dividing by 4 will give you the number of reads. This can be especially important to ensure that the Read 1 and Read 2 files are the same size. If they aren’t, something may be wrong with your data or it has come from a source where you have unpaired (singleton) reads.</p>
+<pre><code>zcat normal_test_1.fastq.gz | wc -l</code></pre>
+<blockquote>
+<p><strong>Questions</strong>: How many reads are in the files? Are they all the same size?</p>
+</blockquote>
+<p>Because FastQ ID lines start with the @ symbol, you might think you could use the grep matching command to count the number of reads without needing to do any math. And on this particular data, it may actually work. Test it yourself:</p>
+<pre><code>zgrep &quot;@&quot; normal_test_1.fastq.gz | wc -l</code></pre>
+<blockquote>
+<p><strong>Question:</strong>* Why would this be a bad idea in practice?</p>
+</blockquote>
 </div>
 <div id="bed-files" class="section level4 hasAnchor">
 <h4>BED Files<a href="module-2.html#bed-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<ul>
-<li>Required and optional columns</li>
-<li>Simple text file</li>
-<li>Whitespace, tabs, etc -&gt; viewing special characters in text files</li>
-</ul>
+<p>BED (Browser Extensible data) files are used most often to represent <strong>genomic features</strong>. Many programs can use BED files to draw representations, like lines, on top of some sort of genomic data structure. For instance the UCSC Genome Browser, or IGV which you will use later on in this workshop. An example BED file can be found in <code>/home/ubuntu/CourseData/Module2/accessory_files</code>. A common use case for BED files is to give genomic ranges.</p>
+<p>The BED format didn’t have a formal specification until 2021! The original UCSC description of the file format is <a href="https://genome.cse.ucsc.edu/FAQ/FAQformat.html#format1">here</a>. The formal 1.0 specification from the Global Alliance for Genomics and Health is <a href="https://www.ga4gh.org/news_item/ga4gh-bed-v1-0-a-formal-standard-sets-ground-rules-for-genomic-features/">here</a>.</p>
+<p>You can print the full contents of this file to standard output:</p>
+<pre><code>cat gene_target_regions.bed</code></pre>
+<p>This is a minimal BED file with only the 3 required columns.</p>
+<blockquote>
+<p><strong>Question:</strong> What does each column represent?</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> BED files use a 0-based coordinate system, such that the first base pair of a contig (typically a chromosome in our work) is a 0 instead of a 1.</p>
+</blockquote>
+<p>BED files are structured into column based data, where each column should be separated by a tab character. Tabs and other whitespace (like simple spaces) can’t be distinguished when we output a file like this, but mixing up tabs and spaces is a common source of files not behaving, or not behaving correctly, in genomics output. Unix lets us see these special characters, like tabs and new line characters.</p>
+<pre><code>cat -A gene_target_regions.bed</code></pre>
+<blockquote>
+<p><strong>Question:</strong> What combination of characters are used to represent tabs and newlines?</p>
+</blockquote>
+<p>Make a copy of this file <code>cp gene_target_regions.bed test.bed</code> and then edit the copy you made using the command-line program nano: <code>nano test.bed</code>. This opens a simple text editor that you can navigate with your keyboard arrows but not with your mouse. Delete a tab and replace it with several spaces instead and repeat the <code>cat -A</code> command but on your edited <code>test.bed</code> file. Notice the difference between tabs and spaces when you view the file this way.</p>
 </div>
 <div id="bam-files" class="section level4 hasAnchor">
 <h4>BAM Files<a href="module-2.html#bam-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<ul>
-<li>BAM files are compressed versions of SAM files (rarely used). How can I view this file?</li>
-<li>Index files</li>
-<li>Sort Orders</li>
-<li>Read Groups</li>
-<li>Dictionary</li>
-</ul>
+<p>BAM files (Binary SAM), are another file format for containing information about sequencing reads. While we most often see these for storing alignment (short-read mapping) data, they can actually contain unaligned sequencing reads as well. In fact the newer versions of the GATK pipeline we are dealing with here often start by converting FastQ files to Unaligned BAMs. We aren’t going to do that here. BAM files are often (but not always) accompanied by an index file (*.bai). Because BAMs are compressed and generally sorted in some fashion (usuually by genomic coordinate but sometimesby Read Name), Index files allow other tools to efficiently move through and read that file. For instance by jumping directly to the part of a file where a genomic coordinate starts instead of reading it line by line.</p>
+<p>The SAM/BAM <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">specification</a> gives you the current format specifications of SAM and BAM files. Remember, a BAM is a compressed binary version of the SAM specification, which is encoded in plain text, although there are some differences, for instance SAM files use a 1-based coordinate system while BAMs are 0-based.</p>
+<p>Here we will use the tool <code>samtools</code> to explore BAM files. We have some example BAM files in <code>/home/ubuntu/CourseData/Module2/BAMs</code></p>
+<p>All of the metadata associated with a file is found in its header. SAM/BAM files contain a number of different ‘tags’ like <span class="citation">(<a href="#ref-RG"><strong>RG?</strong></a>)</span> and <span class="citation">(<a href="#ref-SQ"><strong>SQ?</strong></a>)</span> in the header. Information on what these tags are is found in section 1.3 of the linked specification PDF (page 3). View the header of your provided BAM file and reference the specification to interpret what each of these tagged sections is referencing. To view the header of the Normal sample in this directory:</p>
+<pre><code>samtools head C-GIAB.normal.regions_of_interest.bam</code></pre>
+<p>You’ll notice there is a lot of information here. You can page through all of the info by piping the output of this command to less, again using the spacebar to page through the file:</p>
+<pre><code>samtools head C-GIAB.normal.regions_of_interest.bam | less</code></pre>
+<p>You’ll see the sort order of a BAM file is specified with the SO tag.</p>
+<blockquote>
+<p><strong>Question:</strong> What are the sort orders of the sample BAM files?</p>
+</blockquote>
+<p>After the <span class="citation">(<a href="#ref-SQ"><strong>SQ?</strong></a>)</span> tags, which give you the sequences the reads were aligned against, <span class="citation">(<a href="#ref-PG"><strong>PG?</strong></a>)</span> tags give you different programs and command-lines that have been used on the data, appearing in the order they were used. In this case there have been some very lengthy command-lines with lots of options used on these files! Luckily the program is listed first with the ID field giving its name, and then all of the options</p>
+<blockquote>
+<p><strong>Question:</strong> What programs were used on this file?</p>
+</blockquote>
+<p>We can use samtools to do lots of things. Most commonly we use it to sort files into different sort orders, to convert from SAM to BAM or vise versa, and can even use it to view alignments.</p>
+<p>To take a BAM file and “undo” the alignment process to create paired FastQ files, we will first need to change the sort order so that it is sorted by read name instead of coordinate sort order.</p>
+<pre><code>samtools sort -n -@ 4 -O BAM -o [output_file_name.bam] [input.bam]</code></pre>
+<p>Remember to specify paths if necessary for input and output files, and that the output filename doesn’t already exist. Specifying <code>samtools sort -h</code> will give you the list of options you can use with samtools sort.</p>
+<blockquote>
+<p><strong>Question:</strong> What do the -n, -@ and -O command-line flags do?</p>
+</blockquote>
+<p>To output the read information back into FastQ format you use the <code>samtools fastq</code> command:</p>
+<pre><code>samtools fastq -1 [output_file_name_1.fastq.gz] -2 [output_file_name_2.fastq.gz] -@ 2 [input_file.bam]</code></pre>
+<blockquote>
+<p><strong>Question:</strong> If you use zless to look at these FastQ files, what do you notice compared to the ones you looked at previously?</p>
+</blockquote>
 </div>
 <div id="vcf-files" class="section level4 hasAnchor">
 <h4>VCF Files<a href="module-2.html#vcf-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<ul>
-<li>Compressed and Uncompressed VCFs</li>
-</ul>
+<p>Variant Call Format (VCF) files are used to store information about <strong>genomic variants</strong>, a more generic term than <strong>mutation</strong>. The current specification for VCF format is <a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf">here</a>.</p>
+<blockquote>
+<p><strong>Note:</strong> VCF files are 1-based coordinate systems. Keep this in mind when converting back and forth between BAMs, BEDs, and VCFs! Conversion tools will handle this for you, but this often trips people up when looking at mutations from VCF files in BAM files for instance, which you will be doing later!</p>
+</blockquote>
+<p>Like FastQs, VCFs may be encountered in either their compressed (*.gz) or uncompressed format. VCFs are typically compressed with <code>bgzip</code>, which is mutually compatible with the standard <code>gzip</code> command and uses the same file extension. BGzip is basically a special version of gzip that was created specifically for genomics file formats like the VCF. Like BAMs, compressed VCFs should be indexed (here the command/tool for indexing a compressed VCF is <code>tabix</code>).</p>
+<blockquote>
+<p><strong>Note:</strong> If you just google the term VCF you may encounter an entirely different file format which was created for cell phones a long time ago. Sometimes you have to specify genomics or variant or similar in a google search term!</p>
+</blockquote>
+<p>Uncompressed VCFs can be examined using the <code>less</code> command, while gzip/bgzip compressed VCFs can be examined with <code>zless</code>. As with other genomic file formats the metadata of a VCF file is contained in the header. The header of a VCF file are all of the lines that start with one or more ‘#’ characters. The last of these is a line giving the column headers for the variant that follows. The variant data section of a VCF, like a BED file, is column-based, with each column separated by a tab character.</p>
+<p>The Header section of a VCF file contains information about various tags and fields in the VCF file. In addition, when a VCF file is annotated, all of the information about the annotations that are added to the INFO column of the data have their various tags explained here in the header. The various values that can be found in the FILTER column are also described here.</p>
+<p>An couple of example VCF files can be found in <code>~/CourseData/Module2/VCFs</code>. One of these is an extremely minimal test VCF while the other is the output of MuTect2, a somatic variant caller you will use later in this workshop. The general structure of the VCF file is more apparent if you investigate the <code>test_panel.GRCh38.minimal.vcf</code> file first, before looking at the <code>mutect2_tumour_normal.filtered.regions_of_interest.vcf.gz</code> file.</p>
+<blockquote>
+<p><strong>Question:</strong> What file format specification was used for each file? Is it the same or different?</p>
+</blockquote>
+<blockquote>
+<p><strong>Question:</strong> In the Mutec2 generated VCF how many different values can the FILTER field take?</p>
+</blockquote>
+<blockquote>
+<p><strong>Question:</strong> What is the ID in the FORMAT field for the Approximate read Depth at a site/variant?</p>
+</blockquote>
+<blockquote>
+<p><strong>Question:</strong> What are the genomic coordinates of the first variant listed in the file? What are the Reference and Alt alleles? What entries are given in the filter field?</p>
+</blockquote>
 </div>
 </div>
-<div id="section" class="section level3">
-<h3></h3>
+</div>
+<div id="lab-part-2---implementing-the-gatk-best-practices-workflow" class="section level2 hasAnchor">
+<h2>Lab (Part 2) - Implementing the GATK Best Practices Workflow<a href="module-2.html#lab-part-2---implementing-the-gatk-best-practices-workflow" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this portion of the Lab we will be implementing a basic approximation of the Broad Institute’s [Best Practices Workflow] (<a href="https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows" class="uri">https://gatk.broadinstitute.org/hc/en-us/sections/360007226651-Best-Practices-Workflows</a>), which has been a standard pipeline for the analyis of human-derived next-generation sequencing data, particular whole genomes, for over a decade. There are in fact a number of best-practices workflows. Here we will focus on the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035535912-Data-pre-processing-for-variant-discovery">Data pre-processing for variant discovery</a> workflow. This is broadly applicable and takes data from FastQs or Unaligned BAMs to aligned BAMs that are ready for variant calling. This workflow is generally applicable and can feed into germline, somatic, or mitochondrial short variant calling, copy-number analysis, etc. Notably this is NOT appropriate for handling RNA-derived data such as a transcriptome.</p>
+<p>For the GATK portion of the lab we will be using the set of small FastQs found in the <code>/home/ubuntu/CourseData/Module2/FastQs</code> directory. These files only have 100,000 reads in them, so they will run through each step of the process very fast. That isn’t enough reads, when drawn from the whole genome, to do anything particularly useful. But some other example data is included in the <code>~/CourseData</code> folder that can be used for visualization of BAMs with IGV or for running variant calling like MuTect2.</p>
+<div id="fastqc-quality-control" class="section level3 hasAnchor">
+<h3>FastQC Quality Control<a href="module-2.html#fastqc-quality-control" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Prior to doing any actual analysis of data we receive from a sequencing experiment, we first have to perform so basic quality control to make sure the data is actually good. The <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> program is a program that has been around “forever” in the NGS space for doing just that. This is one of the programs we will be using via a docker container. We are also going to want to make sure that our output goes into the <code>~/workspace</code> directory of our AWS image as this directory is viewable in a web browser, which will let use view compatible output files as well as download data to our local machine.</p>
+<p>To run FastQC on the FastQ file with Read 1 data from the normal sample in the FastQs directory and output to a <code>FastQC</code> folder in the <code>~/workspace</code> directory we will mount the home directory itself to the <code>/data</code> directory of the container. We need to also create the output directory first. The the <code>~/workspace</code> directory create a folder caleld FastQC: <code>mkdir FastQC</code>.</p>
+<p>We can then run FastQC with docker. Note that this particular docker container automatically runs the fastqc command when the docker container is invoked, so it is not specified here in the command-line.</p>
+<pre><code>docker run --rm -v /home/ubuntu/CourseData:/data -v /home/ubuntu/workspace:/workspace pegi3s/fastqc -o /workspace/FastQC/ /data/Module2/FastQs/normal_test_1.fastq.gz</code></pre>
+<p>FastQC can even be run on more than one FastQ file at a time. Take a look at the command line options for FastQC by running <code>docker run --rm pegi3s/fastqc -h</code> and then modify the above command to run on all of the FastQ files in the FastQ directory.</p>
+<p>You can view the contents of your <code>~/workspace</code> directory by going to: <a href="http://NUM.uhn-hpc.ca/" class="uri">http://NUM.uhn-hpc.ca/</a> where NUM is the number for your particular AWS instance. You can click on any of the HTML files in the FastQC directory to open the FastQC reports directly.</p>
+<blockquote>
+<p><strong>Question:</strong> How many reads are in the normal_test_1.fastq.gz file according to its FastQC output? How many total bases?</p>
+</blockquote>
+<blockquote>
+<p><strong>Question</strong>: What is the GC % of th data?</p>
+</blockquote>
+<blockquote>
+<p><strong>Question:</strong> What is the average quality per read?</p>
+</blockquote>
+</div>
+<div id="alignmentshort-read-mapping-with-bwa-mem" class="section level3 hasAnchor">
+<h3>Alignment/Short-Read Mapping with BWA-MEM<a href="module-2.html#alignmentshort-read-mapping-with-bwa-mem" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this and following steps, the command-lines provided for you in code blocks:</p>
+<pre><code>Like This</code></pre>
+<p>May not be complete. They will server as guidance for building the complete and proper command-line yourself.</p>
+<p>The first step of the GATK workflow is to use a short-read mapping algorithm to align our FastQs to a Human Reference Genome (GRCh38). We will use the program <a href="https://github.com/lh3/bwa">BWA</a> for this, again running BWA-MEM from a docker container. BWA-MEM as general input takes 1 or more FastQ files and a reference genome file, and then outputs the results to standard out in the uncompressed SAM format. We will re-route that output to a file. In this case, and for many of our intermediate processing steps, we will not output our results to the <code>~/workspace</code> directory, but instead will output them to locations in the <code>~/CourseData</code> directory. Since the outputs of one program will be the inputs of the next program in our chain this is generally more convenient. We will do all of our intermediate processing in the <code>~/CourseData/Module2/Processing</code> directory. We also have a tumour and a normal sample in our FastQs, each of these steps, until we get to variant calling, we run on each of those individually. For convenience the command-lines provided below will assume you are running on the Normal tissue sample. Simply repeat, changing file names as appropriate for the tumour output.</p>
+<p>We can view all of the command-line options for BWA-mem by running the following command, which will also serve as the base for all of our BWA-MEM commands.</p>
+<pre><code>docker run --rm -v &quot;/home/ubuntu/CourseData:/data&quot; pegi3s/bwa bwa mem</code></pre>
+<p>We see the basic usage is: <code>bwa mem [options] &lt;idxbase&gt; &lt;in1.fq&gt; [in2.fq]</code>. In our case we have two FastQ files, which are gzipped (bwa-mem reads gzipped FastQs just fine). Our GRCh38 humans reference is located at: <code>~/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta</code>.</p>
+<blockquote>
+<p><strong>Question:</strong> What other files are located in the <code>~/CourseData/tools/reference/GATK-bundle-GRCh38/</code> directory? Hint: The various iterations on Homo_sapiens_assembly38.fasta with extra extensions are index files used by various programs to efficiently use the FASTA reference file.</p>
+</blockquote>
+<p>So the command-line structure for BWA-MEM (without the docker bits added on) looks like this to align two gzipped FastQ files to a reference FASTA file and output to a SAM file:</p>
+<pre><code>bwa mem /path/to/reference.fasta /path/to/sample_1.fastq.gz /path/to/sample_2.fastq.gz &gt; /path/to/output.sam</code></pre>
+<p>You have test FastQ files for the normal sample:</p>
+<pre><code>/home/ubuntu/CourseData/Module2/FastQs/normal_test_1.fastq.gz
+/home/ubuntu/CourseData/Module2/FastQs/normal_test_2.fastq.gz</code></pre>
+<p>and the Tumour sample:</p>
+<pre><code>/home/ubuntu/CourseData/Module2/FastQs/tumour_test_1.fastq.gz
+/home/ubuntu/CourseData/Module2/FastQs/tumour_test_2.fastq.gz</code></pre>
+<p>Create the command-line, using the docker elements and correct paths for docker to align the two normal FastQ files to the provided Human reference, and output to a SAM file in the <code>~/CourseData/Module2/Processing</code> directory.</p>
+<p>Some hints, if you use the same volume mounting paths and names as I did above with this docker command <code>docker run --rm -v "/home/ubuntu/CourseData:/data" pegi3s/bwa bwa mem</code> then the normal FastQ files would have the following paths in the Docker container:</p>
+<pre><code>/data/Module2/FastQs/normal_test_2.fastq.gz
+/data/Module2/FastQs/normal_test_1.fastq.gz</code></pre>
+<p>and the prociessing directory path would be <code>/data/Module2/Processing</code>.</p>
+<div id="use-samtools-to-sort-the-results-and-convert-a-sam-to-a-bam" class="section level4 hasAnchor">
+<h4>Use Samtools to sort the results and convert a SAM to a BAM<a href="module-2.html#use-samtools-to-sort-the-results-and-convert-a-sam-to-a-bam" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For further processing with the GATK we need to sort the SAM so that it is coordinate, and not read sorted, and convert it to a BAM file. We can do this from inside our <code>~/CourseData/Module2/Processing</code> directory and we can do it in a single step:</p>
+<pre><code>samtools sort -@ 4 -O bam -o normal.bam normal.sam</code></pre>
+<p>Replace normal.bam and normal.sam with whatever you called your SAM file and whatever you want to call the BAM version of that file. Typically we would keep the file names the same and just change the extension. Repeat for the tumour SAM.</p>
+<blockquote>
+<p><strong>Question:</strong> What command-line flag could you give to the samtools sort command above to have it automatically create an index file for the output BAM?</p>
+</blockquote>
+<blockquote>
+<p><strong>Question:</strong> If you wanted to sort the SAM, but output to a SAM file instead how would you modify the file? What about if you wanted to create a BAM file but change its compression level to 0? Making a binary but uncompressed file?</p>
+</blockquote>
+</div>
+</div>
+<div id="gatk-pre-processing" class="section level3 hasAnchor">
+<h3>GATK Pre-Processing<a href="module-2.html#gatk-pre-processing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Aligned BAM files are not yet ready for variant calling, and some intermediate pre-processing needs to be done.</p>
+<div id="add-read-group-data" class="section level4 hasAnchor">
+<h4>Add Read Group Data<a href="module-2.html#add-read-group-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>First, we want to add Read Groups to our data which gives a sample name and information like Library and Lane IDs, as well as other metadata like the kind of sequencing that was used. Here we will use the GATK software package itself, which we are running from another docker container. Again the example below will just be for the normal sample, you’ll need to repeat it for the tumour. I will assume that your BAM file is just called <code>normal.bam</code> so you’ll need to change that and other possible parameters in order to match this to your own preferences. You can call files pretty much anything you want after all, but I will use some naming conventions here that I find helpful for tracking where in the workflow a file was produced.</p>
+<p>You can read more about Read Groups <a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups">here</a>. Also in the SAM specification that you were provided earlier.</p>
+<p>The Basic Docker part of your command-line for the GATK should be:</p>
+<pre><code>docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk
+</code></pre>
+<p>I will assume this portion in the command-lines below and replace that with <span class="math display">\[docker gatk\]</span>. Remember that the [] here is not meant to by typed literally, this is indicating a variable where you will replace it with the appropriate value, like the docker associated command-line above.</p>
+<pre><code>[docker gatk] AddOrReplaceReadGroups -I /gatk/Module2/Processing/normal.bam -O /gatk/Module2/Processing/normal.rg.bam --RGID normal_lane1 --RGLB normal_lane1 --RGSM normal --RGPL ILLUMINA --RGPU Illumina</code></pre>
+<p>You can put whatever you want in the various RG tabs you are adding. Here I am giving Read Group IDs (RGID) and lanes the same value, and specifying the data came from Lane 1 of the Flowcell. You can alter this to whatever the Lane was that the normal and tumour came from in their respective files for accuracy. I have also given it the sample name of ‘normal’. In the tumour you would want to use –RGSM tumour. This will be important for variant calling later on!</p>
+<p>Modify this command-line however you need to, and also modify and run again for the tumour sample.</p>
+</div>
+<div id="set-nm-md-and-uq-tags" class="section level4 hasAnchor">
+<h4>Set Nm, Md, and Uq tags<a href="module-2.html#set-nm-md-and-uq-tags" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The next step runs the SetNmMdAndUqTags tool. This isn’t always required, but some upstream tools in similar workflows or ways of handling and merging BAM files may mean these particular tags aren’t set. I have found it to be good practice to run it here. These tags report the number of mismatches, mismatching positions, and the unique quality of our alignments compared to the reference sequence.</p>
+<pre><code>[docker gatk] SetNmMdAndUqTags -I /gatk/CourseData/Module2/Processing/normal.rg.bam -O /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta</code></pre>
+</div>
+<div id="recalibrated-base-qualities" class="section level4 hasAnchor">
+<h4>Recalibrated Base Qualities<a href="module-2.html#recalibrated-base-qualities" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>The Base Quality Scores that come from Illumina Sequencing data are good, but the GATK uses several models based on the data to recalibrate these based on their own models as well as the data in your alignment. This step works best with Whole Genome Sequencing. This is a step that runs in two parts, first we do a calculation that creates a recalibration table, and then we apply it.</p>
+<p>The recalibration here uses some additional reference files, VCF files that contain variant information from dbSNP and GnomAD. Two databases of population allele references. This gives us locations of known polymorphisms in the human genome which is an input to the model.</p>
+<pre><code>[docker gatk] BaseRecalibrator -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.dbsnp138.vcf --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table</code></pre>
+<p>Now apply it:</p>
+<pre><code>[docker gatk] ApplyBQSR -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/Processing/normal.fixed.bam --bqsr-recal-file /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table -O /gatk/CourseData/Module2/BAMs/normal.recalibrated.bam</code></pre>
+<p>At this point we have a complete and pre-processed BAM file ready for variant calling!</p>
+<blockquote>
+<p><strong>Question:</strong> We changed the output here for the final recalibrated BAM file as this is a ‘final’ output. Why is this good practice?</p>
+</blockquote>
+</div>
+</div>
+<div id="putting-everything-together" class="section level3 hasAnchor">
+<h3>Putting Everything Together<a href="module-2.html#putting-everything-together" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Running commands one-by-one on the command-line is the best way to learn the ins and outs of a process and how to use specific tools. However, if we are going to do this more than once we want our work to be <em>reproducible</em>, which means putting things together as a script that we can simply configure and run whenever we need it. When you hear a bioinformatician refer to a <em>pipeline</em> that is all they really mean. A bit of code infrastructure that automates a process, taking inputs through a series of steps to get a final output.</p>
+<p>In the pre-work for this course you learned about simple shell scripting. While there are more complex ways of implementing a pipeline, these are usually only needed when you are going to run lots of data and want robust error handling and other features. If you are only going to occasionally run a task, are working primarily on a server like this one, and don’t need to handle a lot of complex data then a simple shell script will suffice.</p>
+<p>Take the commands you have execute so far and put them into a basic shell script. To make it more useful so that you don’t have edit all your commands to change file names everytime you want to run it you should look for all of the places that you can substitute out values for variable names. That way you can simply change variable names as appropriate.</p>
+<p>The Module2 directory structure is a good one for this kind of work. It organizes inputs (FastQs and accessory files), gives locations for final outputs (BAMs and VCFs), and has a central Processing directory whose contents can be safely deleted once the final outputs are created.</p>
+<p>The best targets for variables are:
+- Paths to specific directories, especially a ‘base’ working directory of some kind. For instance /home/ubuntu/CourseData/Module2 here.
+- Sample names or IDs that can be substituted into file names
+- Paths to specific files that get used a lot, like for instance the GRCh38 reference sequence
+- Long strings of supporting code that gets used again and again, like some of the docker wrapping code used here for many programs.</p>
+<p>Some other pointers for good script writing:
+- Scripts execute the commands inside them ‘silently’, so it is good practice to use <code>echo</code> in your scripts to output a command you are executing to standard output before executing.
+- Outputting some basic information at the top of a script, like printing out what sample name or IDs are being used, references, binaries, etc can also be useful
+- Repeat exact code as little as possible to minimize the number of places you need to make changes for fixing bugs or altering code
+- Define as many variables as possible at the top of the code
+- Try and keep all the places you need to make edits for having the script run on a different sample be at the top</p>
+<p>Once you have a shell script you should be able to execute it:</p>
+<pre><code>sh [scriptname]</code></pre>
+</div>
+<div id="viewing-bams-in-igv" class="section level3 hasAnchor">
+<h3>Viewing BAMs in IGV<a href="module-2.html#viewing-bams-in-igv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Some additional BAMs, made from the same data source as what we have been using so far, have been provided in the <code>~/CourseData/Module2/BAMs</code> directory. Here a complete alignment of all of the data was made, and then the BAM was “subset” so that it only contained data from a few regions of the genome. The regions of interest are the ones specified in the BED file we investigated earlier. We will investigate these BAMs in IGV to see what genes were included in our BAM.</p>
+<p>The Integrative Genomics Viewer (IGV) is a tool primarily used for viewing BAM files so you can visually see how the reads are aligned, the context of mutations, etc. You can download the program <a href="https://igv.org/doc/desktop/#DownloadPage/">here</a>. While there is an alternative version that runs in a browser window without installing, in my opinion that should only be used in the last resort. At the Download link there are a number of versions available depending on your operating system and CPU chipset in the case of MacOS versions. Go ahead and download and install IGV on your computer.</p>
+<p>In order to make downloading the BAM files in the <code>~/CourseData/Module2/BAMs</code> directory and their associated index files easy, we will create what is known as a soft-link to them in the <code>~/workspace</code> directory so you can download them from the browser. Here is the general form of the command:</p>
+<pre><code>ln -s /path/to/original_file_or_directory /path/to/symlink</code></pre>
+<p>Run for each of the BAMs and BAI files in the Module2 BAMs directory and also do it for the BED file in the <code>~/CourseData/Module2/accessory_files</code> directory. You can then download them via the browser like how you viewed the FastQC outputs previously.</p>
+<p>First make sure the correct reference sequence is selected in the drop down menu in the upper left. The default for a new installation should be the human GRCh38 reference, which is what we want to use. IGV can be used with any reference, not just human sequences so if you ever find yourself doing microbial or viral genomics, IGV is still a useful tool!</p>
+<p>Learning all of the ins and outs of IGV is beyond the scope of this lab; however, using it to view the basics of a BAM file only requires default options.</p>
+<p>When you have IGV installed and running, you can open files in it with <code>File -&gt; Load From File</code>. You can use this to load BAM files, and you can open multiple files at once. Navigate to where you downloaded the BAMs and thier BAI index files, select both BAM files (no need to select the BAIs) and then open them. Files load as Tracks in IGV, on the very bottom we have a representative of the reference sequence. Each BAM loads two tracks, one for the alignments themselves (only viewable when zoomed in to an appropriate resolution level) and one for plotting the coverage.</p>
+<p>We can also load VCF files, which will then indicate mutations from that file as their own Track, and BED files which will plot the ranges from that file in their own Track. VCFs will tend to load as tracks at the top while BEDs will load at the bottom. Use <code>File -&gt; Load From File</code> to open the BED file you downloaded as well, which plots the targeted regions of the genome that are of interest.</p>
+<p>There are two easy ways to navigate to particular regions of the genome in IGV. You can type in a gene name, like KRAS, or specify genomic coordinates (like that are in your BED file) with the format: <code>chr9:1000-1500</code>. You can then change zoom levels in and out to view your alignment. Try navigating to the KRAS gene and also to each of the genomic coordinates in the BED file to inspect your BAM.</p>
+<p>By default IGV will show base pairs where the base in the sequencing read and that in the reference genome match as just a grey block. Mismatches will have the base shown and coloured, insertions in the read show up as an <strong>I</strong> character, and deletions as a <strong>-</strong> character.</p>
+<blockquote>
+<p><strong>Question:</strong>: What genes of interest were included in the regions selected for your BAM files? Which of these are tumour suppressors and which are oncogenes?</p>
+</blockquote>
+<p>You will use IGV more heavily tomorrow, epsecially when reviewing data for the Cases!</p>
+</div>
+<div id="somatic-variant-calling-with-mutect2" class="section level3 hasAnchor">
+<h3>Somatic Variant Calling with MuTect2<a href="module-2.html#somatic-variant-calling-with-mutect2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<blockquote>
+<p><strong>If you have time, you can continue on with Variant Calling and Variant Annotation, which will get you started for Day 2!</strong></p>
+</blockquote>
+<p>Once both your tumour and normal Recalibrated BAM files are produced, you are ready for Variant Calling. However, the simple test data we have used so far won’t produce any mutation calls. After all we only aligned 100,000 sequencing reads across the entire human genome. Instead we will use the more complete BAMs you investigated with IGV above for variant calling.</p>
+<p>MuTect2 is included in the GATK package and is run the same way, with the same docker-associated code on your command-line. Variant calling is more resource intensive on the RAM usage side, and so the java machine in the docker container needs to be given some more specific options to make use of the RAM. In this case we are going to give it 12 gigs of RAM (our virtual machine has 16) with the <code>--java-options "-Xmx12G"</code>.</p>
+<p>MuTect2 needs a Reference FASTA file like we have used previously, and of course when running any sort of genomics analysis you will always use the exact same reference throughout.</p>
+<p>MuTect2 can be run in a few different modes, and is a somatic variant caller optimized for tumour data. It can run with a tumour-only or with matched tumour-normal data. This second option is what we will be using. To run in this mode you specify the <code>-I</code> input file flag twice, giving it both the tumour BAM and the normal BAM, and then use the <code>-normal</code> flag to give it the name of the normal sample. This needs to match the Sample (SM) Read Group tag you have during the GATK pre-processing steps early, in this case ‘normal’ was the string we used.</p>
+<p>MuTect2 can be run with lots of different options (see <a href="https://gatk.broadinstitute.org/hc/en-us/articles/5358911630107-Mutect2">here</a>).</p>
+<p>In this case we will also be giving it a germline resource VCF with the <code>--germline-resource</code> command-line parameter and are using the GnomAD set here, which contains allele frequency information for polymorphisms and mutations seen in tens of thousands of genomes.</p>
+<pre><code>[docker gatk] --java-options &quot;-Xmx12G&quot; Mutect2 -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/BAMs/C-GIAB.tumour.regions_of_interest.bam -I /gatk/CourseData/Module2/BAMs/C-GIAB.normal.regions_of_interest.bam -normal normal --germline-resource /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.regions_of_interest.vcf.gz</code></pre>
+<p>After running baseline somatic variant calling with MuTect2 we can also apply the <a href="https://gatk.broadinstitute.org/hc/en-us/articles/5358835082779-FilterMutectCalls">FilterMutectCalls</a> program. This can incorporate various additional pieces of information for Read Bias artifacts when dealing with FFPE data or information about potential contamination. We have neither of those here but will run FilterMuTectCalls anyway.</p>
+<blockquote>
+<p><strong>Note:</strong> The output file name provided here will overwrite the existing VCF in the VCFs directory. You should change its name to be unique, or output it to the workspace directory!</p>
+</blockquote>
+<pre><code>[docker gatk] --java-options &quot;-Xmx12G&quot; FilterMutectCalls -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -V /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.regions_of_interest.vcf.gz -O /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.filtered.regions_of_interest.vcf.gz</code></pre>
+<p>The output here is now a ‘complete’ VCF.</p>
+</div>
+<div id="variant-annotation-with-vep" class="section level3 hasAnchor">
+<h3>Variant Annotation with VEP<a href="module-2.html#variant-annotation-with-vep" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Called variants on their own are not generally the most useful. If we want to gather information like what Gene a mutation is in, what the impact of a mutation is at the transcript and protein levels, whether a mutation is a known polymrphism in the GnomAD database or a known pathogenic mutation in ClinVar, we have to add annotations.</p>
+<p>The annotator we will use here is VEP (Variant Effect Predictor) from Ensembl (<a href="https://useast.ensembl.org/info/docs/tools/vep/index.html">Documentation</a>).</p>
+<p>We won’t be using a docker container here, but something similar called apptainer. You can see it works much the same way, although the <code>-B</code> flags here are used instead of <code>-v</code>.</p>
+<p>Here we are going to annotate using a GRCh38 reference set, and are telling VEP to give us ‘everything’. VEP can be modified with all sort sof plug-ins and modules that go beyond what is added here, but this will be plenty to get you started looking at annotations!</p>
+<pre><code>apptainer exec -B /home/ubuntu/CourseData/Module2/VCFs:/data -B /media/cbwdata/CourseData/tools/vep_data:/cache ~/CourseData/tools/ensembl-vep.sif vep -i /data/test_panel.GRCh38.minimal.vcf -o /data/test_panel_GRCh38.minimal.vep.txt --cache --dir_cache /cache --species homo_sapiens --assembly GRCh38 --everything</code></pre>
+</div>
+</div>
+<div id="answers-to-guiding-questions" class="section level2 hasAnchor">
+<h2>Answers to Guiding Questions<a href="module-2.html#answers-to-guiding-questions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
-</div>
 </div>
 </div>
             </section>
@@ -254,7 +711,7 @@ which docker
         </div>
       </div>
 <a href="module-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="module-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -308,6 +765,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

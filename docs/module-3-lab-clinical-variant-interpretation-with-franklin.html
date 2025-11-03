@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 3 Lab: Clinical Variant Interpretation with Franklin | Genomics for Precision Oncology 2025</title>
+  <meta name="description" content="Workshop website for the 2025 Genomics for Precision Oncology Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 3 Lab: Clinical Variant Interpretation with Franklin | Genomics for Precision Oncology 2025" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/GPO_Hal-2511/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2025 Genomics for Precision Oncology Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/GPO_Hal-2511" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 3 Lab: Clinical Variant Interpretation with Franklin | Genomics for Precision Oncology 2025" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2025 Genomics for Precision Oncology Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/GPO_Hal-2511/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Daniel Gaston, Victor Martinez" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-2.html"/>
+<link rel="next" href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Genomics for Precision Oncology",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Genomics for Precision Oncology 2025 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/GPO_Hal-2511",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/workshops-all/2025-genomics-for-precision-oncology-halifax-ns/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Genomics for Precision Oncology<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW-GPO-cancer-logo-w-transparency-1024x1024.png" width="70%" alt="Genomics for Precision Oncology logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#create-a-franklin-account"><i class="fa fa-check"></i>1. Create a Franklin Account</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#download-and-install-igv-integrative-genomics-viewer"><i class="fa fa-check"></i>2. Download and Install IGV (Integrative Genomics Viewer)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#instructors"><i class="fa fa-check"></i>Instructors</a></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#teaching-assistants"><i class="fa fa-check"></i>Teaching Assistants</a></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#facilitator"><i class="fa fa-check"></i>Facilitator</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html"><i class="fa fa-check"></i>Module 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-part-1"><i class="fa fa-check"></i>Lab (Part 1)</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#aws-and-unix-basics"><i class="fa fa-check"></i>AWS and Unix Basics</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#docker"><i class="fa fa-check"></i>Docker</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#investigating-some-genomics-file-formats-and-metadata"><i class="fa fa-check"></i>Investigating Some Genomics File Formats and Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-part-2---implementing-the-gatk-best-practices-workflow"><i class="fa fa-check"></i>Lab (Part 2) - Implementing the GATK Best Practices Workflow</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#fastqc-quality-control"><i class="fa fa-check"></i>FastQC Quality Control</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#alignmentshort-read-mapping-with-bwa-mem"><i class="fa fa-check"></i>Alignment/Short-Read Mapping with BWA-MEM</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#gatk-pre-processing"><i class="fa fa-check"></i>GATK Pre-Processing</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#putting-everything-together"><i class="fa fa-check"></i>Putting Everything Together</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#viewing-bams-in-igv"><i class="fa fa-check"></i>Viewing BAMs in IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#somatic-variant-calling-with-mutect2"><i class="fa fa-check"></i>Somatic Variant Calling with MuTect2</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#variant-annotation-with-vep"><i class="fa fa-check"></i>Variant Annotation with VEP</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#answers-to-guiding-questions"><i class="fa fa-check"></i>Answers to Guiding Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html"><i class="fa fa-check"></i>Module 3 Lab: Clinical Variant Interpretation with Franklin</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#lab-overview"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-1-account-creation-and-platform-navigation"><i class="fa fa-check"></i>Part 1: Account Creation and Platform Navigation</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-your-franklin-account"><i class="fa fa-check"></i>Creating Your Franklin Account</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#platform-navigation-understanding-the-main-interface"><i class="fa fa-check"></i>Platform Navigation: Understanding the Main Interface</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-and-searching-for-variants"><i class="fa fa-check"></i>Creating and Searching for Variants</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-new-cases"><i class="fa fa-check"></i>Creating New Cases</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#understanding-franklins-automated-classification-logic"><i class="fa fa-check"></i>Understanding Franklin’s Automated Classification Logic</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-2-exploring-variant-classification"><i class="fa fa-check"></i>Part 2: Exploring Variant Classification</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-1-searching-for-a-variant"><i class="fa fa-check"></i>Step 1: Searching for a Variant</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-2-understanding-the-classification-workspace"><i class="fa fa-check"></i>Step 2: Understanding the Classification Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-3-reviewing-automatically-assigned-acmg-codes"><i class="fa fa-check"></i>Step 3: Reviewing Automatically Assigned ACMG Codes</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-4-deep-dive-into-population-data-pm2-example"><i class="fa fa-check"></i>Step 4: Deep Dive into Population Data (PM2 Example)</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-5-editing-evidence-strength"><i class="fa fa-check"></i>Step 5: Editing Evidence Strength</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-6-exploring-additional-evidence-categories"><i class="fa fa-check"></i>Step 6: Exploring Additional Evidence Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-3-uploading-and-classifying-your-case-vcf-45-minutes"><i class="fa fa-check"></i>Part 3: Uploading and Classifying Your Case VCF (45 minutes)</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-1-download-your-case-data"><i class="fa fa-check"></i>Step 1: Download Your Case Data</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-2-create-a-new-case-in-franklin"><i class="fa fa-check"></i>Step 2: Create a New Case in Franklin</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-4-variant-interpretation"><i class="fa fa-check"></i>Part 4: Variant interpretation</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-3-navigating-to-your-case"><i class="fa fa-check"></i>Step 3: Navigating to Your Case</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-4-reviewing-brca2-variants-in-your-case"><i class="fa fa-check"></i>Step 4: Reviewing BRCA2 Variants in Your Case</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-5-adding-patient-phenotype-information"><i class="fa fa-check"></i>Step 5: Adding Patient Phenotype Information</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-6-exploring-case-level-quality-control-and-variant-filtering"><i class="fa fa-check"></i>Step 6: Exploring Case-Level Quality Control and Variant Filtering</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-7-deep-dive-into-variant-classification-brca2c.1813dup"><i class="fa fa-check"></i>Step 7: Deep Dive into Variant Classification: BRCA2:c.1813dup</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#reviewing-the-franklin-acmg-classification"><i class="fa fa-check"></i>Reviewing the Franklin ACMG Classification</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#exploring-the-variant-assessment-tab"><i class="fa fa-check"></i>Exploring the Variant Assessment Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#exploring-associated-conditions"><i class="fa fa-check"></i>Exploring Associated Conditions</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#using-the-publications-tab"><i class="fa fa-check"></i>Using the Publications Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#gene-assessment-tab"><i class="fa fa-check"></i>Gene Assessment Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-8-finalizing-your-classification-and-creating-a-clinical-report"><i class="fa fa-check"></i>Step 8: Finalizing Your Classification and Creating a Clinical Report</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-5-extension-exercise-optional"><i class="fa fa-check"></i>Part 5: Extension Exercise (Optional)</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><i class="fa fa-check"></i>Module 4 Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#learning-objectives-1"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#background"><i class="fa fa-check"></i>Background</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#peutz-jeghers-syndrome"><i class="fa fa-check"></i>Peutz-Jeghers Syndrome</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#the-stk11-gene-and-disease-mechanism"><i class="fa fa-check"></i>The STK11 Gene and Disease Mechanism</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#rationale-for-manual-review"><i class="fa fa-check"></i>Rationale for Manual Review</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-1-installing-the-integrative-genomics-viewer"><i class="fa fa-check"></i>Section 1: Installing the Integrative Genomics Viewer</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#overview-of-igv"><i class="fa fa-check"></i>Overview of IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-download-igv"><i class="fa fa-check"></i>Step 1: Download IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#windows-systems"><i class="fa fa-check"></i>Windows Systems</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-systems"><i class="fa fa-check"></i>macOS Systems</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-installation-procedures"><i class="fa fa-check"></i>Step 2: Installation Procedures</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#windows-installation"><i class="fa fa-check"></i>Windows Installation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-installation"><i class="fa fa-check"></i>macOS Installation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-installation-verification"><i class="fa fa-check"></i>Step 3: Installation Verification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#troubleshooting-common-issues"><i class="fa fa-check"></i>Troubleshooting Common Issues</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#java-runtime-not-found"><i class="fa fa-check"></i>Java Runtime Not Found</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-gatekeeper-restrictions"><i class="fa fa-check"></i>macOS Gatekeeper Restrictions</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#application-launch-failure"><i class="fa fa-check"></i>Application Launch Failure</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-2-acquiring-case-study-data-files"><i class="fa fa-check"></i>Section 2: Acquiring Case Study Data Files</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#binary-alignment-map-bam-files-and-indices"><i class="fa fa-check"></i><strong>Binary Alignment Map (BAM) Files and Indices</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#browser-extensible-data-bed-annotation-tracks"><i class="fa fa-check"></i><strong>Browser Extensible Data (BED) Annotation Tracks</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-accessing-data-files-via-jupyter-notebook"><i class="fa fa-check"></i>Step 1: Accessing Data Files via Jupyter Notebook</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-local-directory-organization"><i class="fa fa-check"></i>Step 2: Local Directory Organization</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-downloading-files-from-jupyter-to-your-local-machine"><i class="fa fa-check"></i>Step 3: Downloading Files from Jupyter to Your Local Machine</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-3-loading-data-into-igv-and-navigating-to-stk11"><i class="fa fa-check"></i>Section 3: Loading Data into IGV and Navigating to STK11</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-verifying-genome-build-selection"><i class="fa fa-check"></i>Step 1: Verifying Genome Build Selection</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-loading-bam-alignment-files"><i class="fa fa-check"></i>Step 2: Loading BAM Alignment Files</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-loading-bed-annotation-files"><i class="fa fa-check"></i>Step 3: Loading BED Annotation Files</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-4-navigating-to-the-stk11-gene-region"><i class="fa fa-check"></i>Step 4: Navigating to the STK11 Gene Region</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-5-normalizing-coverage-scale-across-samples"><i class="fa fa-check"></i>Step 5: Normalizing Coverage Scale Across Samples</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-focused-navigation-to-the-deletion-region"><i class="fa fa-check"></i>Step 6: Focused Navigation to the Deletion Region</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-verification"><i class="fa fa-check"></i>Step 7: Verification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#common-issues-and-troubleshooting"><i class="fa fa-check"></i>Common Issues and Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-4-quality-assessment-of-the-suspected-deletion"><i class="fa fa-check"></i>Section 4: Quality Assessment of the Suspected Deletion</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-configuring-igv-display-settings-for-coverage-analysis"><i class="fa fa-check"></i>Step 1: Configuring IGV Display Settings for Coverage Analysis</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-quantitative-coverage-analysis"><i class="fa fa-check"></i>Step 2: Quantitative Coverage Analysis</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-mapping-quality-assessment"><i class="fa fa-check"></i>Step 3: Mapping Quality Assessment</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-4-deletion-breakpoint-definition"><i class="fa fa-check"></i>Step 4: Deletion Breakpoint Definition</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-5-assessment-of-problematic-genomic-regions"><i class="fa fa-check"></i>Step 5: Assessment of Problematic Genomic Regions</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-evaluation-of-supporting-genetic-evidence"><i class="fa fa-check"></i>Step 6: Evaluation of Supporting Genetic Evidence</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-integrating-evidence-and-reaching-a-quality-assessment-conclusion"><i class="fa fa-check"></i>Step 7: Integrating Evidence and Reaching a Quality Assessment Conclusion</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#proceeding-to-clinical-variant-interpretation"><i class="fa fa-check"></i>Proceeding to Clinical Variant Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-5-clinical-interpretation-of-copy-number-loss-using-clingen-guidelines"><i class="fa fa-check"></i>Section 5: Clinical Interpretation of Copy Number Loss Using ClinGen Guidelines</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#overview-of-clingen-cnv-interpretation-framework"><i class="fa fa-check"></i>Overview of ClinGen CNV Interpretation Framework</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#accessing-the-clingen-cnv-loss-calculator"><i class="fa fa-check"></i>Accessing the ClinGen CNV Loss Calculator</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-1---initial-assessment-of-genomic-content"><i class="fa fa-check"></i>Section 1 - Initial Assessment of Genomic Content</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-1a-does-the-cnv-include-any-protein-coding-or-other-critical-genomic-elements"><i class="fa fa-check"></i>Criterion 1A: Does the CNV include any protein-coding or other critical genomic elements?</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-2---overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Section 2 - Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2a-does-the-cnv-completely-overlap-an-established-hi-gene-or-genomic-region"><i class="fa fa-check"></i><strong>Criterion 2A: Does the CNV completely overlap an established HI gene or genomic region?</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2b-2e-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Criterion 2B-2E: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2f-g-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Criterion 2F-G: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-3---evaluation-of-gene-number"><i class="fa fa-check"></i><strong>Section 3 - Evaluation of Gene Number</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-4---detailed-evaluation-of-genomic-content-using-published-literature-public-databases-andor-internal-lab-data"><i class="fa fa-check"></i><strong>Section 4 - Detailed Evaluation of Genomic Content Using Published Literature, Public Databases, and/or Internal Lab Data</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-5---evaluation-of-inheritance-patternfamily-history-for-patient-being-studied"><i class="fa fa-check"></i>Section 5 - Evaluation of Inheritance Pattern/Family History for Patient Being Studied</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-5h-inheritance-information-unavailable-or-uninformative-with-highly-specific-consistent-phenotype"><i class="fa fa-check"></i>Criterion 5H: Inheritance information unavailable or uninformative, with highly specific consistent phenotype</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-calculating-the-final-classification"><i class="fa fa-check"></i>Step 6: Calculating the Final Classification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-clinical-recommendations-and-validation"><i class="fa fa-check"></i>Step 7: Clinical Recommendations and Validation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#references"><i class="fa fa-check"></i>References</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#primary-literature"><i class="fa fa-check"></i>Primary Literature</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#software-and-databases"><i class="fa fa-check"></i>Software and Databases</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#guidelines-and-standards"><i class="fa fa-check"></i>Guidelines and Standards</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html"><i class="fa fa-check"></i>Module 4 Lab: Microsatellite Instability Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#learning-objectives-2"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#lab-overview-1"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#background-understanding-microsatellite-instability"><i class="fa fa-check"></i>Background: Understanding Microsatellite Instability</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-1-data-download-from-jupyter-notebook"><i class="fa fa-check"></i>Part 1: Data Download from Jupyter Notebook</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#accessing-the-data-directory"><i class="fa fa-check"></i>Accessing the Data Directory</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#downloading-the-bam-files"><i class="fa fa-check"></i>Downloading the BAM Files</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-2-loading-data-into-igv"><i class="fa fa-check"></i>Part 2: Loading Data into IGV</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#installing-and-launching-igv"><i class="fa fa-check"></i>Installing and Launching IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#loading-the-bam-files"><i class="fa fa-check"></i>Loading the BAM Files</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-3-visualizing-microsatellite-instability"><i class="fa fa-check"></i>Part 3: Visualizing Microsatellite Instability</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-1-navigate-to-the-microsatellite-locus"><i class="fa fa-check"></i>Step 1: Navigate to the Microsatellite Locus</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-2-configure-igv-track-display-settings"><i class="fa fa-check"></i>Step 2: Configure IGV Track Display Settings</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-3-observe-and-compare-msi-patterns"><i class="fa fa-check"></i>Step 3: Observe and Compare MSI Patterns</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-4-understanding-what-youre-seeing"><i class="fa fa-check"></i>Step 4: Understanding What You’re Seeing</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-5-lab-deliverable"><i class="fa fa-check"></i>Step 5: Lab Deliverable</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#summary-and-clinical-significance"><i class="fa fa-check"></i>Summary and Clinical Significance</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#clinical-applications-of-msi-testing"><i class="fa fa-check"></i>Clinical Applications of MSI Testing</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#references-1"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+<a href="https://oicr.on.ca/"><img src="img/sponsors/hpc4health.png" width=55% style="display:inline-block;" style="padding-bottom: 20px" alt="HPC4Health logo.">
+<a href="https://oicr.on.ca/"><img src="img/sponsors/BHCRI_logo-transparent.png" width=90% style="display:inline-block;" style="padding-bottom: 20px" alt="Beatrice Hunter Cancer Research Institute logo.">
+<a href="https://oicr.on.ca/"><img src="img/sponsors/dal-logo-horizontal-colour.png" width=70% style="display:inline-block;" style="padding-bottom: 20px" alt="Dalhousie University logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics for Precision Oncology 2025</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-3-lab-clinical-variant-interpretation-with-franklin" class="section level1 hasAnchor">
+<h1>Module 3 Lab: Clinical Variant Interpretation with Franklin<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#module-3-lab-clinical-variant-interpretation-with-franklin" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Summary: This lab focuses on clinical variant interpretation using the Franklin platform, emphasizing ACMG classification criteria. Participants will create accounts, navigate the interface, and classify variants from a hereditary cancer case. Key learning objectives include distinguishing automated predictions from manual curation, interpreting population frequency data, and understanding the classification process. The lab highlights the importance of human input in variant interpretation despite automation, the role of phenotype matching, and the value of literature curation in clinical settings.
+Text: Clinical Variant Interpretation with Franklin</p>
+<div id="learning-objectives" class="section level2 hasAnchor">
+<h2>Learning Objectives<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#learning-objectives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>By the end of this lab, you will:</p>
+<ul>
+<li>Navigate a clinical variant interpretation platform used in diagnostic laboratories</li>
+<li>Apply ACMG classification criteria to real variants</li>
+<li>Distinguish between automated predictions and manual curation requirements</li>
+<li>Interpret population frequency data, in silico predictions, and clinical evidence</li>
+</ul>
+</div>
+<div id="lab-overview" class="section level2 hasAnchor">
+<h2>Lab Overview<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#lab-overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This lab shifts focus from computational variant calling to clinical interpretation. You’ve seen how variants are detected algorithmically, and now you’ll learn how clinical labs determine which variants matter.</p>
+<p>We’re using a hereditary cancer case because these variants illustrate key principles that apply to both germline and somatic contexts. The variant classification process you’ll practice here is what molecular geneticists perform daily when reporting diagnostic results.</p>
+<p><strong>Why Franklin?</strong> Franklin (by Genoox, now Qiagen) offers free academic accounts with full VCF upload capability. More importantly, it provides surprisingly accurate automated ACMG code assignment. The platform applies the same evidence rules used in certified diagnostic labs, which makes it a realistic training environment.</p>
+<p>You’ll review each assigned ACMG criterion, adjust evidence strength when appropriate, and understand why certain variants remain difficult to classify.</p>
+</div>
+<div id="part-1-account-creation-and-platform-navigation" class="section level2 hasAnchor">
+<h2>Part 1: Account Creation and Platform Navigation<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-1-account-creation-and-platform-navigation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="creating-your-franklin-account" class="section level3 hasAnchor">
+<h3>Creating Your Franklin Account<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-your-franklin-account" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Step 1: Access the registration page</strong></p>
+<p>Navigate to: <a href="https://franklin.genoox.com">https://franklin.genoox.com</a></p>
+<p>Click “Sign Up” in the upper right corner.</p>
+<p><strong>Step 2: Register with your institutional email</strong></p>
+<p>Fill in the registration form:</p>
+<ul>
+<li><strong>Email:</strong> Use your university/institutional email (required for academic access)</li>
+<li><strong>Password:</strong> Standard requirements (8+ characters, mixed case, number)</li>
+<li>Click “Continue”</li>
+<li><strong>First and Last Name:</strong> Your actual name (this appears in case reports)</li>
+<li><strong>Organization Name:</strong> Your affiliated organization (You can create any)</li>
+<li><strong>Professional Role:</strong> Select what fits better for you</li>
+</ul>
+<p><strong>Important:</strong> Check your email for a verification link. Some email systems flag this as spam, so check your junk folder if you don’t see it within 5 minutes.</p>
+<p>You now have access to the full platform. Franklin operates on a “freemium” model (the free tier includes unlimited cases and full ACMG classification tools, which is everything we need for this workshop).</p>
+</div>
+<div id="platform-navigation-understanding-the-main-interface" class="section level3 hasAnchor">
+<h3>Platform Navigation: Understanding the Main Interface<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#platform-navigation-understanding-the-main-interface" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When you first log in, Franklin displays the <strong>Search page</strong> as your landing screen. The interface is organized into three main sections accessible via the top navigation banner.</p>
+<p><strong>Top Navigation Tabs:</strong></p>
+<p><strong>1. Search (default landing page)</strong></p>
+<ul>
+<li>Central search functionality for querying variants across all accessible cases</li>
+<li>Allows you to search by variant nomenclature, gene name, or genomic coordinates</li>
+<li>Returns results from your cases and (if enabled) the community variant database</li>
+</ul>
+<p><strong>2. Knowledge Base</strong></p>
+<ul>
+<li>Contains pre-defined gene panels for common clinical indications</li>
+<li>Allows creation of custom gene panels for research or clinical use</li>
+<li>Links to curated gene-disease relationships and dosage sensitivity information</li>
+<li>Useful for batch analysis of variants within specific gene sets</li>
+</ul>
+<p><strong>3. My Cases</strong></p>
+<ul>
+<li>Lists all cases you’ve created or been granted access to</li>
+<li>Shows case status (In Progress, Classified, Reviewed)</li>
+<li>Searchable by patient identifier, gene, or variant</li>
+<li>Supports team-based workflows (see below)</li>
+</ul>
+<p><strong>Collaborative Features:</strong></p>
+<p>Franklin supports team-based variant interpretation. You can:</p>
+<ul>
+<li>Invite colleagues to review specific cases</li>
+<li>Assign roles (curator, reviewer, approver)</li>
+<li>Track who made classification decisions and when</li>
+<li>Add internal comments and discussion threads</li>
+</ul>
+<p>This is particularly valuable in clinical settings where variant interpretation requires consensus among multiple specialists.</p>
+</div>
+<div id="creating-and-searching-for-variants" class="section level3 hasAnchor">
+<h3>Creating and Searching for Variants<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-and-searching-for-variants" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>The Central Search Bar</strong></p>
+<p>The search interface occupies the middle of the screen. Here you can manually enter variants or search existing classifications.</p>
+<p><strong>Understanding Variant Nomenclature:</strong></p>
+<p>Click on “Examples” near the search bar to view supported nomenclature formats:</p>
+<ul>
+<li><strong>SNP (Single Nucleotide Variants):</strong> Uses HGVS notation
+<ul>
+<li>Example: <code>MSH6:c.4082delA</code></li>
+<li>Example: <code>chr2:47641560-C-T</code></li>
+</ul></li>
+<li><strong>CNV (Copy Number Variants):</strong> Genomic coordinates format
+<ul>
+<li>Example: <code>DEL:chr1-216138600-216270555</code></li>
+<li>Example: <code>arr\[GRCh37\] 7q31.2(116714478_116715973)x1</code></li>
+</ul></li>
+<li><strong>ROH (Runs of Homozygosity):</strong> Region-based notation
+<ul>
+<li>Used for consanguinity assessment or uniparental disomy detection</li>
+</ul></li>
+</ul>
+<p><strong>Reference Genome Build Selection:</strong></p>
+<p>Critical setting located next to the search bar:</p>
+<ul>
+<li>Dropdown menu displays current reference build (default may be hg19 or hg38)</li>
+<li><strong>For this workshop: Ensure “hg19” (GRCh37) is selected</strong></li>
+<li>Mismatched genome builds will cause variant coordinates to be incorrect</li>
+</ul>
+<p><strong>Case Type Selection:</strong></p>
+<p>Next to the reference build selector, choose the variant analysis framework:</p>
+<ul>
+<li><strong>Germline:</strong> Applies ACMG/AMP germline variant classification criteria (what we’ll use today)</li>
+<li><strong>Somatic:</strong> Applies AMP/ASCO/CAP somatic variant interpretation guidelines (for cancer tumour variants)</li>
+</ul>
+<p>The case type determines which evidence codes and classification rules Franklin applies. For hereditary cancer variants, select “Germline” even though the gene is cancer-related.</p>
+</div>
+<div id="creating-new-cases" class="section level3 hasAnchor">
+<h3>Creating New Cases<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-new-cases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Below the search bar, three options allow case creation from different data types:</p>
+<p><strong>1. CMA (Chromosomal Microarray Analysis)</strong></p>
+<ul>
+<li>Upload microarray data files (.CEL, .CHP, or processed CNV calls)</li>
+<li>Generates CNV calls and quality metrics</li>
+<li>Primarily used for constitutional disorders and developmental delay cases</li>
+</ul>
+<p><strong>2. Report</strong></p>
+<ul>
+<li>Manual entry of a single variant or small variant list</li>
+<li>Useful when you have variant calls from external pipelines</li>
+<li>Requires HGVS notation or genomic coordinates</li>
+</ul>
+<p><strong>3. VCF</strong></p>
+<ul>
+<li>Upload variant call format files from sequencing pipelines</li>
+<li>Supports both single-sample and multi-sample VCFs</li>
+<li>Franklin automatically filters and prioritises variants</li>
+<li><strong>This is the method we’ll use at the end of this section.</strong> If you prefer to start uploading your VCF now, you can skip ahead to Part 3, Step 2 for detailed instructions on case creation and file upload.</li>
+</ul>
+</div>
+<div id="understanding-franklins-automated-classification-logic" class="section level3 hasAnchor">
+<h3>Understanding Franklin’s Automated Classification Logic<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#understanding-franklins-automated-classification-logic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Franklin scans multiple databases and assigns ACMG evidence codes based on specific thresholds defined in the 2015 ACMG/AMP guidelines:</p>
+<ul>
+<li><strong>Population frequency (PM2, BA1, BS1):</strong> Queries gnomAD, ExAC, 1000 Genomes. If a variant is absent in these databases, it automatically assigns PM2 (moderate evidence of pathogenicity). If frequency exceeds 5%, it assigns BA1 (benign standalone).</li>
+<li><strong>Computational predictions (PP3, BP4):</strong> Aggregates SIFT, PolyPhen-2, CADD, REVEL, and others. If multiple algorithms agree on “deleterious,” it suggests PP3. If they agree on “benign,” it suggests BP4.</li>
+<li><strong>Functional consequence (PVS1, PM4):</strong> Recognises null variants (nonsense, frameshift, canonical splice sites) in loss-of-function intolerant genes and assigns PVS1 (very strong pathogenicity). In-frame indels in critical regions get PM4.</li>
+<li><strong>Known pathogenic variants (PS1, PM5):</strong> Cross-references ClinVar. If your variant matches a known pathogenic entry at the same codon or amino acid, Franklin flags PS1 or PM5.</li>
+</ul>
+<p><strong>What requires manual curation:</strong></p>
+<ul>
+<li><strong>Segregation data (PP1, BS4):</strong> You need to enter family history and co-segregation evidence manually.</li>
+<li><strong>Functional studies (PS3, BS3):</strong> If you have lab data showing altered protein function, you add this evidence yourself.</li>
+<li><strong>Allelic data (PM3, BP2):</strong> Whether a variant is in trans with a known pathogenic variant (for recessive conditions).</li>
+<li><strong>De novo status (PS2, PM6):</strong> Requires parental testing confirmation, which you document manually.</li>
+<li><strong>Clinical correlation (PP4):</strong> Patient phenotype matching gene-disease associations.</li>
+</ul>
+<p>Franklin’s automation handles about 60-70% of the evidence gathering. The remaining 30-40% depends on clinical context that only you can provide. This is why variant interpretation remains a skilled professional task despite computational advances.</p>
+</div>
+</div>
+<div id="part-2-exploring-variant-classification" class="section level2 hasAnchor">
+<h2>Part 2: Exploring Variant Classification<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-2-exploring-variant-classification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before uploading, you start working on your case-specific VCF file, we’ll quickly explore Franklin’s classification workspace using a demonstration variant. This walkthrough uses an MSH2 variant to show you the complete evidence evaluation process.</p>
+<div id="step-1-searching-for-a-variant" class="section level3 hasAnchor">
+<h3>Step 1: Searching for a Variant<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-1-searching-for-a-variant" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To demonstrate Franklin’s classification interface, we’ll search for an existing variant in the MSH2 gene (a mismatch repair gene associated with Lynch syndrome).</p>
+<p><strong>Procedure:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Ensure you’re on the Search page (default landing screen)</li>
+<li>In the central search bar, type: <code>MSH6:c.4082del</code></li>
+<li>Verify your settings before searching:
+<ul>
+<li><strong>Reference build:</strong> hg19 (GRCh37)</li>
+<li><strong>Case type:</strong> Germline</li>
+</ul></li>
+<li>Press Enter or click the search button.</li>
+</ol>
+<p>Franklin will query its database and display the variant classification page if this variant exists in the system. If you’re creating a new variant assessment, you would instead click “Create New Case” and the platform would generate a fresh classification workspace.</p>
+<aside>
+<p>💡</p>
+<p><strong>Note:</strong> The variant notation here uses HGVS coding sequence nomenclature (c. prefix indicates coding DNA). Franklin accepts multiple notation formats, but HGVS is the clinical standard.</p>
+</aside>
+</div>
+<div id="step-2-understanding-the-classification-workspace" class="section level3 hasAnchor">
+<h3>Step 2: Understanding the Classification Workspace<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-2-understanding-the-classification-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When Franklin loads a variant, the page organises into several key sections. Understanding this layout helps you efficiently navigate the evidence.</p>
+<p><strong>Page Header (Top Section):</strong></p>
+<ul>
+<li><strong>Variant identifier:</strong> Displays the genomic coordinates, reference/alternate alleles, and HGVS notation</li>
+<li><strong>Gene and transcript:</strong> Shows which gene is affected and which transcript Franklin is using (typically the MANE Select transcript)</li>
+<li><strong>Suggested classification:</strong> Franklin’s automated prediction based on accumulated evidence (VUS/Likely Pathogenic/Pathogenic/Likely Benign/Benign)</li>
+<li><strong>Classification scale:</strong> A visual “thermometer” showing where the variant falls on the benign-to-pathogenic spectrum</li>
+</ul>
+<p><strong>Main Content Tabs:</strong></p>
+<p>The workspace has multiple tabs, but you’ll primarily use:</p>
+<ul>
+<li><strong>Franklin ACMG Classification:</strong> The main evidence evaluation workspace (this is where you’ll spend most of your time)</li>
+<li><strong>Variant Assessment:</strong> Additional computational predictions and population frequency details</li>
+<li><strong>Publications:</strong> Linked literature from PubMed</li>
+<li><strong>Gene Assessment:</strong> Gene-level information (constraint scores, disease associations, dosage sensitivity)</li>
+</ul>
+</div>
+<div id="step-3-reviewing-automatically-assigned-acmg-codes" class="section level3 hasAnchor">
+<h3>Step 3: Reviewing Automatically Assigned ACMG Codes<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-3-reviewing-automatically-assigned-acmg-codes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Franklin ACMG Classification tab displays all 28 ACMG evidence criteria organised into categories. Each criterion shows:</p>
+<ul>
+<li><strong>Evidence code:</strong> (e.g., PM2, PVS1, PP3, BA1)</li>
+<li><strong>Description:</strong> Brief explanation of what the code represents</li>
+<li><strong>Status:</strong> Whether Franklin automatically assigned this code</li>
+<li><strong>Strength:</strong> The evidence level (Very Strong, Strong, Moderate, Supporting)</li>
+</ul>
+<p><strong>Understanding the Evidence Display:</strong></p>
+<p>Franklin uses colour coding to indicate code status:</p>
+<ul>
+<li><strong>Red badge (Pathogenic codes like PM2, PVS1):</strong> Assigned and contributing points toward pathogenic classification</li>
+<li><strong>Green badge (Benign codes like BA1, BP4):</strong> Assigned and contributing points toward benign classification</li>
+<li><strong>Grey/collapsed codes:</strong> Not automatically assigned; may require manual evaluation</li>
+</ul>
+<p>The <strong>“Unmet”</strong> codes section at the bottom lists criteria that Franklin could not evaluate automatically. These typically require clinical information that you must provide manually.</p>
+</div>
+<div id="step-4-deep-dive-into-population-data-pm2-example" class="section level3 hasAnchor">
+<h3>Step 4: Deep Dive into Population Data (PM2 Example)<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-4-deep-dive-into-population-data-pm2-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s examine how Franklin evaluates population frequency, one of the most commonly assigned codes. Scroll down in the Franklin ACMG Classification tab until you find the <strong>“Population Data”</strong> evidence category. You should see the PM2 code if this variant is rare: <strong>PM2 (Moderate Evidence of Pathogenicity)</strong> - “Absent from controls (or at extremely low frequency) in gnomAD Exome or Genome or Exome Sequencing Project”</p>
+<p>Click <strong>“See Details”</strong> so Franklin shows you the evidence used:</p>
+<ul>
+<li>gnomAD maximal non-founder subpopulations frequency: 0.0%</li>
+<li>gnomAD maximal founder subpopulations frequency: 0.0%</li>
+<li>Recommended PM2 frequency threshold for gene: 0.05% (this is gene-specific)</li>
+<li>Most frequent known pathogenic variant in gene: Lists examples with their frequencies</li>
+</ul>
+<p><strong>Why does Franklin assign PM2 here?</strong></p>
+<p>The variant is absent (frequency = 0.0%) in all gnomAD populations. The ACMG guidelines state that variants absent from large population databases can be assigned PM2, with the caveat that the frequency threshold must be appropriate for the gene’s disease mechanism and inheritance pattern.</p>
+</div>
+<div id="step-5-editing-evidence-strength" class="section level3 hasAnchor">
+<h3>Step 5: Editing Evidence Strength<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-5-editing-evidence-strength" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Franklin’s automated assignments are starting points. Your role is to review each assigned code and decide whether you agree with both the code assignment and its strength.</p>
+<p><strong>How to adjust evidence:</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>Locate an assigned ACMG code</strong> (e.g., PM2 with the red badge)</li>
+<li><strong>Click on the “Edit” section of the code</strong> to expand its detail view</li>
+<li>You’ll see two main controls:
+<ul>
+<li><strong>Met/Unmet toggle:</strong> Switches the code on or off, and determines whether the code contributes to the classification (ON) or not (OFF).</li>
+<li><strong>Strength selector:</strong> Dropdown menu to adjust evidence weight. Some ACMG codes allow strength adjustments. For example, PM2 (Moderate) can potentially be adjusted to:
+<ul>
+<li><strong>Supporting (PP2-like):</strong> If frequency is at the threshold boundary</li>
+<li><strong>Moderate (PM2):</strong> Standard assignment (Genoox’s suggestion)</li>
+<li><strong>Strong (PS2-like):</strong> Generally not applicable for frequency evidence alone</li>
+</ul></li>
+</ul></li>
+</ol>
+<p><strong>The “Preview” Feature:</strong></p>
+<p>After you adjust any evidence code, Franklin displays a <strong>“Preview”</strong> section showing:</p>
+<ul>
+<li><strong>Suggested classification:</strong> How the classification changes with your edit</li>
+<li><strong>Visual scale:</strong> Updated position on the benign-to-pathogenic thermometer</li>
+<li><strong>Point total:</strong> Recalculated evidence score</li>
+</ul>
+<p>This real-time feedback helps you understand how each piece of evidence contributes to the final classification.</p>
+</div>
+<div id="step-6-exploring-additional-evidence-categories" class="section level3 hasAnchor">
+<h3>Step 6: Exploring Additional Evidence Categories<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-6-exploring-additional-evidence-categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Beyond population frequency, Franklin organises evidence into several other categories. Scroll through the Franklin ACMG Classification tab to explore:</p>
+<p><strong>Effect on Protein (Functional Consequence):</strong></p>
+<ul>
+<li><strong>PVS1:</strong> Null variant (nonsense, frameshift, canonical splice site) in a gene where loss of function causes disease</li>
+<li><strong>PM4:</strong> Protein length changes (in-frame deletions/insertions in non-repeat regions)</li>
+</ul>
+<p>Franklin automatically detects variant consequences using transcript annotations. For PVS1, it checks:</p>
+<ul>
+<li>Whether the gene is known to cause disease via loss of function</li>
+<li>Whether the variant truly disrupts protein function (not all nonsense variants do due to alternate transcripts or rescue mechanisms)</li>
+<li>Whether the variant affects a critical exon</li>
+</ul>
+<p><strong>In Silico Predictions:</strong></p>
+<ul>
+<li><strong>PP3:</strong> Multiple computational algorithms predict deleterious effect</li>
+<li><strong>BP4:</strong> Multiple computational algorithms predict benign effect</li>
+</ul>
+<p>Franklin aggregates predictions from SIFT, PolyPhen-2, REVEL, CADD, and others. The criterion is met when the majority of algorithms agree. You can expand this section to see individual tool scores.</p>
+<aside>
+<p>⚠️</p>
+<p><strong>Important caveat:</strong> In silico predictions should not be used as standalone evidence. They’re supporting evidence that strengthens other findings but cannot drive classification alone (especially for VUS to Likely Pathogenic upgrades).</p>
+</aside>
+</div>
+</div>
+<div id="part-3-uploading-and-classifying-your-case-vcf-45-minutes" class="section level2 hasAnchor">
+<h2>Part 3: Uploading and Classifying Your Case VCF (45 minutes)<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-3-uploading-and-classifying-your-case-vcf-45-minutes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now that you’ve explored Franklin’s classification interface, you’ll upload your own VCF file and work through a complete variant interpretation workflow.</p>
+<div id="step-1-download-your-case-data" class="section level3 hasAnchor">
+<h3>Step 1: Download Your Case Data<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-1-download-your-case-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before creating a case in Franklin, you need to download the VCF file from the JupyterHub environment.</p>
+<p><strong>Procedure:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Return to your JupyterHub session (the browser tab with the file browser)</li>
+<li>Navigate to the <code>Module3/Hereditary</code> directory</li>
+<li>Locate the file: <strong><code>hereditary_partial.hard-filtered.vcf.gz</code></strong></li>
+<li>Right-click on the file and select <strong>“Download”</strong></li>
+<li>Save it to a location you can easily access (e.g., your Desktop or Downloads folder)</li>
+</ol>
+<aside>
+<p>💡</p>
+<p><strong>Why this file?</strong> The <code>hereditary_partial.hard-filtered.vcf.gz</code> file contains variant calls from a hereditary cancer case, already filtered to remove low-quality calls. This is a realistic representation of what you’d receive from a sequencing core facility or bioinformatics pipeline. The “partial” designation means we’ve subset to a manageable number of variants for this exercise.</p>
+</aside>
+</div>
+<div id="step-2-create-a-new-case-in-franklin" class="section level3 hasAnchor">
+<h3>Step 2: Create a New Case in Franklin<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-2-create-a-new-case-in-franklin" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Return to your Franklin browser tab and navigate to the <strong>Search page</strong> (the default landing screen).</p>
+<p><strong>Creating the case:</strong></p>
+<ol style="list-style-type: decimal">
+<li>In the centre of the page, you’ll see three case creation options. Click on <strong>“VCF”</strong> (the third option)</li>
+<li>Franklin opens the case creation form with several sections to complete</li>
+</ol>
+<p><strong>Case Configuration Form:</strong></p>
+<p><strong>Case Type Selection:</strong></p>
+<ul>
+<li>Select <strong>“Inherited Disease”</strong> (this applies germline ACMG classification rules)</li>
+<li>Choose <strong>“Single Case”</strong> (we’re analysing one individual, not a family trio or cohort)</li>
+</ul>
+<p><strong>Case Information Section:</strong></p>
+<p>You’ll see several fields to fill in. Here’s what to enter:</p>
+<ul>
+<li><strong>Case Name (required):</strong> Choose something you’ll recognise as your practice exercise
+<ul>
+<li>Examples: <code>Module3_Exercise</code>, <code>Hereditary_Workshop</code>, <code>Your_Name_VCF_Lab</code></li>
+<li>Avoid generic names like “Test” or “Case1” if multiple people are using the same account</li>
+</ul></li>
+<li><strong>Patient ID (optional):</strong> You can leave this blank or use a placeholder like <code>Patient_001</code></li>
+<li><strong>Gender (optional):</strong> Select any option (this affects X-linked variant interpretation, but we won’t focus on that today)</li>
+<li><strong>Date of Birth (optional):</strong> Can be left blank for this exercise</li>
+<li><strong>Referring Physician (optional):</strong> Can be left blank</li>
+<li><strong>Clinical Indication (optional):</strong> If you want to practise, you could enter “Hereditary cancer syndrome” or similar</li>
+</ul>
+<aside>
+<p>⚠️</p>
+<p><strong>Important:</strong> The case name is the only field that truly matters for this exercise. Everything else is optional metadata that would be relevant in a clinical setting. Don’t spend time overthinking these fields, since you can always modify case details later.</p>
+</aside>
+<p><strong>VCF File Upload:</strong></p>
+<ul>
+<li>Scroll to the bottom of the case creation form</li>
+<li>You’ll see a file upload section labelled <strong>“VCF File”</strong></li>
+<li>Click <strong>“Choose File”</strong> or drag-and-drop your downloaded <code>hereditary_partial.hard-filtered.vcf.gz</code> file</li>
+<li>Franklin accepts gzipped VCF files directly (no need to decompress)</li>
+</ul>
+<p><strong>Reference VCF &amp; Genome Verification:</strong></p>
+<ul>
+<li><p>Before clicking “Create Case,” verify the reference genome selection is <strong>hg19 (GRCh37)</strong></p></li>
+<li><p>This should match the genome build used in the variant calling pipeline</p></li>
+<li><p>Check the VCF file format version (should be VCFv4.2)</p></li>
+</ul>
+<pre><code>    zgrep &quot;^##fileformat&quot; hereditary_partial.hard-filtered.vcf.gz</code></pre>
+<ul>
+<li>Check the reference genome or contig naming (should mention hg19 or GRCh37)</li>
+</ul>
+<pre><code>    zgrep &quot;^##reference&quot; hereditary_partial.hard-filtered.vcf.gz</code></pre>
+<p><strong>Create the Case:</strong>
+- Click <strong>“Create Case”</strong> at the bottom of the form
+- Franklin will upload your VCF and begin processing (this typically takes 30-60 seconds)</p>
+<aside>
+<p>⏸️</p>
+<p><strong>Break Time:</strong> While your VCF uploads and processes, take a short break. When you return, we’ll navigate to your case and begin the variant classification workflow.</p>
+</aside>
+</div>
+</div>
+<div id="part-4-variant-interpretation" class="section level2 hasAnchor">
+<h2>Part 4: Variant interpretation<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-4-variant-interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="step-3-navigating-to-your-case" class="section level3 hasAnchor">
+<h3>Step 3: Navigating to Your Case<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-3-navigating-to-your-case" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Locate your newly created case in Franklin.</p>
+<p><strong>Procedure:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Click on the <strong>“My Cases”</strong> tab in the top navigation bar</li>
+<li>You should see your case listed with the name you chose (e.g., <code>Module3_Exercise_Germline</code>)</li>
+<li>The case status will show as <strong>“In Progress”</strong> with a count of variants detected</li>
+<li>Click on the case name to open the variant workbench</li>
+</ol>
+<p>Franklin will display the variant classification workspace you saw in Part 2, but now populated with variants from your uploaded VCF file.</p>
+</div>
+<div id="step-4-reviewing-brca2-variants-in-your-case" class="section level3 hasAnchor">
+<h3>Step 4: Reviewing BRCA2 Variants in Your Case<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-4-reviewing-brca2-variants-in-your-case" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Your VCF file contains two clinically relevant BRCA2 variants that we’ll focus on for this exercise. In your <strong>Workbench</strong> section, you should see:</p>
+<ul>
+<li><strong>BRCA2:c.1813dup</strong> (also written as c.1813dupA or p.Ile605Asnfs*4)</li>
+<li><strong>BRCA2:c.1310_1313del</strong> (also written as c.1310_1313delAAGA or p.Glu437Valfs*22)</li>
+</ul>
+<aside>
+<p>💡</p>
+<p><strong>Why these variants?</strong> Both are frameshift variants in BRCA2, a gene associated with hereditary breast and ovarian cancer syndrome. Frameshift variants typically trigger PVS1 (very strong evidence of pathogenicity) because they create premature stop codons and result in loss of protein function.</p>
+</aside>
+<p>Click on <strong>BRCA2:c.1813dup</strong> to open its classification workspace (Use the arrow head to the right of the variant bar). Take note of:</p>
+<ul>
+<li><strong>Automatically assigned ACMG codes:</strong> Franklin should have assigned several codes based on the variant’s properties</li>
+<li><strong>Suggested classification:</strong> Check whether Franklin suggests this as Pathogenic, Likely Pathogenic, or VUS</li>
+<li><strong>Population frequency:</strong> Review the PM2 evidence if assigned</li>
+<li><strong>Functional consequence:</strong> Look for PVS1 assignment (null variant in a loss-of-function gene)</li>
+</ul>
+<p>Repeat this process for <strong>BRCA2:c.1310_1313del</strong> and compare the evidence profiles. Do both variants receive similar classifications? Are there any differences in the evidence codes assigned?</p>
+</div>
+<div id="step-5-adding-patient-phenotype-information" class="section level3 hasAnchor">
+<h3>Step 5: Adding Patient Phenotype Information<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-5-adding-patient-phenotype-information" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Clinical variant interpretation is significantly enhanced when you provide patient phenotype data. Franklin uses Human Phenotype Ontology (HPO) terms to prioritize variants in genes associated with the patient’s clinical features.</p>
+<p><strong>Understanding the Phenotype JSON File:</strong></p>
+<p>Your course materials include a file called <strong><code>phenotips_data.json</code></strong> located in <code>CourseData/Module3/Hereditary/</code>. This file was exported from a clinical phenotyping system and contains structured patient information.</p>
+<p><strong>Extracting Relevant HPO Terms:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Open the <code>phenotips_data.json</code> file in a text editor (or view it in the Jupyter notebook)</li>
+</ol>
+<pre><code>    less phenotips_data.json</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Look for the <strong>“features”</strong> section, which contains a list of phenotypic observations</li>
+<li>For each feature, check the <strong>“observed”</strong> field:
+<ul>
+<li><code>"observed": "yes"</code> → Include this HPO term</li>
+<li><code>"observed": "no"</code> → Do NOT include this HPO term</li>
+</ul></li>
+</ol>
+<p><strong>Expected HPO Terms to Extract:</strong></p>
+<p>From the JSON file, you should find the following observed phenotypes:</p>
+<ul>
+<li><strong>HP:0100615</strong> - Ovarian neoplasm</li>
+<li><strong>HP:0032317</strong> - Family history of cancer</li>
+<li><strong>HP:0012378</strong> - Fatigue</li>
+<li><strong>HP:0000819</strong> - Diabetes mellitus</li>
+</ul>
+<p>You can also extact relevant phenotype terms using a quick one-line command:</p>
+<pre><code>jq -r &#39;.features[] | select(.observed==&quot;yes&quot;) | &quot;\(.id) - \(.label)&quot;&#39; phenotips_data.json</code></pre>
+<p>Here is a breakdown of the code:</p>
+<pre><code>jq : A small tool for reading and filtering JSON files.
+-r :Raw output (no quotes around strings).
+.features[] : Start at the top of the JSON, then iterate over each item in the features list.
+select(.observed==&quot;yes&quot;)  :  Keep only features where &quot;observed&quot; equals &quot;yes&quot;.
+&quot;\(.id) - \(.label)&quot;   : Print the HPO ID and its label on one line.
+phenotips_data.json : The JSON file you’re reading.</code></pre>
+<aside>
+<p>⚠️</p>
+<p><strong>Important:</strong> Do NOT add HP:0001737 (Pancreatic cysts). This has <code>"observed": "no"</code> in the JSON file, meaning the patient does NOT have this feature.</p>
+</aside>
+<p><strong>Adding Phenotypes to Your Franklin Case:</strong></p>
+<ol style="list-style-type: decimal">
+<li>In your case view, locate the <strong>“Phenotype”</strong> section (typically in the right sidebar or case details panel)</li>
+<li>Click <strong>“Add/<strong>Remove </strong>Phenotype”</strong> or the <strong>“+”</strong> icon</li>
+<li>In the search box, enter either the HPO ID (e.g., <code>HP:0100615</code>) or the phenotype name (e.g., <code>Ovarian neoplasm</code>)</li>
+<li>Franklin will provide autocomplete suggestions - select the correct term</li>
+<li>The term will be added to your phenotype list</li>
+<li>Repeat for all four observed phenotypes listed above</li>
+</ol>
+<p><strong>Adding Patient Demographics:</strong></p>
+<p>While in the case details, you can also add:</p>
+<ul>
+<li><strong>Age:</strong> 45 years old</li>
+<li><strong>Sex:</strong> Female</li>
+</ul>
+<p><strong>How Phenotypes Affect Variant Prioritization:</strong></p>
+<p>After adding the HPO terms, return to your variant list. You should notice:</p>
+<ul>
+<li>The <strong>“Phenotype Match”</strong> column will show scores indicating how well each variant’s gene matches the patient’s clinical features</li>
+<li>Franklin may automatically filter or deprioritize variants in genes unrelated to the patient’s presentation.</li>
+</ul>
+</div>
+<div id="step-6-exploring-case-level-quality-control-and-variant-filtering" class="section level3 hasAnchor">
+<h3>Step 6: Exploring Case-Level Quality Control and Variant Filtering<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-6-exploring-case-level-quality-control-and-variant-filtering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before diving into detailed variant interpretation, it’s valuable to explore the additional information Franklin provides about your case. Understanding these features will help you assess data quality and efficiently filter variants.</p>
+<p><strong>Quality Control Tab:</strong></p>
+<p>Navigate to the <strong>Quality Control</strong> tab in your case view. You’ll likely see several warnings or quality metrics displayed.</p>
+<aside>
+<p>ℹ️</p>
+<p><strong>Important context:</strong> Because you’re working with a partial VCF file (subset of variants from the complete case), some quality calculations may not be accurate. However, it’s still important to understand what quality parameters Franklin monitors in a complete clinical workflow.</p>
+</aside>
+<p><strong>Key Quality Metrics to Review:</strong></p>
+<p><strong>1. Sex Detection and Ploidy Parameters (not apploicable to this case)</strong></p>
+<p>Franklin analyzes the ratio of X and Y chromosome variants to determine biological sex. This is critical for:</p>
+<ul>
+<li>Verifying sample identity (does the detected sex match the clinical record?)</li>
+<li>Interpreting X-linked variants correctly</li>
+<li>Detecting sample mix-ups or contamination</li>
+</ul>
+<p>For example, if the case metadata says “Female” but Franklin detects XY chromosomes, this indicates a potential sample labelling error.</p>
+<p><strong>2. Average Variant Depth</strong></p>
+<p>This metric shows the mean read depth across all called variants. For your case, this should be approximately <strong>140×</strong> coverage, which is typical for exome sequencing.</p>
+<p>Why this matters:</p>
+<ul>
+<li><strong>Low average depth (&lt;20×):</strong> May miss variants, especially heterozygous ones</li>
+<li><strong>Expected range (100-150×):</strong> Appropriate for clinical exome analysis</li>
+<li><strong>Very high depth (&gt;500×):</strong> Typical for targeted panels, not relevant here</li>
+</ul>
+<p><strong>3. Other Quality Indicators</strong></p>
+<p>Franklin may also display:</p>
+<ul>
+<li><strong>Variant-to-reference ratio:</strong> Helps detect contamination</li>
+<li><strong>Transition/transversion ratio:</strong> Should be ~2.0-2.1 for exomes (genome-wide quality metric)</li>
+<li><strong>Coverage uniformity:</strong> Percentage of target regions meeting minimum depth thresholds</li>
+</ul>
+<aside>
+<p>⚠️</p>
+<p><strong>Clinical practice note:</strong> In a real diagnostic workflow, you would carefully review all quality warnings before proceeding with interpretation. Any failures would require troubleshooting or repeat analysis.</p>
+</aside>
+<p><strong>Exploring the Variant Tab:</strong></p>
+<p>Now navigate to the <strong>Variants</strong> tab on the left side of your case view. This is where you’ll see a significant difference from the Workbench.</p>
+<p><strong>Workbench vs. Variants Tab:</strong></p>
+<ul>
+<li><strong>Workbench:</strong> Shows only variants likely to be clinically reportable (typically classified as Pathogenic, Likely Pathogenic, or clinically relevant VUS)</li>
+<li><strong>Variants Tab:</strong> Displays <strong>all variants</strong> present in your VCF file, including benign polymorphisms and low-quality calls that passed initial filtering</li>
+</ul>
+<p><strong>Understanding the Filter Panel:</strong></p>
+<p>On the left side of the Variants tab, Franklin provides comprehensive filtering options. These filters allow you to narrow down variants based on various criteria:</p>
+<p><strong>1. Phenotype Filters</strong></p>
+<p>If you’ve added HPO terms (as you did in Step 5), you’ll see a <strong>Phenotypes</strong> filter section at the top. You can:</p>
+<ul>
+<li>Filter to show only variants in genes associated with your patient’s phenotypes</li>
+<li>This dramatically reduces the variant list to clinically relevant candidates</li>
+</ul>
+<p><strong>2. Franklin Classification Filter</strong></p>
+<p>One of the most useful filters for clinical workflows:</p>
+<ul>
+<li>Click on the <strong>“Franklin Classification”</strong> filter</li>
+<li>Select <strong>“Pathogenic”</strong> to see only variants Franklin suggests as Pathogenic</li>
+<li>You should see your two BRCA2 frameshift variants appear</li>
+</ul>
+<p>Try toggling between different classification categories (Pathogenic, Likely Pathogenic, VUS, Likely Benign, Benign) to see how the variant list changes.</p>
+<p><strong>3. Additional VCF-Based Filters</strong></p>
+<p>Franklin exposes all the information encoded in your VCF file as filterable parameters:</p>
+<ul>
+<li><strong>Variant Type:</strong> SNV, insertion, deletion, complex</li>
+<li><strong>Genomic Region:</strong> Exonic, intronic, splice site, UTR</li>
+<li><strong>Gene:</strong> Filter by specific gene names</li>
+<li><strong>Quality Metrics:</strong> Depth, quality score, allele fraction</li>
+<li><strong>Population Frequency:</strong> Filter by gnomAD frequency thresholds</li>
+<li><strong>Consequence:</strong> Missense, nonsense, frameshift, synonymous</li>
+<li><strong>Inheritance Pattern:</strong> Match to disease inheritance models</li>
+</ul>
+<p><strong>Practical Exercise:</strong></p>
+<p>Try the following filtering combinations to see how they affect your variant list:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Filter by Franklin Classification = “Pathogenic”</strong>
+<ul>
+<li>Result: Should show your two BRCA2 frameshift variants</li>
+</ul></li>
+<li><strong>Filter by Phenotype = “Ovarian neoplasm”</strong>
+<ul>
+<li>Result: Should prioritise variants in genes associated with ovarian cancer</li>
+</ul></li>
+<li><strong>Filter by Variant Type = “Deletion”</strong>
+<ul>
+<li>Result: Shows only deletion variants, including BRCA2:c.1310_1313del</li>
+</ul></li>
+</ol>
+</div>
+<div id="step-7-deep-dive-into-variant-classification-brca2c.1813dup" class="section level3 hasAnchor">
+<h3>Step 7: Deep Dive into Variant Classification: BRCA2:c.1813dup<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-7-deep-dive-into-variant-classification-brca2c.1813dup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that you’ve explored the case-level features, let’s perform an interpretation of one of your BRCA2 variants. We’ll use <strong>BRCA2:c.1813dup</strong> as our example, though you can apply the same process to any variant in your case.</p>
+<p><strong>Opening the Detailed Variant View:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Navigate back to your <strong>Workbench</strong> tab</li>
+<li>Locate <strong>BRCA2:c.1813dup</strong> in your variant list</li>
+<li>Click anywhere on the variant bar <strong>EXCEPT</strong> the arrow icon on the right. It should open the detailed variant assessment view</li>
+</ol>
+<p>Franklin will load a variant detail page with multiple tabs and information panels (similar to what you saw with the initial example).</p>
+</div>
+<div id="reviewing-the-franklin-acmg-classification" class="section level3 hasAnchor">
+<h3>Reviewing the Franklin ACMG Classification<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#reviewing-the-franklin-acmg-classification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first tab you’ll see is <strong>Franklin ACMG Classification</strong>. This is where you evaluate the automatically assigned evidence codes and understand how they contribute to the classification. The thermometer position is calculated based on the cumulative strength of evidence codes assigned. For BRCA2:c.1813dup (a frameshift variant), you should see the marker positioned in the <strong>Pathogenic</strong> range.</p>
+<p><strong>ClinGen Gene-Specific Guidelines:</strong></p>
+<p>Below the thermometer, you’ll notice a Franklin Highlight section stating: <strong>“ClinGen has gene-specific guidelines for BRCA2”.</strong> Click on this link to access the ClinGen Expert Panel specifications for BRCA2. This is important because:</p>
+<ul>
+<li>Different genes have different tolerances for variation</li>
+<li>Some ACMG codes may not apply to certain genes or disease mechanisms</li>
+<li>Evidence strength may be adjusted based on gene-disease relationships</li>
+<li>Specific code combinations may be recommended or cautioned against</li>
+</ul>
+<p><strong>What you’ll find in the ClinGen BRCA2 guidelines:</strong></p>
+<p>When you click through to ClinGen, scroll down to review:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Gene-disease relationship:</strong> BRCA2 and hereditary breast-ovarian cancer (HBOC)</li>
+<li><strong>Recommended modifications to ACMG criteria:</strong>
+<ul>
+<li>Which codes are particularly informative for BRCA2</li>
+<li>Any codes that should NOT be used</li>
+<li>Strength adjustments for specific evidence types</li>
+</ul></li>
+<li><strong>Code-by-code specifications:</strong> Detailed guidance on applying each ACMG criterion to BRCA2 variants</li>
+</ol>
+<aside>
+<p>⚠️</p>
+<p><strong>When to consult gene-specific guidelines:</strong> These are particularly valuable when you have borderline classifications (e.g., a VUS that’s close to Likely Pathogenic, or a Likely Pathogenic that might be upgraded to Pathogenic). The expert panel guidance can provide the justification needed for appropriate classification.</p>
+</aside>
+<p><strong>Reviewing Assigned ACMG Codes:</strong></p>
+<p>Scroll through the Franklin ACMG Classification tab and review each assigned code. For BRCA2:c.1813dup, you should see codes like:</p>
+<ul>
+<li><strong>PVS1:</strong> Null variant in a gene where loss of function is a known disease mechanism</li>
+<li><strong>PM2:</strong> Absent from population databases (or extremely rare)</li>
+<li><strong>PP3:</strong> Multiple computational predictions suggest a deleterious effect (if applicable to frameshift context)</li>
+</ul>
+<p>Take time to expand each code and review the supporting evidence Franklin used to make the assignment.</p>
+</div>
+<div id="exploring-the-variant-assessment-tab" class="section level3 hasAnchor">
+<h3>Exploring the Variant Assessment Tab<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#exploring-the-variant-assessment-tab" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Click on the <strong>Variant Assessment</strong> tab. This tab contains multiple information panels organized on the left sidebar. Each panel provides different types of evidence to support your interpretation.</p>
+<p><strong>1. Links</strong></p>
+<p>The first section provides quick access to external databases:</p>
+<ul>
+<li><strong>rs80359306:</strong> dbSNP reference SNP ID (click to view in NCBI dbSNP)</li>
+<li><strong>UCSC:</strong> Opens the UCSC Genome Browser at this variant’s genomic location</li>
+<li><strong>gnomAD:</strong> Direct link to this variant’s entry in the gnomAD database</li>
+</ul>
+<p>These links allow you to verify Franklin’s annotations and explore additional information in the source databases.</p>
+<p><strong>2. Region Viewer</strong></p>
+<p>This interactive panel shows how other variants in the same genomic region are classified in ClinVar.</p>
+<p><strong>Features to explore:</strong></p>
+<ul>
+<li><strong>Genomic context:</strong> Visual representation of the BRCA2 gene region surrounding your variant</li>
+<li><strong>ClinVar variant overlay:</strong> Red and green markers showing pathogenic and benign variants respectively</li>
+<li><strong>Filter buttons:</strong>
+<ul>
+<li><strong>LOF (Loss of Function):</strong> Shows nonsense, frameshift, and splice variants</li>
+<li><strong>Missense:</strong> Shows amino acid substitution variants</li>
+<li><strong>Non-coding and Synonymous:</strong> Shows variants outside coding regions or with no amino acid change</li>
+</ul></li>
+</ul>
+<p><strong>Using the Region Viewer:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Click <strong>LOF</strong> to filter the view to show only loss-of-function variants like yours</li>
+<li>Observe the distribution of pathogenic (red) vs. benign (green) markers</li>
+<li>Click <strong>“Select Track”</strong> on the right to add additional annotation tracks (e.g., protein domains, conservation scores)</li>
+</ol>
+<aside>
+<p>💡</p>
+<p><strong>Interpretation insight:</strong> If you see many pathogenic LOF variants clustered in this region of BRCA2, it strengthens the evidence that null variants in this part of the gene are disease-causing. Conversely, if you saw many benign LOF variants, it might suggest this region tolerates protein truncation (which is NOT the case for BRCA2).</p>
+</aside>
+<p><strong>3. Franklin Community Frequency</strong></p>
+<p>This section shows how many times this variant has been observed in the Franklin user community.bFor BRCA2:c.1813dup, you should see: <strong>“80 cases - Very Rare variant in Franklin community”.</strong> This indicates that while the variant has been observed, it remains rare across Franklin’s user base.</p>
+<aside>
+<p>ℹ️</p>
+<p><strong>Context:</strong> Franklin Community data is distinct from gnomAD population data. Franklin users are typically clinical cases undergoing genetic testing, whereas gnomAD represents general population controls. A variant can be rare in gnomAD but relatively more common in Franklin if it’s a recurrent pathogenic mutation.</p>
+</aside>
+<p><strong>4. Variant Priority</strong></p>
+<p>This metric assesses how likely this variant is to be clinically reportable based on:</p>
+<ul>
+<li>Classification (Pathogenic/Likely Pathogenic = high priority)</li>
+<li>Gene-disease association strength</li>
+<li>Phenotype match (if you added HPO terms)</li>
+</ul>
+<p>For your BRCA2 variant with the ovarian neoplasm phenotype, this should show high priority.</p>
+<p><strong>5. Confidence</strong></p>
+<p>This section displays quality metrics from the VCF file to assess whether the variant call is reliable or potentially an artifact.</p>
+<p><strong>Key metrics to review:</strong></p>
+<ul>
+<li><strong>Allele Fraction (AF):</strong> For a germline heterozygous variant, expect ~50%
+<ul>
+<li>For BRCA2:c.1813dup, you should see approximately <strong>56% AF</strong></li>
+<li>This is close to the expected 50%, confirming this is likely a true heterozygous variant</li>
+<li>Deviations from 50% could indicate:
+<ul>
+<li>Copy number changes affecting the region</li>
+<li>Subclonal mosaicism</li>
+<li>Technical artifacts or contamination</li>
+</ul></li>
+</ul></li>
+<li><strong>Read Depth (DP):</strong> Number of reads covering this position
+<ul>
+<li>Higher depth = more confidence in the call</li>
+<li>For exome data, expect 100-200× depth at well-covered exons</li>
+</ul></li>
+<li><strong>Genotype Quality (GQ):</strong> Phred-scaled confidence in the genotype call
+<ul>
+<li>GQ ≥20 is typically considered high confidence (99% certainty)</li>
+</ul></li>
+</ul>
+<aside>
+<p>✅</p>
+<p><strong>Quality checkpoint:</strong> The ~56% allele fraction with high depth confirms this is a real heterozygous variant, not a sequencing artifact. You can proceed with interpretation confidently.</p>
+</aside>
+<p><strong>6. Clinical Evidence</strong></p>
+<p>This section links your variant to existing clinical interpretations in ClinVar.</p>
+<p>Click to expand and review:</p>
+<ul>
+<li><strong>ClinVar classification:</strong> How other labs have classified this variant</li>
+<li><strong>Submission count:</strong> How many independent labs have reported this variant</li>
+<li><strong>Star rating:</strong> ClinVar’s confidence level based on agreement across submitters</li>
+<li><strong>Review status:</strong> Whether the classification has expert panel review</li>
+</ul>
+<p>For BRCA2:c.1813dup, you should see existing Pathogenic classifications from multiple submitters, providing strong supporting evidence.</p>
+<p><strong>7. Predictions</strong></p>
+<p>This section displays in silico algorithm predictions about the variant’s functional impact.</p>
+<p><strong>Important context for frameshift variants:</strong></p>
+<p>Since BRCA2:c.1813dup is a frameshift (not a missense variant), most amino acid substitution predictors (SIFT, PolyPhen-2, etc.) are not applicable. Instead, you’ll primarily see:</p>
+<ul>
+<li><strong>SpliceAI:</strong> Predicts whether the variant affects RNA splicing
+<ul>
+<li>For frameshifts, splicing disruption can compound the truncation effect</li>
+<li>Check if SpliceAI predicts splice donor/acceptor gain or loss</li>
+</ul></li>
+</ul>
+<aside>
+<p>💡</p>
+<p><strong>Missense vs. Frameshift predictions:</strong> If you were analyzing a missense variant instead, this section would show SIFT, PolyPhen-2, REVEL, CADD, and other algorithms that assess amino acid substitution consequences. For LOF variants, these tools are less informative, so Franklin appropriately shows only splice-relevant predictions.</p>
+</aside>
+<p><strong>8. Internal Frequency</strong></p>
+<p>This metric would show how frequently the variant appears in your own cohort or laboratory’s previous cases. For this workshop exercise with a single case, this field is not applicable.</p>
+<p>In a clinical laboratory setting with hundreds of cases, this helps identify:</p>
+<ul>
+<li>Recurrent pathogenic mutations</li>
+<li>Technical artifacts that appear repeatedly across runs</li>
+<li>Population-specific variants in your patient population</li>
+</ul>
+<p><strong>9. Population Frequencies</strong></p>
+<p>This critical section queries multiple population databases to determine variant rarity.</p>
+<p><strong>Databases queried:</strong></p>
+<ul>
+<li><strong>gnomAD (primary):</strong> Genome Aggregation Database with &gt;140,000 individuals</li>
+<li><strong>ExAC:</strong> Exome Aggregation Consortium (now incorporated into gnomAD)</li>
+<li><strong>1000 Genomes Project:</strong> International reference dataset</li>
+<li><strong>ESP (Exome Sequencing Project):</strong> NHLBI dataset</li>
+<li><strong>Population-specific databases:</strong> TopMed, UK10K, etc.</li>
+</ul>
+<p><strong>What to look for:</strong></p>
+<p>For BRCA2:c.1813dup, you should see:</p>
+<ul>
+<li><strong>gnomAD frequency: 0.0%</strong> (absent in all populations)</li>
+<li>This supports the PM2 ACMG code assignment (absent/rare in controls)</li>
+</ul>
+<p><strong>Critical interpretation rule:</strong></p>
+<ul>
+<li>Variants with &gt;5% frequency in any population are typically classified as Benign (BA1 code)</li>
+<li>Variants with &gt;1% frequency require careful consideration (BS1 code may apply)</li>
+<li>Variants absent or extremely rare (&lt;0.01%) support pathogenicity (PM2 code)</li>
+</ul>
+<p><strong>10. Transcripts and References</strong></p>
+<p>This section provides HGVS nomenclature for the variant across different transcript isoforms and reference sequences.</p>
+<p><strong>Information provided:</strong></p>
+<ul>
+<li><strong>HGVS coding (c.):</strong> c.1813dup (coding DNA level)</li>
+<li><strong>HGVS protein (p.):</strong> p.Ile605Asnfs*4 (protein level - indicates frameshift starting at isoleucine 605)</li>
+<li><strong>Alternate nomenclature:</strong> How this variant may be referenced in older publications</li>
+<li><strong>Effect across transcripts:</strong> Whether the variant affects all BRCA2 isoforms or only specific ones</li>
+</ul>
+<p>When searching literature for prior reports of this variant, authors may use different transcript references. This section helps you identify all possible names for the same variant.</p>
+<p><strong>11. Suspected Compound Variants</strong></p>
+<p>This section identifies other variants in the same gene (BRCA2) that appear in your case.</p>
+<p><strong>Clinical relevance:</strong></p>
+<ul>
+<li><strong>For autosomal recessive conditions:</strong> Two variants in the same gene (one on each chromosome) are required for disease</li>
+<li><strong>For BRCA2 (dominant condition):</strong> This is less relevant, but can still be informative</li>
+<li><strong>Phasing requirement:</strong> To determine if variants are in <em>cis</em> (same chromosome) or <em>trans</em> (different chromosomes), you need parental samples</li>
+</ul>
+<p><strong>12. Gene Coverage</strong></p>
+<p>This section would display read depth coverage across the BRCA2 gene if a BAM file were uploaded.</p>
+<p>This section will show “No coverage data available.” However, you can still visualize coverage using the BAM file from your Jupyter Notebook environment.</p>
+<p><strong>Alternative visualization with IGV (optional):</strong></p>
+<ol style="list-style-type: decimal">
+<li>Download and install IGV (Integrative Genomics Viewer) from <a href="http://igv.org">igv.org</a></li>
+<li>Download the <code>hereditary_partial.bam</code> file from your <code>Module3/Hereditary/</code> directory. Once downloaded, load .bam into IGV (make sure that the .bai file is in the same folder</li>
+<li>Navigate to the BRCA2 gene (chr13:32,907,420 in hg19/GRCh37)</li>
+<li>Zoom into the region around c.1813dup</li>
+<li>Observe:
+<ul>
+<li>Read depth across the region</li>
+<li>Individual reads supporting the reference vs. alternate allele</li>
+<li>Read quality and mapping quality</li>
+<li>Presence of any alignment artifacts</li>
+</ul></li>
+</ol>
+<p>This manual inspection can help you identify potential technical issues that automated callers might miss.</p>
+<p><strong>13. Additional Tools and Resources</strong></p>
+<p>Scroll to the bottom of the Variant Assessment tab to find links to:</p>
+<ul>
+<li><strong>Sequence Browser:</strong> Explore the DNA sequence context around the variant</li>
+</ul>
+</div>
+<div id="exploring-associated-conditions" class="section level3 hasAnchor">
+<h3>Exploring Associated Conditions<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#exploring-associated-conditions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Navigate to the <strong>Associated Conditions</strong> tab to see how your variant connects to clinical phenotypes. This view integrates three key elements: the variant, the gene (BRCA2), and the patient phenotypes you added earlier.</p>
+<p><strong>Top Section: Primary Condition Match</strong></p>
+<p>At the top of this view, you’ll see the primary conditions associated with BRCA2 alongside the phenotypes you added to your case (ovarian neoplasm, family history of cancer, fatigue, diabetes mellitus).</p>
+<p><strong>Key features to observe:</strong></p>
+<ul>
+<li><strong>Association strength gauge:</strong> On the left side, you’ll see a visual gauge indicating the strength of association between BRCA2 and your observed phenotypes
+<ul>
+<li>The gauge position reflects how strongly BRCA2 variants are linked to these clinical features in the literature</li>
+<li>For ovarian neoplasm and family history of cancer, expect a strong association given BRCA2’s well-established role in hereditary breast-ovarian cancer syndrome</li>
+</ul></li>
+</ul>
+<p><strong>Scrolling Through Associated Conditions</strong></p>
+<p>As you scroll down, Franklin displays other conditions associated with BRCA2 variants:</p>
+<ul>
+<li><strong>Condition descriptions:</strong> Brief summaries of each disease phenotype</li>
+<li><strong>Phenotype matching indicators:</strong> Franklin highlights which of your patient’s phenotypes match each condition
+<ul>
+<li>Green checkmarks or highlighted terms indicate perfect matches</li>
+<li>Grey or absent terms indicate phenotypes not observed in your patient</li>
+</ul></li>
+</ul>
+<p><strong>Expanding Condition Details</strong></p>
+<p>Click on any condition to see more specific information:</p>
+<ol style="list-style-type: decimal">
+<li>Click the condition name to expand the detail panel</li>
+<li>Click the arrow icon on the right side to access condition-specific information</li>
+<li>You’ll see:
+<ul>
+<li><strong>Complete HPO term list:</strong> All phenotypes associated with this specific condition or sub-specification</li>
+<li><strong>Matched terms highlighted in green:</strong> HPO terms from the condition that match your patient’s phenotypes</li>
+<li><strong>Inheritance pattern:</strong> Whether the condition follows autosomal dominant, recessive, or X-linked inheritance</li>
+<li><strong>Age of onset:</strong> Typical age range when symptoms appear</li>
+</ul></li>
+</ol>
+<aside>
+<p>💡</p>
+<p><strong>Clinical value:</strong> This feature helps you assess whether your patient’s presentation matches the expected phenotype for a BRCA2-related condition. Strong phenotype matches increase confidence that a variant is clinically relevant to the patient’s case.</p>
+</aside>
+</div>
+<div id="using-the-publications-tab" class="section level3 hasAnchor">
+<h3>Using the Publications Tab<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#using-the-publications-tab" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Click on the <strong>Publications</strong> tab to access Franklin’s curated scientific literature relevant to your variant and case. This is one of Franklin’s most powerful features for clinical variant interpretation.</p>
+<p><strong>Why this matters:</strong></p>
+<p>Variant interpretation often requires literature review to find:</p>
+<ul>
+<li>Prior case reports describing this exact variant</li>
+<li>Functional studies demonstrating pathogenic mechanism</li>
+<li>Clinical outcome data supporting actionability</li>
+<li>Genotype-phenotype correlation studies</li>
+</ul>
+<p>Franklin’s algorithm automatically curates and ranks publications by relevance, saving you significant time compared to manual PubMed searches.</p>
+<p><strong>Understanding the Scope Filter</strong></p>
+<p>When you first open the Publications tab, Franklin displays papers by default at the <strong>whole gene</strong> level. Use the <strong>Scope</strong> dropdown to refine your search:</p>
+<ul>
+<li><strong>Variant:</strong> Papers specifically mentioning your exact variant (BRCA2:c.1813dup)
+<ul>
+<li>For this variant, expect approximately <strong>53 articles</strong></li>
+</ul></li>
+<li><strong>Amino Acid:</strong> Papers discussing variants at this specific amino acid position</li>
+<li><strong>Domain:</strong> Papers about the protein domain containing your variant</li>
+<li><strong>Whole Gene:</strong> All BRCA2-related publications (thousands of papers)</li>
+</ul>
+<p><strong>Recommended workflow:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Start with <strong>Scope = Variant</strong> to see if this exact variant has been reported</li>
+<li>If no variant-specific papers exist, expand to <strong>Amino Acid</strong> or <strong>Domain</strong></li>
+<li>Use <strong>Whole Gene</strong> scope for background reading on BRCA2 function and disease associations</li>
+</ol>
+<p><strong>Reviewing Individual Publications</strong></p>
+<p>Each publication entry displays:</p>
+<ul>
+<li><strong>Title:</strong> Full publication title</li>
+<li><strong>Authors and journal:</strong> Publication details</li>
+<li><strong>PMID (PubMed ID):</strong> Click to open the full record in PubMed</li>
+<li><strong>Abstract preview:</strong> Click the publication to expand and read the abstract within Franklin</li>
+</ul>
+<p><strong>Practical filtering strategy:</strong></p>
+<p>As you review a few articles for BRCA2:c.1813dup, you can prioritize based on:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Case reports:</strong> Skim abstracts to verify the variant and patient phenotype match your case</li>
+<li><strong>Functional studies:</strong> Read in detail if they provide experimental evidence of pathogenicity</li>
+<li><strong>Population studies:</strong> Note allele frequencies in specific populations</li>
+<li><strong>Review articles:</strong> Use for background understanding but don’t cite as primary evidence</li>
+</ol>
+<aside>
+<p>📝</p>
+<p><strong>For your report:</strong> Select 2-3 key publications that provide the strongest evidence for your variant’s pathogenicity. You might include:</p>
+<ul>
+<li>A case report demonstrating clinical impact</li>
+<li>A functional study showing loss of protein function</li>
+<li>A large cohort study confirming recurrence in affected families</li>
+</ul>
+</aside>
+</div>
+<div id="gene-assessment-tab" class="section level3 hasAnchor">
+<h3>Gene Assessment Tab<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#gene-assessment-tab" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The final core section for variant interpretation is the <strong>Gene Assessment</strong> tab. This provides gene-level context that complements your variant-specific evidence.</p>
+<p><strong>Why review gene-level information?</strong></p>
+<p>When reporting a variant clinically, you typically include:</p>
+<ol style="list-style-type: decimal">
+<li>Variant-specific evidence (what you’ve reviewed so far)</li>
+<li>Gene-level summary (function, disease mechanism, constraint metrics)</li>
+</ol>
+<p>This dual approach helps clinicians understand both the specific variant and the broader biological context.</p>
+<p><strong>1. Gene Summary</strong></p>
+<p>At the top of the Gene Assessment tab, you’ll see:</p>
+<ul>
+<li><strong>Function description:</strong> Summarizes BRCA2’s biological role (typically sourced from RefSeq or NCBI Gene)
+<ul>
+<li>For BRCA2, this will describe its role in DNA repair, homologous recombination, and tumour suppression</li>
+</ul></li>
+<li><strong>Disease mechanism:</strong> How loss of BRCA2 function leads to cancer predisposition</li>
+</ul>
+<p><strong>2. Curated Variations Distribution</strong></p>
+<p>This section shows the breakdown of all reported BRCA2 variants by type and classification.</p>
+<p><strong>Variant type categories:</strong></p>
+<ul>
+<li><strong>LOF (Loss of Function):</strong> Nonsense, frameshift, canonical splice variants</li>
+<li><strong>Missense:</strong> Amino acid substitutions</li>
+<li><strong>In-frame Indels:</strong> Insertions or deletions that don’t shift the reading frame</li>
+<li><strong>Non-coding:</strong> Intronic, UTR, or intergenic variants</li>
+<li><strong>Synonymous:</strong> Silent variants that don’t change amino acids</li>
+</ul>
+<p><strong>Classification breakdown:</strong></p>
+<p>For each variant type, you’ll see counts for:</p>
+<ul>
+<li><strong>Pathogenic</strong> (red bars)</li>
+<li><strong>VUS</strong> (yellow bars)</li>
+<li><strong>Benign</strong> (green bars)</li>
+</ul>
+<p><strong>Interpreting the distribution for BRCA2:</strong></p>
+<p>You should observe that LOF variants in BRCA2 have a <strong>significantly higher proportion classified as Pathogenic</strong> compared to other variant types. This confirms that:</p>
+<ul>
+<li>BRCA2 is highly sensitive to loss of function</li>
+<li>Null variants are a well-established disease mechanism</li>
+<li>Your frameshift variant (BRCA2:c.1813dup) falls into a variant class with strong prior evidence of pathogenicity</li>
+</ul>
+<aside>
+<p>💡</p>
+<p><strong>Clinical interpretation tip:</strong> If you were analyzing a gene where LOF variants were predominantly benign or VUS, it would suggest the gene tolerates loss of function, and you’d need stronger evidence to classify a frameshift as pathogenic. The BRCA2 distribution strongly supports PVS1 code assignment for your variant.</p>
+</aside>
+<p><strong>3. Gene Pathogenicity Metrics</strong></p>
+<p>Scroll down to the <strong>Gene Pathogenicity</strong> section to review constraint and dosage sensitivity data from multiple sources.</p>
+<p><strong>ClinGen Dosage Sensitivity:</strong></p>
+<ul>
+<li><strong>Haploinsufficiency:</strong> Does losing one functional copy of the gene cause disease?
+<ul>
+<li>For BRCA2, this should show <strong>“Sufficient evidence for haploinsufficiency”</strong></li>
+<li>This confirms that heterozygous loss-of-function variants (like yours) are pathogenic</li>
+</ul></li>
+<li><strong>Triplosensitivity:</strong> Does gene duplication cause disease?
+<ul>
+<li>Less relevant for BRCA2, but important for other genes (e.g., dosage-sensitive developmental genes)</li>
+</ul></li>
+</ul>
+<p><strong>ClinVar Pathogenicity Summary:</strong></p>
+<p>Franklin displays aggregated ClinVar data showing:</p>
+<ul>
+<li>Total number of BRCA2 variants in ClinVar</li>
+<li>Breakdown by classification (Pathogenic, Likely Pathogenic, VUS, Benign)</li>
+<li>Most common variant types reported</li>
+</ul>
+<p><strong>gnomAD Constraint Metrics:</strong></p>
+<p>This section shows statistical evidence for negative selection against variants in BRCA2.</p>
+<p><strong>Key metrics explained:</strong></p>
+<ul>
+<li><strong>pLI (probability of Loss of Intolerance):</strong> Score from 0-1 indicating how intolerant a gene is to loss-of-function variants
+<ul>
+<li>pLI &gt; 0.9 suggests the gene is highly intolerant (LOF variants are under strong negative selection)</li>
+<li>For BRCA2, expect a moderate to high pLI score</li>
+</ul></li>
+<li><strong>Z-score:</strong> Compares observed vs. expected missense variants
+<ul>
+<li>Positive Z-score = fewer variants observed than expected (intolerant to variation)</li>
+<li>Negative Z-score = more variants than expected (tolerant to variation)</li>
+</ul></li>
+<li><strong>Observed/Expected (o/e) ratio:</strong> Direct calculation of variant burden
+<ul>
+<li>o/e &lt; 0.35 suggests strong constraint</li>
+<li>o/e close to 1.0 suggests no constraint</li>
+</ul></li>
+</ul>
+<p>If gnomAD shows significantly <strong>fewer LOF variants observed than expected</strong> in the general population, it indicates strong selection pressure against loss of BRCA2 function. This supports:</p>
+<ul>
+<li>The gene is critical for human health</li>
+<li>LOF variants are likely to be pathogenic</li>
+<li>Your frameshift variant fits the expected disease mechanism</li>
+</ul>
+<p>You can click the gnomAD link to explore detailed constraint metrics directly in the gnomAD browser.</p>
+<p><strong>4. Gene Expression Data (GTEx)</strong></p>
+<p>The final section provides tissue expression information from GTEx (Genotype-Tissue Expression project). Here you’ll see</p>
+<ul>
+<li><strong>Tissue expression heatmap:</strong> Shows in which tissues BRCA2 is expressed
+<ul>
+<li>For BRCA2, you should see broad expression across many tissues, including ovarian tissue (relevant to your patient’s phenotype)</li>
+</ul></li>
+<li><strong>Expression level:</strong> Relative expression intensity (darker colours = higher expression)</li>
+<li><strong>Transcript-level expression:</strong> Some exons may be preferentially expressed in certain tissues</li>
+</ul>
+<p><strong>Why this is clinically relevant:</strong></p>
+<p>For BRCA2, you already know the gene is relevant to ovarian tissue because of its well-established role in hereditary cancer. However, for less well-characterized genes, confirming tissue expression is critical:</p>
+<ul>
+<li>If your patient has a kidney disorder, but the gene is not expressed in kidney tissue, the variant is unlikely to be causative</li>
+<li>If multiple transcripts exist, confirming which transcript is expressed in the relevant tissue helps determine if your variant affects the functional isoform</li>
+</ul>
+<p><strong>Exploring GTEx in detail (optional):</strong></p>
+<p>Click the <strong>GTEx Portal</strong> link to access:</p>
+<ul>
+<li>Quantitative expression levels across 54 tissues</li>
+<li>Exon-level expression patterns</li>
+<li>Transcript isoform usage in different tissues</li>
+<li>eQTL data (if common variants affect gene expression)</li>
+</ul>
+<p><strong>5. GWAS Traits (optional)</strong></p>
+<p>At the bottom of the Gene Assessment tab, you may see <strong>GWAS (Genome-Wide Association Study) Traits</strong> linking BRCA2 to population-level traits or disease risks. This information is supplementary and not required for clinical variant interpretation.</p>
+<aside>
+<p>✅</p>
+<p><strong>You’ve now reviewed all core sections of Franklin’s variant interpretation workspace.</strong> You’ve examined:</p>
+<ul>
+<li>Automated ACMG classification and evidence codes</li>
+<li>Population frequency data</li>
+<li>Computational predictions</li>
+<li>Clinical evidence from ClinVar</li>
+<li>Associated phenotypes and conditions</li>
+<li>Scientific literature</li>
+<li>Gene-level constraint and expression data</li>
+</ul>
+<p>This comprehensive review equips you with the evidence needed to confidently classify and report BRCA2:c.1813dup.</p>
+</aside>
+</div>
+<div id="step-8-finalizing-your-classification-and-creating-a-clinical-report" class="section level3 hasAnchor">
+<h3>Step 8: Finalizing Your Classification and Creating a Clinical Report<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-8-finalizing-your-classification-and-creating-a-clinical-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now that you’ve reviewed all the evidence, it’s time to formalize your classification and generate a report that can be shared with clinicians and other team members.</p>
+<p><strong>Locating the Classification Controls</strong></p>
+<p>In the detailed variant view where you’ve been working, look at the <strong>top right corner</strong> of the page. You’ll see several action buttons:</p>
+<ul>
+<li><strong>Remove from Workbench:</strong> Removes the variant from your prioritized list (don’t use this for BRCA2:c.1813dup, as it’s clearly clinically relevant)</li>
+<li><strong>Add to Report:</strong> Marks this variant as reportable for the final clinical report</li>
+<li><strong>Classify Variant:</strong> Opens the classification form (this is what you’ll click)</li>
+</ul>
+<p><strong>1. Click “Classify Variant”</strong></p>
+<p>Franklin will open a classification form with several sections to complete.</p>
+<p><strong>2. Select Your Classification</strong></p>
+<p>The first dropdown asks you to choose a classification tier based on your interpretation:</p>
+<ul>
+<li><strong>Pathogenic</strong></li>
+<li><strong>Likely Pathogenic</strong></li>
+<li><strong>VUS (Variant of Uncertain Significance)</strong></li>
+<li><strong>Likely Benign</strong></li>
+<li><strong>Benign</strong></li>
+</ul>
+<p>For BRCA2:c.1813dup, based on the evidence you’ve reviewed (PVS1 + PM2 + supporting evidence), this should be classified as <strong>Pathogenic</strong>.</p>
+<p><strong>3. Assign Associated Condition and Inheritance</strong></p>
+<p>In the next section, you’ll specify:</p>
+<ul>
+<li><strong>Associated condition:</strong> Select the most appropriate disease phenotype for this variant
+<ul>
+<li>For BRCA2:c.1813dup, choose <strong>“Hereditary breast and ovarian cancer syndrome”</strong> or similar terminology that Franklin provides</li>
+</ul></li>
+<li><strong>Inheritance pattern:</strong> Select the mode of inheritance
+<ul>
+<li>For BRCA2, select <strong>“Autosomal dominant”</strong></li>
+</ul></li>
+</ul>
+<p>This information helps clinicians understand the genetic counselling implications and family screening recommendations.</p>
+<p><strong>4. Write Your Interpretation Summary</strong></p>
+<p>This is one of the most critical sections. You’ll provide a brief narrative explaining your classification decision.</p>
+<p><strong>Key principles for writing interpretation text:</strong></p>
+<ul>
+<li><strong>Use plain language:</strong> Avoid ACMG jargon that clinicians may not understand
+<ul>
+<li>❌ <strong>Don’t say:</strong> “This variant meets PM2, PVS1, and PP3 criteria”</li>
+<li>✅ <strong>Do say:</strong> “This variant is absent from population databases, creates a premature stop codon in a gene where loss of function causes disease, and is predicted to be deleterious by multiple computational algorithms”</li>
+</ul></li>
+<li><strong>Be concise:</strong> Aim for 3-5 sentences that summarize the key evidence</li>
+<li><strong>Include clinical context:</strong> Reference the patient’s phenotype if relevant</li>
+</ul>
+<p><strong>Example interpretation for BRCA2:c.1813dup:</strong></p>
+<blockquote>
+<p>This variant is a frameshift deletion resulting in a premature stop codon at amino acid position 605. The variant is absent from large population databases (gnomAD, ExAC), indicating it is not a common benign polymorphism. BRCA2 is a well-established tumor suppressor gene where loss-of-function variants cause hereditary breast and ovarian cancer syndrome through an autosomal dominant mechanism. This variant has been reported multiple times in ClinVar with consistent Pathogenic classifications from multiple clinical laboratories. The patient’s clinical presentation of ovarian neoplasm and strong family history of cancer is consistent with BRCA2-associated disease.</p>
+</blockquote>
+<p><strong>5. Add Supporting References (Optional)</strong></p>
+<p>If you identified particularly strong publications during your literature review, you can add them here:</p>
+<ul>
+<li>Enter the <strong>PMID (PubMed ID)</strong> of relevant papers</li>
+<li>Include papers that provide:
+<ul>
+<li>Functional evidence of loss of protein function</li>
+<li>Case reports with similar phenotypes</li>
+<li>Population studies confirming pathogenicity</li>
+</ul></li>
+</ul>
+<aside>
+<p>📝</p>
+<p>You don’t need to cite every paper you reviewed. Select 2-3 key publications that provide the strongest supporting evidence. Prioritize functional studies and expert panel consensus statements over individual case reports.</p>
+</aside>
+<p><strong>6. Review and Edit the Classification Summary</strong></p>
+<p>Franklin provides a structured summary based on the information you’ve entered. You can:</p>
+<ul>
+<li><strong>Accept the default summary:</strong> If Franklin’s auto-generated text is accurate</li>
+<li><strong>Edit the summary:</strong> Modify any sections that need clarification or additional detail</li>
+<li><strong>Add gene-level context:</strong> Include information about BRCA2 function and disease mechanism if not already present</li>
+</ul>
+<p><strong>7. Assign ACMG Evidence Codes</strong></p>
+<p>The final section of the form allows you to document which ACMG criteria support your classification explicitly.</p>
+<p>Click the checkbox or toggle next to each code to include it in your formal classification.</p>
+<aside>
+<p>⚠️</p>
+<p><strong>Important:</strong> Only assign codes where you have verified the supporting evidence. Don’t accept all of Franklin’s automated suggestions if you identified reasons to remove or downgrade any codes during your review.</p>
+</aside>
+<p><strong>8. Submit Your Classification</strong></p>
+<p>Once you’ve completed all sections of the form, click the <strong>“Submit”</strong> button in the top right corner.</p>
+<p>You’ll see two submission options:</p>
+<ul>
+<li><strong>Submit as Draft:</strong> Saves your classification to the report repository but marks it as requiring review
+<ul>
+<li>Use this option for this workshop exercise.</li>
+<li>In a clinical setting, this allows supervisors or genetic counsellors to review your work before finalization</li>
+</ul></li>
+<li><strong>Submit as Final:</strong> Locks the classification and generates a final report
+<ul>
+<li>Only use this if you have sign-off authority (typically molecular geneticists or licensed genetic counsellors)</li>
+</ul></li>
+</ul>
+<p><strong>Understanding the Collaborative Workflow:</strong></p>
+<p>The variant interpretation process you’ve just completed mirrors real-world clinical laboratory workflows:</p>
+<p><strong>1. Genome Analysts / Bioinformaticians:</strong></p>
+<ul>
+<li>Perform initial variant calling and quality control</li>
+<li>Run automated annotation and filtering</li>
+<li>Generate prioritized variant lists</li>
+<li>Assign preliminary ACMG codes based on computational evidence.</li>
+</ul>
+<p><strong>2. Genetic Counsellors:</strong></p>
+<ul>
+<li>Deep dive into patient phenotype and clinical history</li>
+<li>Assess gene-disease associations and inheritance patterns</li>
+<li>Review family history and segregation evidence</li>
+<li>Ensure phenotype matches expected disease presentation.</li>
+</ul>
+<p><strong>3. Molecular Geneticists / Laboratory Directors:</strong></p>
+<ul>
+<li>Final review of all evidence</li>
+<li>Sign off on classification decisions</li>
+<li>Ensure compliance with ACMG/AMP guidelines and regulatory standards</li>
+<li>Authorize release of report to ordering physician</li>
+</ul>
+</div>
+</div>
+<div id="part-5-extension-exercise-optional" class="section level2 hasAnchor">
+<h2>Part 5: Extension Exercise (Optional)<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-5-extension-exercise-optional" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If you have additional time, try classifying the second BRCA2 variant in your case:</p>
+<p>**BRCA2:c.1310_1313del (p.Glu437Valfs*22)**</p>
+<ol style="list-style-type: decimal">
+<li>Click on this variant in your Workbench</li>
+<li>Work through the same systematic review process:
+<ul>
+<li>Check Franklin ACMG Classification codes</li>
+<li>Review Variant Assessment evidence</li>
+<li>Check Associated Conditions and Publications</li>
+<li>Review Gene Assessment information</li>
+</ul></li>
+<li>Complete the classification form</li>
+<li>Compare your classification between the two BRCA2 variants</li>
+</ol>
+<p><strong>Discussion questions:</strong></p>
+<ul>
+<li>Do both variants receive the same classification?</li>
+<li>Are there any differences in the supporting evidence?</li>
+<li>Which variant would you report first if you could only report one?</li>
+<li>How would you counsel this patient based on both findings?</li>
+</ul>
+</div>
+<div id="summary" class="section level2 hasAnchor">
+<h2>Summary<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This lab shows the transition from computational variant calling to clinical interpretation. You’ve seen how:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Automation handles data processing but requires human curation:</strong> Franklin’s algorithms assign ~60-70% of ACMG evidence automatically, but you must verify assignments and add clinical context</li>
+<li><strong>Population frequency is powerful but not sufficient:</strong> Rarity alone doesn’t prove pathogenicity; you need functional consequence, gene constraint, and clinical evidence</li>
+<li><strong>Phenotype matching strengthens interpretation:</strong> HPO terms help prioritize variants and confirm gene-disease associations</li>
+<li><strong>Literature curation saves time:</strong> Franklin’s automated literature ranking is one of its most valuable features, but you must still evaluate publications</li>
+<li><strong>Classification is a team effort:</strong> Real diagnostic labs involve multiple specialists with complementary expertise</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/GPO_Hal-2511/blob/main/030-module-3.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

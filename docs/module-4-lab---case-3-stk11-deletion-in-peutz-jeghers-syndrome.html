@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Module 4 Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome | Genomics for Precision Oncology 2025</title>
+  <meta name="description" content="Workshop website for the 2025 Genomics for Precision Oncology Canadian Bioinformatics Workshop" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Module 4 Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome | Genomics for Precision Oncology 2025" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://bioinformaticsdotca.github.io/GPO_Hal-2511/img/bioinformatics_logo.png" />
+  <meta property="og:description" content="Workshop website for the 2025 Genomics for Precision Oncology Canadian Bioinformatics Workshop" />
+  <meta name="github-repo" content="bioinformaticsdotca/GPO_Hal-2511" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Module 4 Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome | Genomics for Precision Oncology 2025" />
+  
+  <meta name="twitter:description" content="Workshop website for the 2025 Genomics for Precision Oncology Canadian Bioinformatics Workshop" />
+  <meta name="twitter:image" content="https://bioinformaticsdotca.github.io/GPO_Hal-2511/img/bioinformatics_logo.png" />
+
+<meta name="author" content="Faculty: Daniel Gaston, Victor Martinez" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="module-3-lab-clinical-variant-interpretation-with-franklin.html"/>
+<link rel="next" href="module-4-lab-microsatellite-instability-visualization.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Genomics for Precision Oncology",
+  "description": "The complete set of tutorials, slides, and practical exercises for the Genomics for Precision Oncology 2025 Canadian Bioinformatics Workshop, hosted on GitHub Pages.",
+  "url": "https://bioinformaticsdotca.github.io/GPO_Hal-2511",
+  "learningResourceType": ["tutorial", "slides", "exercise"],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "provider": {
+    "@type": "Organization",
+    "name": "Bioinformatics.ca",
+    "url": "https://bioinformatics.ca"
+  },
+  "keywords": "",
+  "isPartOf": {
+    "@type": "Course",
+    "@id": "https://bioinformatics.ca/workshops-all/2025-genomics-for-precision-oncology-halifax-ns/"
+  }
+}
+</script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<a href="https://bioinformaticsdotca.github.io/">
+ <img src="img/bioinformatics_logo.png" width="90%" alt="bioinformatics.ca logo" style="display:block; margin-left:auto; margin-right:auto; margin-top:15px;">
+ </a>
+<li><center><strong><a href="./"><br>Genomics for Precision Oncology<br><br></a></strong></center></li>
+<a href="./">
+ <img src="img/CBW-GPO-cancer-logo-w-transparency-1024x1024.png" width="70%" alt="Genomics for Precision Oncology logo" style="display:block; margin-left:auto; margin-right:auto; ">
+ </a>
+<br>
+
+<li class="divider"></li>
+<li class="part"><span><b>I Introduction</b></span></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Workshop Info</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#pre-work"><i class="fa fa-check"></i>Pre-work</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#create-a-franklin-account"><i class="fa fa-check"></i>1. Create a Franklin Account</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#download-and-install-igv-integrative-genomics-viewer"><i class="fa fa-check"></i>2. Download and Install IGV (Integrative Genomics Viewer)</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#class-photo"><i class="fa fa-check"></i>Class Photo</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#schedule"><i class="fa fa-check"></i>Schedule</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html"><i class="fa fa-check"></i>Meet Your Faculty</a>
+<ul>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#instructors"><i class="fa fa-check"></i>Instructors</a></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#teaching-assistants"><i class="fa fa-check"></i>Teaching Assistants</a></li>
+<li class="chapter" data-level="" data-path="meet-your-faculty.html"><a href="meet-your-faculty.html#facilitator"><i class="fa fa-check"></i>Facilitator</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="data-and-compute-setup.html"><a href="data-and-compute-setup.html"><i class="fa fa-check"></i>Data and Compute Setup</a></li>
+<li class="part"><span><b>II Modules</b></span></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html"><i class="fa fa-check"></i>Module 1</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lecture"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-1.html"><a href="module-1.html#lab"><i class="fa fa-check"></i>Lab</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-part-1"><i class="fa fa-check"></i>Lab (Part 1)</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#aws-and-unix-basics"><i class="fa fa-check"></i>AWS and Unix Basics</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#docker"><i class="fa fa-check"></i>Docker</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#investigating-some-genomics-file-formats-and-metadata"><i class="fa fa-check"></i>Investigating Some Genomics File Formats and Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-part-2---implementing-the-gatk-best-practices-workflow"><i class="fa fa-check"></i>Lab (Part 2) - Implementing the GATK Best Practices Workflow</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#fastqc-quality-control"><i class="fa fa-check"></i>FastQC Quality Control</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#alignmentshort-read-mapping-with-bwa-mem"><i class="fa fa-check"></i>Alignment/Short-Read Mapping with BWA-MEM</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#gatk-pre-processing"><i class="fa fa-check"></i>GATK Pre-Processing</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#putting-everything-together"><i class="fa fa-check"></i>Putting Everything Together</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#viewing-bams-in-igv"><i class="fa fa-check"></i>Viewing BAMs in IGV</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#somatic-variant-calling-with-mutect2"><i class="fa fa-check"></i>Somatic Variant Calling with MuTect2</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#variant-annotation-with-vep"><i class="fa fa-check"></i>Variant Annotation with VEP</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#answers-to-guiding-questions"><i class="fa fa-check"></i>Answers to Guiding Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html"><i class="fa fa-check"></i>Module 3 Lab: Clinical Variant Interpretation with Franklin</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#learning-objectives"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#lab-overview"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-1-account-creation-and-platform-navigation"><i class="fa fa-check"></i>Part 1: Account Creation and Platform Navigation</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-your-franklin-account"><i class="fa fa-check"></i>Creating Your Franklin Account</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#platform-navigation-understanding-the-main-interface"><i class="fa fa-check"></i>Platform Navigation: Understanding the Main Interface</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-and-searching-for-variants"><i class="fa fa-check"></i>Creating and Searching for Variants</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#creating-new-cases"><i class="fa fa-check"></i>Creating New Cases</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#understanding-franklins-automated-classification-logic"><i class="fa fa-check"></i>Understanding Franklin’s Automated Classification Logic</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-2-exploring-variant-classification"><i class="fa fa-check"></i>Part 2: Exploring Variant Classification</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-1-searching-for-a-variant"><i class="fa fa-check"></i>Step 1: Searching for a Variant</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-2-understanding-the-classification-workspace"><i class="fa fa-check"></i>Step 2: Understanding the Classification Workspace</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-3-reviewing-automatically-assigned-acmg-codes"><i class="fa fa-check"></i>Step 3: Reviewing Automatically Assigned ACMG Codes</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-4-deep-dive-into-population-data-pm2-example"><i class="fa fa-check"></i>Step 4: Deep Dive into Population Data (PM2 Example)</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-5-editing-evidence-strength"><i class="fa fa-check"></i>Step 5: Editing Evidence Strength</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-6-exploring-additional-evidence-categories"><i class="fa fa-check"></i>Step 6: Exploring Additional Evidence Categories</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-3-uploading-and-classifying-your-case-vcf-45-minutes"><i class="fa fa-check"></i>Part 3: Uploading and Classifying Your Case VCF (45 minutes)</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-1-download-your-case-data"><i class="fa fa-check"></i>Step 1: Download Your Case Data</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-2-create-a-new-case-in-franklin"><i class="fa fa-check"></i>Step 2: Create a New Case in Franklin</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-4-variant-interpretation"><i class="fa fa-check"></i>Part 4: Variant interpretation</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-3-navigating-to-your-case"><i class="fa fa-check"></i>Step 3: Navigating to Your Case</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-4-reviewing-brca2-variants-in-your-case"><i class="fa fa-check"></i>Step 4: Reviewing BRCA2 Variants in Your Case</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-5-adding-patient-phenotype-information"><i class="fa fa-check"></i>Step 5: Adding Patient Phenotype Information</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-6-exploring-case-level-quality-control-and-variant-filtering"><i class="fa fa-check"></i>Step 6: Exploring Case-Level Quality Control and Variant Filtering</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-7-deep-dive-into-variant-classification-brca2c.1813dup"><i class="fa fa-check"></i>Step 7: Deep Dive into Variant Classification: BRCA2:c.1813dup</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#reviewing-the-franklin-acmg-classification"><i class="fa fa-check"></i>Reviewing the Franklin ACMG Classification</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#exploring-the-variant-assessment-tab"><i class="fa fa-check"></i>Exploring the Variant Assessment Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#exploring-associated-conditions"><i class="fa fa-check"></i>Exploring Associated Conditions</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#using-the-publications-tab"><i class="fa fa-check"></i>Using the Publications Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#gene-assessment-tab"><i class="fa fa-check"></i>Gene Assessment Tab</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#step-8-finalizing-your-classification-and-creating-a-clinical-report"><i class="fa fa-check"></i>Step 8: Finalizing Your Classification and Creating a Clinical Report</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#part-5-extension-exercise-optional"><i class="fa fa-check"></i>Part 5: Extension Exercise (Optional)</a></li>
+<li class="chapter" data-level="" data-path="module-3-lab-clinical-variant-interpretation-with-franklin.html"><a href="module-3-lab-clinical-variant-interpretation-with-franklin.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><i class="fa fa-check"></i>Module 4 Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#learning-objectives-1"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#background"><i class="fa fa-check"></i>Background</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#peutz-jeghers-syndrome"><i class="fa fa-check"></i>Peutz-Jeghers Syndrome</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#the-stk11-gene-and-disease-mechanism"><i class="fa fa-check"></i>The STK11 Gene and Disease Mechanism</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#rationale-for-manual-review"><i class="fa fa-check"></i>Rationale for Manual Review</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-1-installing-the-integrative-genomics-viewer"><i class="fa fa-check"></i>Section 1: Installing the Integrative Genomics Viewer</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#overview-of-igv"><i class="fa fa-check"></i>Overview of IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-download-igv"><i class="fa fa-check"></i>Step 1: Download IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#windows-systems"><i class="fa fa-check"></i>Windows Systems</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-systems"><i class="fa fa-check"></i>macOS Systems</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-installation-procedures"><i class="fa fa-check"></i>Step 2: Installation Procedures</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#windows-installation"><i class="fa fa-check"></i>Windows Installation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-installation"><i class="fa fa-check"></i>macOS Installation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-installation-verification"><i class="fa fa-check"></i>Step 3: Installation Verification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#troubleshooting-common-issues"><i class="fa fa-check"></i>Troubleshooting Common Issues</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#java-runtime-not-found"><i class="fa fa-check"></i>Java Runtime Not Found</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-gatekeeper-restrictions"><i class="fa fa-check"></i>macOS Gatekeeper Restrictions</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#application-launch-failure"><i class="fa fa-check"></i>Application Launch Failure</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-2-acquiring-case-study-data-files"><i class="fa fa-check"></i>Section 2: Acquiring Case Study Data Files</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#binary-alignment-map-bam-files-and-indices"><i class="fa fa-check"></i><strong>Binary Alignment Map (BAM) Files and Indices</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#browser-extensible-data-bed-annotation-tracks"><i class="fa fa-check"></i><strong>Browser Extensible Data (BED) Annotation Tracks</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-accessing-data-files-via-jupyter-notebook"><i class="fa fa-check"></i>Step 1: Accessing Data Files via Jupyter Notebook</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-local-directory-organization"><i class="fa fa-check"></i>Step 2: Local Directory Organization</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-downloading-files-from-jupyter-to-your-local-machine"><i class="fa fa-check"></i>Step 3: Downloading Files from Jupyter to Your Local Machine</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-3-loading-data-into-igv-and-navigating-to-stk11"><i class="fa fa-check"></i>Section 3: Loading Data into IGV and Navigating to STK11</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-verifying-genome-build-selection"><i class="fa fa-check"></i>Step 1: Verifying Genome Build Selection</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-loading-bam-alignment-files"><i class="fa fa-check"></i>Step 2: Loading BAM Alignment Files</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-loading-bed-annotation-files"><i class="fa fa-check"></i>Step 3: Loading BED Annotation Files</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-4-navigating-to-the-stk11-gene-region"><i class="fa fa-check"></i>Step 4: Navigating to the STK11 Gene Region</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-5-normalizing-coverage-scale-across-samples"><i class="fa fa-check"></i>Step 5: Normalizing Coverage Scale Across Samples</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-focused-navigation-to-the-deletion-region"><i class="fa fa-check"></i>Step 6: Focused Navigation to the Deletion Region</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-verification"><i class="fa fa-check"></i>Step 7: Verification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#common-issues-and-troubleshooting"><i class="fa fa-check"></i>Common Issues and Troubleshooting</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-4-quality-assessment-of-the-suspected-deletion"><i class="fa fa-check"></i>Section 4: Quality Assessment of the Suspected Deletion</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-configuring-igv-display-settings-for-coverage-analysis"><i class="fa fa-check"></i>Step 1: Configuring IGV Display Settings for Coverage Analysis</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-quantitative-coverage-analysis"><i class="fa fa-check"></i>Step 2: Quantitative Coverage Analysis</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-mapping-quality-assessment"><i class="fa fa-check"></i>Step 3: Mapping Quality Assessment</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-4-deletion-breakpoint-definition"><i class="fa fa-check"></i>Step 4: Deletion Breakpoint Definition</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-5-assessment-of-problematic-genomic-regions"><i class="fa fa-check"></i>Step 5: Assessment of Problematic Genomic Regions</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-evaluation-of-supporting-genetic-evidence"><i class="fa fa-check"></i>Step 6: Evaluation of Supporting Genetic Evidence</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-integrating-evidence-and-reaching-a-quality-assessment-conclusion"><i class="fa fa-check"></i>Step 7: Integrating Evidence and Reaching a Quality Assessment Conclusion</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#proceeding-to-clinical-variant-interpretation"><i class="fa fa-check"></i>Proceeding to Clinical Variant Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-5-clinical-interpretation-of-copy-number-loss-using-clingen-guidelines"><i class="fa fa-check"></i>Section 5: Clinical Interpretation of Copy Number Loss Using ClinGen Guidelines</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#overview-of-clingen-cnv-interpretation-framework"><i class="fa fa-check"></i>Overview of ClinGen CNV Interpretation Framework</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#accessing-the-clingen-cnv-loss-calculator"><i class="fa fa-check"></i>Accessing the ClinGen CNV Loss Calculator</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-1---initial-assessment-of-genomic-content"><i class="fa fa-check"></i>Section 1 - Initial Assessment of Genomic Content</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-1a-does-the-cnv-include-any-protein-coding-or-other-critical-genomic-elements"><i class="fa fa-check"></i>Criterion 1A: Does the CNV include any protein-coding or other critical genomic elements?</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-2---overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Section 2 - Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2a-does-the-cnv-completely-overlap-an-established-hi-gene-or-genomic-region"><i class="fa fa-check"></i><strong>Criterion 2A: Does the CNV completely overlap an established HI gene or genomic region?</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2b-2e-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Criterion 2B-2E: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2f-g-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions"><i class="fa fa-check"></i><strong>Criterion 2F-G: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-3---evaluation-of-gene-number"><i class="fa fa-check"></i><strong>Section 3 - Evaluation of Gene Number</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-4---detailed-evaluation-of-genomic-content-using-published-literature-public-databases-andor-internal-lab-data"><i class="fa fa-check"></i><strong>Section 4 - Detailed Evaluation of Genomic Content Using Published Literature, Public Databases, and/or Internal Lab Data</strong></a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-5---evaluation-of-inheritance-patternfamily-history-for-patient-being-studied"><i class="fa fa-check"></i>Section 5 - Evaluation of Inheritance Pattern/Family History for Patient Being Studied</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-5h-inheritance-information-unavailable-or-uninformative-with-highly-specific-consistent-phenotype"><i class="fa fa-check"></i>Criterion 5H: Inheritance information unavailable or uninformative, with highly specific consistent phenotype</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-calculating-the-final-classification"><i class="fa fa-check"></i>Step 6: Calculating the Final Classification</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-clinical-recommendations-and-validation"><i class="fa fa-check"></i>Step 7: Clinical Recommendations and Validation</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#references"><i class="fa fa-check"></i>References</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#primary-literature"><i class="fa fa-check"></i>Primary Literature</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#software-and-databases"><i class="fa fa-check"></i>Software and Databases</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#guidelines-and-standards"><i class="fa fa-check"></i>Guidelines and Standards</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html"><i class="fa fa-check"></i>Module 4 Lab: Microsatellite Instability Visualization</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#learning-objectives-2"><i class="fa fa-check"></i>Learning Objectives</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#lab-overview-1"><i class="fa fa-check"></i>Lab Overview</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#background-understanding-microsatellite-instability"><i class="fa fa-check"></i>Background: Understanding Microsatellite Instability</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-1-data-download-from-jupyter-notebook"><i class="fa fa-check"></i>Part 1: Data Download from Jupyter Notebook</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#accessing-the-data-directory"><i class="fa fa-check"></i>Accessing the Data Directory</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#downloading-the-bam-files"><i class="fa fa-check"></i>Downloading the BAM Files</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-2-loading-data-into-igv"><i class="fa fa-check"></i>Part 2: Loading Data into IGV</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#installing-and-launching-igv"><i class="fa fa-check"></i>Installing and Launching IGV</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#loading-the-bam-files"><i class="fa fa-check"></i>Loading the BAM Files</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#part-3-visualizing-microsatellite-instability"><i class="fa fa-check"></i>Part 3: Visualizing Microsatellite Instability</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-1-navigate-to-the-microsatellite-locus"><i class="fa fa-check"></i>Step 1: Navigate to the Microsatellite Locus</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-2-configure-igv-track-display-settings"><i class="fa fa-check"></i>Step 2: Configure IGV Track Display Settings</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-3-observe-and-compare-msi-patterns"><i class="fa fa-check"></i>Step 3: Observe and Compare MSI Patterns</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-4-understanding-what-youre-seeing"><i class="fa fa-check"></i>Step 4: Understanding What You’re Seeing</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#step-5-lab-deliverable"><i class="fa fa-check"></i>Step 5: Lab Deliverable</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#summary-and-clinical-significance"><i class="fa fa-check"></i>Summary and Clinical Significance</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#clinical-applications-of-msi-testing"><i class="fa fa-check"></i>Clinical Applications of MSI Testing</a></li>
+<li class="chapter" data-level="" data-path="module-4-lab-microsatellite-instability-visualization.html"><a href="module-4-lab-microsatellite-instability-visualization.html#references-1"><i class="fa fa-check"></i>References</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<h1 id="sponsors">Sponsors</h1>
+<center>
+<a href="https://www.cihr-irsc.gc.ca"><img src="img/sponsors/cihr.png" width=90% style="padding-bottom: 20px" alt="Canadian Institutes of Health Research logo."></a>
+
+<a href="https://genomecanada.ca/"><img src="img/sponsors/genomecanada.png" height="55" style="display:inline-block;"  style="padding-bottom: 20px" alt="Genome Canada logo.">
+<a href="https://www.ontariogenomics.ca/"><img src="img/sponsors/ontariogenomics.png" height="55" style="display:inline-block;" style="padding-bottom: 20px;" alt="Ontario Genomics logo.">
+<br><br>
+<a href="https://oicr.on.ca/"><img src="img/sponsors/oicr.png" width=35% style="display:inline-block;" style="padding-bottom: 20px" alt="Ontario Institute for Cancer Research logo.">
+<a href="https://oicr.on.ca/"><img src="img/sponsors/hpc4health.png" width=55% style="display:inline-block;" style="padding-bottom: 20px" alt="HPC4Health logo.">
+<a href="https://oicr.on.ca/"><img src="img/sponsors/BHCRI_logo-transparent.png" width=90% style="display:inline-block;" style="padding-bottom: 20px" alt="Beatrice Hunter Cancer Research Institute logo.">
+<a href="https://oicr.on.ca/"><img src="img/sponsors/dal-logo-horizontal-colour.png" width=70% style="display:inline-block;" style="padding-bottom: 20px" alt="Dalhousie University logo.">
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Genomics for Precision Oncology 2025</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome" class="section level1 hasAnchor">
+<h1>Module 4 Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Summary: The laboratory session focuses on assessing the STK11 deletion in Peutz-Jeghers syndrome, emphasizing systematic quality evaluation of copy number variants (CNVs) using IGV. Participants will learn to classify CNVs based on genomic content and patient phenotype, integrate bioinformatic evidence, and determine variant pathogenicity. The session covers the clinical implications of Peutz-Jeghers syndrome, the role of the STK11 gene, and the rationale for manual review of variant calls. Key steps include installing IGV, acquiring case study data, loading data into IGV, and performing quality assessments to differentiate true deletions from technical artifacts.
+Text: Module 4 Lab - Case Study on STK11 Deletion in Peutz-Jeghers Syndrome</p>
+<div id="learning-objectives-1" class="section level2 hasAnchor">
+<h2>Learning Objectives<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#learning-objectives-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>By the end of this laboratory session, you will be able to:</p>
+<ol style="list-style-type: decimal">
+<li>Perform systematic quality assessment of copy number variants (CNVs) in IGV by evaluating coverage patterns, mapping quality, breakpoint definition, and overlap with known technical confounders</li>
+<li>Apply the ClinGen dosage sensitivity framework to classify copy number variants based on genomic content, haploinsufficiency evidence, and patient phenotype concordance</li>
+<li>Integrate bioinformatic evidence with clinical context to determine variant pathogenicity in the context of hereditary cancer syndromes</li>
+</ol>
+</div>
+<div id="background" class="section level2 hasAnchor">
+<h2>Background<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="peutz-jeghers-syndrome" class="section level3 hasAnchor">
+<h3>Peutz-Jeghers Syndrome<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#peutz-jeghers-syndrome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Peutz-Jeghers syndrome (PJS) is an autosomal dominant hereditary cancer predisposition syndrome caused by pathogenic variants in the STK11 gene.<a href="https://pubmed.ncbi.nlm.nih.gov/20051941/">[1]</a> In autosomal dominant inheritance, a single mutated allele is sufficient to cause disease manifestation. Affected individuals have a 50% probability of transmitting the variant to each offspring.</p>
+<p>The clinical presentation of PJS includes:</p>
+<ul>
+<li>Mucocutaneous hyperpigmentation (melanotic macules on the lips, buccal mucosa, and perioral region)</li>
+<li>Multiple hamartomatous polyps throughout the gastrointestinal tract</li>
+<li>Elevated cancer risks: gastrointestinal malignancies (40-60%), breast cancer (45-50%), ovarian cancer (20%)<a href="https://pubmed.ncbi.nlm.nih.gov/20051941/">[1]</a></li>
+</ul>
+<p>While the hamartomatous polyps themselves are typically benign, they frequently cause complications, including intussusception and bowel obstruction.[[2]] The substantially elevated lifetime cancer risks require intensive surveillance throughout the patient’s life.</p>
+</div>
+<div id="the-stk11-gene-and-disease-mechanism" class="section level3 hasAnchor">
+<h3>The STK11 Gene and Disease Mechanism<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#the-stk11-gene-and-disease-mechanism" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>STK11 (serine/threonine kinase 11), also known as LKB1, is located at chromosomal position 19p13.3. This tumour suppressor gene encodes a master kinase that regulates cellular polarity, energy metabolism, and growth control through the AMPK signaling pathway.<a href="https://www.cell.com/ajhg/fulltext/S0002-9297(07)61608-5">[3]</a></p>
+<p>PJS operates through a haploinsufficiency mechanism. Loss of one functional STK11 allele results in insufficient kinase activity to maintain normal cellular homeostasis.<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1734361/">[4]</a> The molecular spectrum of pathogenic variants includes point mutations (approximately 52% of cases) and large genomic deletions (approximately 15% of cases).<a href="https://ncbi.nlm.nih.gov/pmc/articles/PMC2564523/">[5]</a></p>
+<p>Exon 7 of STK11 is particularly significant from a clinical perspective. This exon encodes part of the catalytic kinase domain, and mutations affecting this region have been frequently reported in PJS patients.<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1734361/">[4]</a></p>
+</div>
+<div id="rationale-for-manual-review" class="section level3 hasAnchor">
+<h3>Rationale for Manual Review<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#rationale-for-manual-review" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Clinical genomic analysis frequently encounters variant calls that require expert human interpretation beyond automated pipeline classification. This case presents a deletion call affecting STK11 exons 6 and 7 with characteristics that need to be evaluated.</p>
+<p>The variant caller assigned a quality score of 33, marginally above the laboratory threshold of 30 for reporting. Coverage analysis reveals the following pattern:</p>
+<ul>
+<li>Exon 6: Patient coverage approximately 45X; control samples 107-164X</li>
+<li>Exon 7: Patient coverage approximately 90X; control samples 152-205X</li>
+</ul>
+<p>This region presents known technical challenges. The sequence context is GC-rich (high guanine and cytosine content), which introduces systematic bias in PCR amplification and sequencing. The laboratory has documented false-positive copy number variant calls in this region previously.</p>
+<aside>
+<p>💡 Your objective is to determine whether this represents a true heterozygous deletion requiring clinical reporting or a technical artifact attributable to sequence composition bias.</p>
+</aside>
+</div>
+</div>
+<div id="section-1-installing-the-integrative-genomics-viewer" class="section level2 hasAnchor">
+<h2>Section 1: Installing the Integrative Genomics Viewer<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-1-installing-the-integrative-genomics-viewer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="overview-of-igv" class="section level3 hasAnchor">
+<h3>Overview of IGV<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#overview-of-igv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Integrative Genomics Viewer (IGV) is a genome browser application developed at the Broad Institute for visualization and interactive exploration of genomic data. IGV enables integration of multiple data types, including aligned sequencing reads, variant calls, and genomic annotations.</p>
+<p>For this analysis, you will use IGV to:</p>
+<ul>
+<li>Visualize read alignments in BAM format across the STK11 locus</li>
+<li>Quantify sequencing coverage depth at single-exon resolution</li>
+<li>Compare patient and control samples from the same sequencing run</li>
+<li>Identify supporting evidence such as heterozygous single nucleotide variants (or their absence in deleted regions)</li>
+</ul>
+</div>
+<div id="step-1-download-igv" class="section level3 hasAnchor">
+<h3>Step 1: Download IGV<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-download-igv" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="windows-systems" class="section level3 hasAnchor">
+<h3>Windows Systems<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#windows-systems" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Access the download repository:</strong>
+<ul>
+<li>Navigate to <a href="https://igv.org/doc/desktop/">https://igv.org/doc/desktop/</a> using your web browser</li>
+<li>Locate the Downloads section</li>
+</ul></li>
+<li><strong>Download the Windows installer:</strong>
+<ul>
+<li>Select “IGV for Windows (installer)”</li>
+<li>File name format: <code>IGV_Win_[version]_WithJava.exe</code></li>
+<li>Save to your Downloads directory</li>
+</ul></li>
+</ol>
+</div>
+<div id="macos-systems" class="section level3 hasAnchor">
+<h3>macOS Systems<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-systems" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Access the download repository:</strong>
+<ul>
+<li>Navigate to <a href="https://igv.org/doc/desktop/">https://igv.org/doc/desktop/</a></li>
+</ul></li>
+<li><strong>Download the macOS application:</strong>
+<ul>
+<li>Select “IGV for macOS (app)”</li>
+<li>File name format: <code>IGV_MacApp_[version]_[WithJava.zip](http://WithJava.zip)</code></li>
+<li>Save to Downloads directory</li>
+</ul></li>
+</ol>
+</div>
+<div id="step-2-installation-procedures" class="section level3 hasAnchor">
+<h3>Step 2: Installation Procedures<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-installation-procedures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="windows-installation" class="section level3 hasAnchor">
+<h3>Windows Installation<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#windows-installation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Execute the installer:</strong>
+<ul>
+<li>Navigate to Downloads directory</li>
+<li>Double-click <code>IGV_Win_[version]_WithJava.exe</code></li>
+</ul></li>
+<li><strong>Complete installation wizard:</strong>
+<ul>
+<li>Advance through the welcome screen</li>
+<li>Accept the license agreement</li>
+<li>Default installation path: <code>C:\Program Files\IGV_[version]</code></li>
+<li>Initiate installation (1-2 minutes)</li>
+</ul></li>
+<li><strong>Launch IGV:</strong>
+<ul>
+<li>Use the desktop shortcut or locate IGV via the Start menu</li>
+<li>Initial launch requires 15-30 seconds for Java initialization</li>
+</ul></li>
+</ol>
+</div>
+<div id="macos-installation" class="section level3 hasAnchor">
+<h3>macOS Installation<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-installation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><strong>Locate the application file:</strong>
+<ul>
+<li>Open Finder and navigate to Downloads</li>
+<li>Identify <code>IGV_[version].app</code></li>
+</ul></li>
+<li><strong>Transfer to Applications:</strong>
+<ul>
+<li>Move <code>IGV_[version].app</code> to your Applications directory</li>
+</ul></li>
+<li><strong>Initial launch procedure (critical for macOS security model):</strong>
+<ul>
+<li>Attempt to launch IGV via double-click</li>
+</ul></li>
+<li><strong>Verify successful installation:</strong>
+<ul>
+<li>IGV should display its main interface</li>
+<li>Initial launch requires 15-30 seconds</li>
+</ul></li>
+</ol>
+</div>
+<div id="step-3-installation-verification" class="section level3 hasAnchor">
+<h3>Step 3: Installation Verification<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-installation-verification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Upon successful launch, the IGV interface displays:</p>
+<ul>
+<li>Menu bar (File, Genomes, View, Tracks, etc.)</li>
+<li>Toolbar containing genome version selector (typically defaulting to “Human hg19”)</li>
+<li>Primary visualization panel (initially empty)</li>
+<li>Reference gene track along the top margin</li>
+</ul>
+<aside>
+<p>💡<strong>Checkpoint:</strong> If you observe this interface configuration, installation is complete and functional.</p>
+</aside>
+</div>
+<div id="troubleshooting-common-issues" class="section level3 hasAnchor">
+<h3>Troubleshooting Common Issues<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#troubleshooting-common-issues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="java-runtime-not-found" class="section level3 hasAnchor">
+<h3>Java Runtime Not Found<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#java-runtime-not-found" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The recommended installers bundle the Java runtime. If you encounter a Java-related error:</p>
+<ul>
+<li>Verify you downloaded the “WithJava” installer variant</li>
+<li>Alternatively, install Java 11 or later</li>
+</ul>
+</div>
+<div id="macos-gatekeeper-restrictions" class="section level3 hasAnchor">
+<h3>macOS Gatekeeper Restrictions<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#macos-gatekeeper-restrictions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Follow the right-click procedure described above. Alternatively:</p>
+<ul>
+<li>Open System Preferences &gt; Security &amp; Privacy &gt; General</li>
+<li>Locate the IGV security notice and select “Open Anyway”</li>
+</ul>
+</div>
+<div id="application-launch-failure" class="section level3 hasAnchor">
+<h3>Application Launch Failure<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#application-launch-failure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, verify that the available system memory meets the 4 GB minimum requirement. If memory is adequate but crashes persist:</p>
+<ul>
+<li>Locate the IGV installation directory</li>
+<li>Edit the launch script (<a href="http://igv.sh"><code>igv.sh</code></a> for macOS/Linux, <code>igv.bat</code> for Windows)</li>
+<li>Modify the heap memory parameter from <code>-Xmx2g</code> to <code>-Xmx4g</code></li>
+</ul>
+</div>
+</div>
+<div id="section-2-acquiring-case-study-data-files" class="section level2 hasAnchor">
+<h2>Section 2: Acquiring Case Study Data Files<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-2-acquiring-case-study-data-files" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="binary-alignment-map-bam-files-and-indices" class="section level3 hasAnchor">
+<h3><strong>Binary Alignment Map (BAM) Files and Indices</strong><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#binary-alignment-map-bam-files-and-indices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>File Name</strong></th>
+<th><strong>Contents</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hereditary_case1.region.bam</td>
+<td>Patient aligned sequencing reads spanning the STK11 genomic region</td>
+</tr>
+<tr class="even">
+<td>hereditary_case1.region.bam.bai</td>
+<td>Binary index for sample1 (required for random access by IGV)</td>
+</tr>
+<tr class="odd">
+<td>sample1.region.bam</td>
+<td>Control sample 1 aligned reads</td>
+</tr>
+<tr class="even">
+<td>sample1.region.bam.bai</td>
+<td>Binary index for sample1</td>
+</tr>
+<tr class="odd">
+<td>(samples 1-5 follow identical pattern)</td>
+<td>Additional control samples with corresponding indices</td>
+</tr>
+</tbody>
+</table>
+<p>Each BAM file requires its corresponding BAI index file in the same directory. IGV cannot efficiently access BAM files without valid indices. These files represent region-specific extracts rather than complete exome data. Full whole exome BAM files typically range from 5-50 GB per sample, which would be impractical for workshop distribution. The region extracts contain all reads mapping to the STK11 locus plus flanking sequence, preserving complete analytical capability while reducing file size.</p>
+</div>
+<div id="browser-extensible-data-bed-annotation-tracks" class="section level3 hasAnchor">
+<h3><strong>Browser Extensible Data (BED) Annotation Tracks</strong><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#browser-extensible-data-bed-annotation-tracks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>File Name</strong></th>
+<th><strong>Annotation Content</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>IWK_Caveats_11242022.bed</td>
+<td>Laboratory-specific regions with documented technical artefacts</td>
+</tr>
+<tr class="even">
+<td>MANE_Select_hg19.bed</td>
+<td>MANE Select transcripts (clinically relevant canonical isoforms)</td>
+</tr>
+<tr class="odd">
+<td>median_coverage_1bp_exome.bed</td>
+<td>Expected coverage distribution across the exome capture at single-base resolution</td>
+</tr>
+<tr class="even">
+<td>NCBI_GIAB_BP_problematic_hg19.bed</td>
+<td>Genome in a Bottle consortium problematic regions (difficult to sequence or align)</td>
+</tr>
+<tr class="odd">
+<td>Region_under_100X_median_average.bed</td>
+<td>Genomic intervals where median coverage typically falls below 100X</td>
+</tr>
+<tr class="even">
+<td>Regions_median_coverage_under_20X_20MQ.bed</td>
+<td>Low coverage regions (below 20X depth with mapping quality threshold of 20)</td>
+</tr>
+</tbody>
+</table>
+<p>These annotation tracks will appear as colored intervals in IGV.</p>
+</div>
+<div id="step-1-accessing-data-files-via-jupyter-notebook" class="section level3 hasAnchor">
+<h3>Step 1: Accessing Data Files via Jupyter Notebook<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-accessing-data-files-via-jupyter-notebook" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>All case study data files are accessible through the Jupyter Notebook environment you are currently using.</p>
+<p><strong>Locating the Data Directory:</strong></p>
+<ol style="list-style-type: decimal">
+<li>In your Jupyter Notebook interface, navigate to the file browser (typically the left sidebar)</li>
+<li>Locate the directory path: <code>Case1_Hereditary/IGV/</code></li>
+<li>You should see all BAM files, BAI indices, and BED annotation files listed</li>
+</ol>
+</div>
+<div id="step-2-local-directory-organization" class="section level3 hasAnchor">
+<h3>Step 2: Local Directory Organization<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-local-directory-organization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before downloading files to your local machine, create your local workspace.</p>
+<p><strong>Windows Systems:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Open File Explorer</p></li>
+<li><p>Navigate to a location with adequate storage capacity (e.g., <code>C:\Users\[YourUsername]\Documents\</code>)</p></li>
+<li><p>Create the following directory hierarchy (suggested):</p>
+<pre><code>BioinformaticsWorkshop\
+└── Module4_StructuralVariants\
+    └── Case1_STK11\
+        └── IGV_data\</code></pre></li>
+</ol>
+<p><strong>macOS/Linux Systems:</strong></p>
+<p>Open Terminal and execute:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#cb39-1" tabindex="-1"></a><span class="bu">cd</span> ~/Documents</span>
+<span id="cb39-2"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#cb39-2" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> BioinformaticsWorkshop/Module4_StructuralVariants/Case1_STK11/IGV_data</span>
+<span id="cb39-3"><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#cb39-3" tabindex="-1"></a><span class="bu">cd</span> BioinformaticsWorkshop/Module4_StructuralVariants/Case1_STK11/IGV_data</span></code></pre></div>
+<p>Alternatively, use Finder (macOS) to create the directory structure manually.</p>
+</div>
+<div id="step-3-downloading-files-from-jupyter-to-your-local-machine" class="section level3 hasAnchor">
+<h3>Step 3: Downloading Files from Jupyter to Your Local Machine<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-downloading-files-from-jupyter-to-your-local-machine" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Batch File Download via Jupyter Interface</strong></p>
+<ol style="list-style-type: decimal">
+<li>In the Jupyter file browser, navigate to <code>Case1_Hereditary/IGV/</code></li>
+<li>Select multiple files by holding Ctrl (Windows) or Command (macOS) while clicking on each file</li>
+<li>Select all required files:
+<ul>
+<li>All BAM files (<code>hereditary_case1.region.bam</code> and <code>sample1.region.bam</code> through <code>sample5.region.bam</code>)</li>
+<li>All BAI index files (<code>hereditary_case1.region.bam</code> and <code>sample1.region.bam.bai</code> through <code>sample5.region.bam.bai</code>)</li>
+<li>All BED annotation files</li>
+</ul></li>
+<li>Right-click on any of the selected files and select “Download” from the contextual menu</li>
+<li>Your browser will download all selected files to your default Downloads directory</li>
+<li>Move the downloaded files to your organized workspace: <code>BioinformaticsWorkshop/Module4_StructuralVariants/Case1_STK11/IGV_data/</code></li>
+</ol>
+<p><strong>Important Considerations:</strong></p>
+<ul>
+<li>Ensure each BAM file has its corresponding BAI index file</li>
+<li>Keep BAM and BAI file pairs in the same directory</li>
+</ul>
+</div>
+</div>
+<div id="section-3-loading-data-into-igv-and-navigating-to-stk11" class="section level2 hasAnchor">
+<h2>Section 3: Loading Data into IGV and Navigating to STK11<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-3-loading-data-into-igv-and-navigating-to-stk11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We recommend to load data files into IGV in a specific order:</p>
+<ol style="list-style-type: decimal">
+<li>Patient BAM file (hereditary_case1)</li>
+<li>Control BAM files (samples 1-5)</li>
+<li>BED annotation files</li>
+</ol>
+<p>When BAM files are loaded first, followed by BED files, IGV automatically positions the annotation tracks at the top of the visualization panel, with sequencing data tracks below. This organization facilitates visual comparison of patient and control samples.</p>
+<aside>
+<p>💡<strong>Note:</strong> Loading order is a matter of personal preference. If you prefer to load BED files first, they will remain in the order in which they were loaded, and you can manually rearrange the tracks later if needed.</p>
+</aside>
+<div id="step-1-verifying-genome-build-selection" class="section level3 hasAnchor">
+<h3>Step 1: Verifying Genome Build Selection<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-verifying-genome-build-selection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before loading any data files, confirm that IGV is configured to use the correct reference genome build. <strong>All analyses in this case study use the GRCh37/hg19 reference genome build.</strong> Using an incorrect genome build will result in misaligned data and invalid interpretations. To verify the genome build:</p>
+<ol style="list-style-type: decimal">
+<li>Locate the genome selector dropdown in the IGV toolbar (upper left)</li>
+<li>The currently selected genome is displayed (typically defaults to “Human hg19”)</li>
+<li>If the selector does not display “Human hg19” or “Human (GRCh37/hg19)”:
+<ul>
+<li>Click the dropdown menu</li>
+<li>Select “Human (GRCh37/hg19)” from the available options</li>
+<li>IGV will reload the reference genome (requires a few seconds)</li>
+</ul></li>
+</ol>
+</div>
+<div id="step-2-loading-bam-alignment-files" class="section level3 hasAnchor">
+<h3>Step 2: Loading BAM Alignment Files<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-loading-bam-alignment-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>BAM files contain the actual sequencing read alignments that form the basis of your coverage analysis. You will load all five samples (patient and controls) together.</p>
+<p><strong>Loading all BAM files:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Access the file loading interface:</strong></p>
+<ul>
+<li>Select File &gt; Load from File</li>
+</ul></li>
+<li><p><strong>Navigate to your data directory:</strong></p>
+<ul>
+<li>Go to <code>BioinformaticsWorkshop/Module4_StructuralVariants/Case1_STK11/IGV_data/</code></li>
+</ul></li>
+<li><p><strong>Select all BAM files:</strong></p>
+<ul>
+<li>Hold Ctrl (Windows) or Command (macOS) while clicking</li>
+<li>Click on each BAM file:
+<ul>
+<li><code>hereditary_case1.region.bam</code> (patient sample)</li>
+<li><code>sample1.region.bam</code> (control)</li>
+<li><code>sample2.region.bam</code> (control)</li>
+<li><code>sample3.region.bam</code> (control)</li>
+<li><code>sample4.region.bam</code> (control)</li>
+<li><code>sample5.region.bam</code> (control)</li>
+</ul></li>
+<li>All five files should be highlighted</li>
+</ul>
+<aside>
+<p>💡<strong>Important:</strong> Do not manually select the corresponding <code>.bai</code> index files. IGV will automatically detect and load the index files if they are present in the same directory as the BAM files.</p>
+</aside></li>
+<li><p><strong>Load the files:</strong></p>
+<ul>
+<li>Click “Open”</li>
+<li>IGV will load all five BAM files sequentially (~ 15-40 seconds for all files)</li>
+</ul></li>
+</ol>
+<p>Each BAM track consists of two components:</p>
+<ul>
+<li><strong>Coverage track:</strong> A histogram displaying read depth across genomic positions</li>
+<li><strong>Alignment track:</strong> Individual sequencing reads (visible only at high magnification)</li>
+</ul>
+</div>
+<div id="step-3-loading-bed-annotation-files" class="section level3 hasAnchor">
+<h3>Step 3: Loading BED Annotation Files<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-loading-bed-annotation-files" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>BED files provide genomic interval annotations that establish interpretive context for sequencing data. Loading these files after BAM files positions them at the top of the visualization panel for easy reference.</p>
+<p><strong>Loading procedure:</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>Access the file loading interface:</strong>
+<ul>
+<li>Navigate to the menu bar</li>
+<li>Select File &gt; Load from File</li>
+<li>A file browser dialogue will open</li>
+</ul></li>
+<li><strong>Navigate to your data directory:</strong>
+<ul>
+<li><code>BioinformaticsWorkshop/Module4_StructuralVariants/Case1_STK11/IGV_data/</code></li>
+</ul></li>
+<li><strong>Select BED annotation files:</strong>
+<ul>
+<li>Hold Ctrl (Windows) or Command (macOS) while clicking to select multiple files</li>
+<li>Select all six BED files:
+<ul>
+<li><code>IWK_Caveats_11242022.bed</code></li>
+<li><code>MANE_Select_hg19.bed</code></li>
+<li><code>median_coverage_1bp_exome.bed</code></li>
+<li><code>NCBI_GIAB_BP_problematic_hg19.bed</code></li>
+<li><code>Region_under_100X_median_average.bed</code></li>
+<li><code>Regions_median_coverage_under_20X_20MQ.bed</code></li>
+</ul></li>
+</ul></li>
+<li><strong>Complete the loading process:</strong>
+<ul>
+<li>Click “Open” or “Load”</li>
+<li>IGV will process the files (typically 1-5 seconds per file)</li>
+<li>BED annotation tracks will appear at the top of the visualization panel</li>
+</ul></li>
+</ol>
+</div>
+<div id="step-4-navigating-to-the-stk11-gene-region" class="section level3 hasAnchor">
+<h3>Step 4: Navigating to the STK11 Gene Region<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-4-navigating-to-the-stk11-gene-region" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After loading all data files, you will not immediately see coverage or alignment data. The region-specific BAM files contain sequencing data only for the STK11 locus, which represents a small fraction of the genome currently displayed. To visualize the data, you must navigate to the STK11 gene region.</p>
+<p><strong>Locating the search interface:</strong></p>
+<p>The search box is positioned in the IGV toolbar, immediately to the right of the chromosome selector dropdown (third box from the left in the toolbar):</p>
+<ol style="list-style-type: decimal">
+<li><strong>Enter the gene symbol:</strong>
+<ul>
+<li>Click in the search box</li>
+<li>Type: <code>STK11</code></li>
+</ul></li>
+<li><strong>Execute the search:</strong>
+<ul>
+<li>Press Enter</li>
+<li>IGV will navigate to the STK11 gene locus on chromosome 19</li>
+<li>The view will display the entire gene region, including all exons and introns</li>
+</ul></li>
+<li><strong>Observe the initial visualization:</strong>
+<ul>
+<li>Coverage histograms will become visible for all five samples</li>
+<li>BED annotation tracks will display intervals that overlap this region</li>
+<li>The reference gene track will show the STK11 gene structure</li>
+</ul></li>
+</ol>
+<p>Viewing the complete STK11 gene provides context before focusing on the suspected deletion. At this magnification level, you can:</p>
+<ul>
+<li>Assess overall coverage patterns across the entire gene</li>
+<li>Identify which exons show coverage reduction in the patient sample</li>
+<li>Observe the relationship between coverage patterns and gene structure</li>
+<li>Familiarize yourself with the data quality and characteristics for this case</li>
+</ul>
+</div>
+<div id="step-5-normalizing-coverage-scale-across-samples" class="section level3 hasAnchor">
+<h3>Step 5: Normalizing Coverage Scale Across Samples<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-5-normalizing-coverage-scale-across-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>By default, IGV displays coverage histograms using an independent scale for each sample. Each coverage track is automatically scaled from 0 to its own maximum value. This setup creates issues challenges for comparative analysis. For example, if the patient sample has maximum coverage of 180X and a control sample has maximum coverage of 300X, both histograms will fill the available vertical space. Visual comparison becomes unreliable because the same histogram height represents different absolute coverage depths.</p>
+<p>To enable accurate visual comparison, you must normalize all coverage tracks to a common scale.</p>
+<p><strong>Scale normalization procedure:</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>Select all coverage tracks simultaneously:</strong>
+<ul>
+<li>Hold Ctrl (Windows) or Command (macOS)</li>
+<li>Click on each coverage histogram track (the colored bar graph for each sample)</li>
+<li>Click on all five coverage tracks: the case1 sample, and sample1 through sample5</li>
+<li>All selected tracks will be highlighted</li>
+</ul></li>
+<li><strong>Access the scale configuration interface:</strong>
+<ul>
+<li>Right-click on any of the selected coverage tracks</li>
+<li>A contextual menu will appear</li>
+<li>Select “Set Data Range” from the menu options</li>
+</ul></li>
+<li><strong>Configure the uniform scale:</strong>
+<ul>
+<li>A dialog box will appear with fields for minimum and maximum values</li>
+<li>In the “Minimum” field: Leave at 0 (default)</li>
+<li>In the “Maximum” field: Enter <code>327</code>
+<ul>
+<li>This value represents the maximum coverage observed across all samples in this dataset</li>
+</ul></li>
+<li>Click “OK” to apply the scale</li>
+</ul></li>
+<li><strong>Verify scale normalization:</strong>
+<ul>
+<li>All coverage histograms should now use the same vertical scale</li>
+<li>The Y-axis labels should display identical ranges (0 to 327) for all samples</li>
+<li>Coverage differences between patient and control samples should now be visually apparent</li>
+</ul></li>
+</ol>
+<aside>
+<p>💡With normalized scales, histogram heights directly correspond to absolute coverage depths. A histogram at 50% height in the patient sample and 100% height in control samples immediately indicates approximately 50% coverage reduction, consistent with a heterozygous deletion. Without scale normalization, this visual interpretation would be impossible.</p>
+</aside>
+</div>
+<div id="step-6-focused-navigation-to-the-deletion-region" class="section level3 hasAnchor">
+<h3>Step 6: Focused Navigation to the Deletion Region<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-focused-navigation-to-the-deletion-region" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The suspected deletion affects STK11 exons 6 and 7, spanning genomic coordinates chr19:1,221,191 to 1,222,025 (GRCh37/hg19 reference). For detailed analysis of coverage patterns and read alignments, navigate to this specific region:</p>
+<ol style="list-style-type: decimal">
+<li>Enter deletion coordinates with flanking sequence:
+<ul>
+<li>Click in the search box (replacing the current “STK11” text)</li>
+<li>Type: <code>chr19:1,220,000-1,223,000</code></li>
+<li>This range includes the deletion region plus approximately 1 kilobase of flanking sequence on each side</li>
+</ul></li>
+<li>Execute the navigation:
+<ul>
+<li>Press Enter</li>
+<li>IGV will zoom to the specified region</li>
+<li>Individual exons will become clearly distinguishable</li>
+<li>Coverage patterns within exons 6 and 7 will be visible at high resolution</li>
+</ul></li>
+</ol>
+</div>
+<div id="step-7-verification" class="section level3 hasAnchor">
+<h3>Step 7: Verification<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-verification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After navigating to the STK11 region, verify that all data tracks are displaying correctly.</p>
+<p><strong>Expected visualization elements:</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>Reference genome track (top):</strong>
+<ul>
+<li>Gene annotations for STK11</li>
+<li>Exon and intron structures</li>
+<li>Transcript orientation (5’ to 3’ direction)</li>
+</ul></li>
+<li><strong>BED annotation tracks:</strong>
+<ul>
+<li>Colored intervals indicating various genomic features</li>
+<li>Some tracks may show intervals in this region, others may be empty</li>
+</ul></li>
+<li><strong>Coverage histograms for all five samples:</strong>
+<ul>
+<li>Vertical bars representing read depth at each genomic position</li>
+<li>Patient sample (case1) should display visibly reduced coverage in the deletion region</li>
+<li>Control samples (samples 1-5) should display consistent high coverage</li>
+</ul></li>
+<li><strong>Alignment tracks (if zoomed sufficiently):</strong>
+<ul>
+<li>Individual sequencing reads displayed as horizontal bars</li>
+<li>Become visible when viewing regions smaller than approximately 30 kilobases</li>
+</ul></li>
+</ol>
+</div>
+<div id="common-issues-and-troubleshooting" class="section level3 hasAnchor">
+<h3>Common Issues and Troubleshooting<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#common-issues-and-troubleshooting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Issue: BAM tracks show “Index not found” error</p>
+<p>Cause: The <code>.bai</code> index file is missing or not located in the same directory as the <code>.bam</code> file.</p>
+<p>Resolution:</p>
+<ul>
+<li>Verify that each BAM file has a corresponding BAI file with identical naming (e.g., <code>hereditary_case1.region.bam</code> and `<code>hereditary_case1.region.bam.bai</code>)</li>
+<li>Ensure both files are in the same directory</li>
+<li>Reload the BAM file</li>
+</ul>
+<p>Issue: Coverage appears as a flat line at zero</p>
+<p>Cause: You are viewing a genomic region that is not present in the region-specific BAM extract.</p>
+<p>Resolution:</p>
+<ul>
+<li>Verify you have navigated to chr19:1,220,000-1,223,000</li>
+<li>Confirm the genome build is set to GRCh37/hg19</li>
+<li>Check that BAM files loaded without error messages</li>
+</ul>
+<p>Issue: Genome coordinates do not match expected values</p>
+<p>Cause: IGV is using a different genome build (possibly GRCh38/hg38).</p>
+<p>Resolution:</p>
+<ul>
+<li>Change the genome selector to “Human (GRCh37/hg19)”</li>
+<li>Reload all data files</li>
+<li>Navigate again to the STK11 coordinates</li>
+</ul>
+<p>Issue: IGV performance is extremely slow</p>
+<p>Cause: Insufficient memory allocation or attempting to view too large a genomic region with all alignment details.</p>
+<p>Resolution:</p>
+<ul>
+<li>Close other memory-intensive applications</li>
+<li>Zoom to a smaller genomic region (100 kb or less)</li>
+<li>Increase IGV memory allocation as described in Section 1 troubleshooting</li>
+<li>Hide alignment tracks and view only coverage histograms</li>
+</ul>
+</div>
+<div id="section-4-quality-assessment-of-the-suspected-deletion" class="section level3 hasAnchor">
+<h3>Section 4: Quality Assessment of the Suspected Deletion<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-4-quality-assessment-of-the-suspected-deletion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Copy number variant detection from sequencing data usually requires quality assessment before clinical interpretation. Automated variant callers flag potential deletions based on statistical models, but these algorithms cannot fully account for technical artifacts arising from sequence complexity, capture efficiency, or sample quality. <strong>Your objective in this section is to systematically evaluate whether the suspected STK11 deletion represents:</strong></p>
+<ul>
+<li>A true heterozygous deletion requiring clinical reporting and validation, <strong>or</strong></li>
+<li>A technical artefact caused by sequencing bias, requiring variant call rejection</li>
+</ul>
+<p>This assessment follows the laboratory standard operating procedures used in clinical genomics laboratories. The evaluation encompasses four components:</p>
+<ol style="list-style-type: decimal">
+<li>Coverage depth quantification and comparison</li>
+<li>Read mapping quality assessment</li>
+<li>Alignment pattern inspection</li>
+<li>Integration of supporting and contradictory evidence</li>
+</ol>
+</div>
+<div id="step-1-configuring-igv-display-settings-for-coverage-analysis" class="section level3 hasAnchor">
+<h3>Step 1: Configuring IGV Display Settings for Coverage Analysis<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-1-configuring-igv-display-settings-for-coverage-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Collapsing alignment tracks to maximize coverage visibility:</strong></p>
+<p>Individual alignment reads provide valuable information but consume substantial vertical space. During initial coverage assessment, collapsed alignment tracks improve efficiency.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Select all alignment tracks:</strong>
+<ul>
+<li>These appear below each coverage histogram</li>
+<li>Hold Ctrl/Command and click each alignment track</li>
+</ul></li>
+<li><strong>Collapse the tracks:</strong>
+<ul>
+<li>Right-click on any selected alignment track</li>
+<li>Select “Collapsed” from the visualization mode options</li>
+<li>Alignment tracks will compress to minimal height</li>
+</ul></li>
+</ol>
+<p>You can expand alignment tracks later when examining read-level evidence.</p>
+</div>
+<div id="step-2-quantitative-coverage-analysis" class="section level3 hasAnchor">
+<h3>Step 2: Quantitative Coverage Analysis<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-2-quantitative-coverage-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Accurate coverage quantification requires measurement at specific genomic positions within the suspected deletion boundaries. You will record coverage values for both exons 6 and 7 across all five samples.</p>
+<p><strong>Navigation to exon 6:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Enter the following coordinates in the search box: <code>chr19:1,221,191-1,221,500</code></li>
+<li>Press Enter</li>
+<li>This region encompasses exon 6 of STK11</li>
+</ol>
+<p><strong>Measuring coverage depth:</strong></p>
+<p>IGV displays coverage values dynamically as you move your cursor over the coverage histogram.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Position your cursor over the coverage histogram for hereditary_case1 (patient):</strong>
+<ul>
+<li>Move the cursor to the approximate center of the exon 6 region</li>
+<li>Observe the information box that appears near the cursor</li>
+<li>The box displays: genomic position, coverage depth at that position, and mapping quality statistics</li>
+</ul></li>
+<li><strong>Record the coverage value:</strong>
+<ul>
+<li>Note the coverage depth (displayed as an integer, e.g., “Coverage: 45”)</li>
+<li>Sample multiple positions across the exon (left, center, right)</li>
+<li>Calculate the approximate average coverage for exon 6</li>
+</ul></li>
+<li><strong>Repeat for all control samples (samples 1-5):</strong>
+<ul>
+<li>For each control sample, measure coverage at the center of exon 6</li>
+<li>Record all values</li>
+</ul></li>
+</ol>
+<p><strong>Expected coverage pattern for a true heterozygous deletion:</strong></p>
+<ul>
+<li>Patient sample: approximately 50% of control sample coverage</li>
+<li>Control samples: relatively consistent coverage depths (within 20-30% of each other)</li>
+</ul>
+<p><strong>Example data recording table:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Sample</th>
+<th>Exon 6 Coverage</th>
+<th>Exon 7 Coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hereditary_case1 (patient)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>sample1 (control)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>sample2 (control)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>sample3 (control)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>sample4 (control)</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>sample5 (control)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Navigation to exon 7:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Enter coordinates: <code>chr19:1,221,750-1,222,025</code></li>
+<li>Press Enter</li>
+<li>Repeat the coverage measurement process for exon 7</li>
+<li>Record values in the table above</li>
+</ol>
+<p><strong>Calculating the coverage ratio:</strong></p>
+<p>For each exon, calculate the patient-to-control coverage ratio:</p>
+<p>Coverage ratio = (Patient coverage) / (Mean control coverage)</p>
+<p>For a heterozygous deletion, the expected ratio is approximately 0.5 (50% reduction).</p>
+<p><strong>Example calculation:</strong></p>
+<ul>
+<li>Patient exon 6 coverage: 45X</li>
+<li>Control mean exon 6 coverage: (107 + 134 + 150 + 164) / 4 = 139X</li>
+<li>Coverage ratio: 45 / 139 = 0.32</li>
+</ul>
+<p><strong>Interpretation of coverage ratios:</strong></p>
+<ul>
+<li>Ratio 0.4-0.6: Consistent with heterozygous deletion</li>
+<li>Ratio 0.6-0.8: Intermediate, suggests possible technical bias</li>
+<li>Ratio 0.8-1.2: Coverage difference not consistent with deletion</li>
+<li>Ratio &lt;0.1 or &gt;1.8: Homozygous deletion or duplication</li>
+</ul>
+</div>
+<div id="step-3-mapping-quality-assessment" class="section level3 hasAnchor">
+<h3>Step 3: Mapping Quality Assessment<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-3-mapping-quality-assessment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Read mapping quality (MAPQ) quantifies the confidence that each sequencing read is aligned to the correct genomic location. Reads with low mapping quality may be mismapped, which can artificially reduce apparent coverage and create false positive deletion calls. MAPQ is expressed on a Phred-scaled logarithmic scale:</p>
+<ul>
+<li>MAPQ 60: 1 in 1,000,000 probability of incorrect mapping (very high confidence)</li>
+<li>MAPQ 40: 1 in 10,000 probability of incorrect mapping</li>
+<li>MAPQ 30: 1 in 1,000 probability of incorrect mapping</li>
+<li>MAPQ 20: 1 in 100 probability of incorrect mapping</li>
+<li>MAPQ 0-10: Ambiguous mapping, read may align equally well to multiple locations</li>
+</ul>
+<p>Laboratory quality thresholds:</p>
+<ul>
+<li>Minimum acceptable MAPQ: 20 (1% error probability)</li>
+<li>Recommended MAPQ: 30-60 for clinical variant calling</li>
+</ul>
+<p>Assessing mapping quality in IGV:</p>
+<ol style="list-style-type: decimal">
+<li>Enable color coding by mapping quality:
+<ul>
+<li>Navigate to View &gt; Preferences</li>
+<li>Select the “Alignments” tab</li>
+<li>Under “Color alignments by,” select “mapping quality”</li>
+<li>Click OK</li>
+</ul></li>
+<li>Interpret the color scheme:
+<ul>
+<li>IGV colours reads on a gradient:
+<ul>
+<li>Dark/bright colors: High MAPQ (good quality)</li>
+<li>Pale/gray colors: Low MAPQ (poor quality)</li>
+</ul></li>
+<li>Specific colours vary by IGV version, but usually intensity correlates with quality</li>
+</ul></li>
+<li>Visual inspection of the deletion region:
+<ul>
+<li>Navigate to <code>chr19:1,221,191-1,222,025</code></li>
+<li>Expand alignment tracks by right-clicking and selecting “Expanded”</li>
+<li>Examine the reads present in the patient sample within the deletion region</li>
+<li>Assess whether the remaining reads (approximately 50% of normal if deletion is true) show high or low mapping quality</li>
+</ul></li>
+</ol>
+<aside>
+<p>💡<strong>Question:</strong> Are the reads that remain in the patient sample (within the deletion region) high quality or low quality?</p>
+</aside>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li><strong>If remaining reads show high MAPQ (dark/bright colors):</strong> This supports a true deletion. The reads originate from the non-deleted allele and map with high confidence.</li>
+<li><strong>If remaining reads show low MAPQ (pale/gray colors):</strong> This suggests technical artefact. Low quality reads may be mismapped or derived from repetitive sequence.</li>
+</ul>
+<p><strong>Additional mapping quality check using the ruler:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Hover your cursor over individual reads in the alignment track</li>
+<li>A tooltip displays read-specific information including MAPQ</li>
+<li>Sample 5-10 reads in the deletion region</li>
+<li>Verify that most reads exceed MAPQ 30</li>
+</ol>
+</div>
+<div id="step-4-deletion-breakpoint-definition" class="section level3 hasAnchor">
+<h3>Step 4: Deletion Breakpoint Definition<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-4-deletion-breakpoint-definition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For a true structural deletion, the coverage reduction should have clearly defined boundaries corresponding to the deletion breakpoints. Gradual coverage transitions or irregular boundaries suggest technical artefacts.</p>
+<p><strong>Visualizing coverage transitions:</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>Navigate to the left deletion boundary:</strong>
+<ul>
+<li>Enter coordinates: <code>chr19:1,221,000-1,221,400</code></li>
+<li>This spans the region from normal coverage into the deletion</li>
+</ul></li>
+<li><strong>Assess the left breakpoint:</strong>
+<ul>
+<li>Observe the transition from normal coverage (upstream) to reduced coverage (deletion region)</li>
+<li>A true deletion shows an abrupt transition in coverage (within 50-100 base pairs)</li>
+<li>GC bias or capture efficiency artifacts show gradual transitions (300-500+ base pairs)</li>
+</ul></li>
+<li><strong>Navigate to the right deletion boundary:</strong>
+<ul>
+<li>Enter coordinates: <code>chr19:1,221,900-1,222,200</code></li>
+</ul></li>
+<li><strong>Assess the right breakpoint:</strong>
+<ul>
+<li>Evaluate the transition from reduced coverage back to normal coverage</li>
+<li>Apply the same criteria as for the left breakpoint</li>
+</ul></li>
+</ol>
+<p><strong>Characteristics of true deletion breakpoints:</strong></p>
+<ul>
+<li>Sharp transitions in coverage depth (sudden drops and recoveries)</li>
+<li>Consistent breakpoint positions across multiple reads</li>
+<li>Presence of split reads or discordant read pairs at breakpoints (visible if zoom level is high enough)</li>
+</ul>
+<p><strong>Characteristics of technical artifact boundaries:</strong></p>
+<ul>
+<li>Gradual coverage transitions</li>
+<li>Irregular or poorly defined boundaries</li>
+<li>Absence of supporting structural variant evidence at transitions</li>
+</ul>
+</div>
+<div id="step-5-assessment-of-problematic-genomic-regions" class="section level3 hasAnchor">
+<h3>Step 5: Assessment of Problematic Genomic Regions<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-5-assessment-of-problematic-genomic-regions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The BED annotation tracks loaded earlier identify regions with known technical challenges. Coverage reductions that overlap with these problematic regions have higher probability of representing technical artefacts.</p>
+<p><strong>Reviewing annotation tracks:</strong></p>
+<p>Ensure you are viewing the region <code>chr19:1,221,191-1,222,025</code> (the deletion coordinates).</p>
+<p><strong>Examine each annotation track:</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>IWK_Caveats_11242022.bed:</strong>
+<ul>
+<li>Does this track show any colored intervals overlapping the deletion region?</li>
+<li>This track contains laboratory-specific regions with documented false-positive CNV calls</li>
+<li><strong>If overlap exists:</strong> This region has produced false positives previously.</li>
+<li><strong>If no overlap:</strong> No prior laboratory-specific issues documented.</li>
+</ul></li>
+<li><strong>NCBI_GIAB_BP_problematic_hg19.bed:</strong>
+<ul>
+<li>Does the Genome in a Bottle consortium identify this region as problematic?</li>
+<li>These regions have structural complexity, high homology to other genomic locations, or sequencing challenges</li>
+<li><strong>If overlap exists:</strong> Independent evidence of technical difficulty. Support for artefact hypothesis.</li>
+</ul></li>
+<li><strong>Region_under_100X_median_average.bed</strong> and <strong>Regions_median_coverage_under_20X_20MQ.bed:</strong>
+<ul>
+<li>Do these tracks show intervals in the deletion region?</li>
+<li>These identify regions where exome capture efficiency is typically reduced</li>
+<li><strong>If overlap exists:</strong> Coverage reduction may be expected technical variation rather than deletion.</li>
+</ul></li>
+<li><strong>median_coverage_1bp_exome.bed:</strong>
+<ul>
+<li>This track displays expected coverage distribution</li>
+<li>Compare the expected coverage to your observed control sample coverage</li>
+<li><strong>If expected coverage is low:</strong> The region may be difficult to sequence regardless of deletion status.</li>
+</ul></li>
+</ol>
+<p><strong>Interpretation framework:</strong></p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Annotation Pattern</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No overlap with any problematic region tracks</td>
+<td>Coverage reduction is less likely to be technical artefact</td>
+</tr>
+<tr class="even">
+<td>Overlap with one problematic region track</td>
+<td>Interpret cautiously; consider additional validation</td>
+</tr>
+<tr class="odd">
+<td>Overlap with multiple problematic region tracks</td>
+<td>High probability of technical artifact; variant call may be false positive</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="step-6-evaluation-of-supporting-genetic-evidence" class="section level3 hasAnchor">
+<h3>Step 6: Evaluation of Supporting Genetic Evidence<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-evaluation-of-supporting-genetic-evidence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Beyond coverage patterns, additional genetic evidence can support or contradict a deletion hypothesis.</p>
+<p><strong>Heterozygous SNVs in the deletion region:</strong></p>
+<p>If the patient is heterozygous for single nucleotide variants (SNVs) within the deletion region, this contradicts the deletion hypothesis. A true deletion removes one allele, so SNVs should appear homozygous (or hemizygous, with only one allele visible).</p>
+<p><strong>Visual inspection for SNVs:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Navigate to <code>chr19:1,221,191-1,222,025</code></li>
+<li>Expand the alignment track for hereditary_case1 (patient)</li>
+<li>Zoom to high magnification if needed (right-click and zoom, or use the zoom slider)</li>
+<li>Scan the reads for positions showing color variation
+<ul>
+<li>IGV colors nucleotides: A (green), C (blue), G (brown/orange), T (red)</li>
+<li>Heterozygous SNVs appear as mixed colors at a single genomic position</li>
+<li>Approximately 50% of reads show one color, 50% show another color</li>
+</ul></li>
+</ol>
+<p><strong>Interpretation:</strong></p>
+<ul>
+<li>If heterozygous SNVs are present in the deletion region: The second allele is intact. It contradicts the deletion hypothesis and suggests a technical artifact.</li>
+<li>If no heterozygous SNVs are present: This does not confirm deletion (absence of evidence is not evidence of absence), but it does not contradict the deletion hypothesis.</li>
+<li>If homozygous SNVs are present: This is consistent with a deletion (only one allele remains visible).</li>
+</ul>
+</div>
+<div id="step-7-integrating-evidence-and-reaching-a-quality-assessment-conclusion" class="section level3 hasAnchor">
+<h3>Step 7: Integrating Evidence and Reaching a Quality Assessment Conclusion<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-integrating-evidence-and-reaching-a-quality-assessment-conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After completing the evaluation, integrate all evidence to reach a conclusion about deletion authenticity. Create a summary of your findings:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Quality Assessment Criterion</th>
+<th>Observation</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Coverage ratio (patient/control)</td>
+<td>[Your calculated ratio]</td>
+<td>[Consistent with deletion? Yes/No/Intermediate]</td>
+</tr>
+<tr class="even">
+<td>Mapping quality of reads in deletion region</td>
+<td>[High/Low]</td>
+<td>[Supports true deletion / Suggests artefact]</td>
+</tr>
+<tr class="odd">
+<td>Deletion breakpoint sharpness</td>
+<td>[Abrupt/Gradual]</td>
+<td>[Supports deletion / Suggests artefact]</td>
+</tr>
+<tr class="even">
+<td>Overlap with problematic region annotations</td>
+<td>[None / One track / Multiple tracks]</td>
+<td>[Low artefact risk / Moderate / High]</td>
+</tr>
+<tr class="odd">
+<td>Heterozygous SNVs in deletion region</td>
+<td>[Present/Absent]</td>
+<td>[Contradicts deletion / Consistent with deletion]</td>
+</tr>
+<tr class="even">
+<td>GC content of deletion region</td>
+<td>[Percentage]</td>
+<td>[GC bias likely? Yes/No]</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Decision framework:</strong></p>
+<p>Based on your evidence summary, select the most appropriate conclusion:</p>
+<ol style="list-style-type: decimal">
+<li><strong>High confidence true deletion:</strong>
+<ul>
+<li>Coverage ratio 0.4-0.6</li>
+<li>High mapping quality</li>
+<li>Sharp breakpoints</li>
+<li>No overlap with problematic regions</li>
+<li>No contradicting SNV evidence</li>
+<li><strong>Decision:</strong> Proceed to clinical interpretation and validation planning</li>
+</ul></li>
+<li><strong>Probable deletion, validation recommended:</strong>
+<ul>
+<li>Coverage ratio 0.4-0.6</li>
+<li>Some technical concerns present (GC bias, single problematic region overlap)</li>
+<li><strong>Decision:</strong> Proceed to clinical interpretation, but emphasize validation requirement</li>
+</ul></li>
+<li><strong>Uncertain, validation essential:</strong>
+<ul>
+<li>Coverage ratio 0.5-0.8</li>
+<li>Multiple technical concerns</li>
+<li><strong>Decision:</strong> Defer clinical interpretation until orthogonal validation (e.g., MLPA) is completed</li>
+</ul></li>
+<li><strong>Probable technical artefact:</strong>
+<ul>
+<li>Coverage ratio &gt;0.7</li>
+<li>Low mapping quality, gradual breakpoints, or contradicting SNV evidence</li>
+<li><strong>Decision:</strong> Reject variant call, do not proceed to clinical interpretation</li>
+</ul></li>
+</ol>
+<p>Document your quality assessment conclusion with specific supporting evidence. In clinical practice, this documentation is included in the variant interpretation report.</p>
+</div>
+<div id="proceeding-to-clinical-variant-interpretation" class="section level3 hasAnchor">
+<h3>Proceeding to Clinical Variant Interpretation<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#proceeding-to-clinical-variant-interpretation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If your quality assessment supports a true deletion (categories 1 or 2 above), proceed to Section 5 for clinical interpretation using the ClinGen CNV Loss framework. If your assessment suggests a technical artifact (category 4), skip to the final discussion section.</p>
+</div>
+</div>
+<div id="section-5-clinical-interpretation-of-copy-number-loss-using-clingen-guidelines" class="section level2 hasAnchor">
+<h2>Section 5: Clinical Interpretation of Copy Number Loss Using ClinGen Guidelines<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-5-clinical-interpretation-of-copy-number-loss-using-clingen-guidelines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="overview-of-clingen-cnv-interpretation-framework" class="section level3 hasAnchor">
+<h3>Overview of ClinGen CNV Interpretation Framework<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#overview-of-clingen-cnv-interpretation-framework" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After confirming that a copy number variant is likely genuine through quality assessment, the next critical step is determining its clinical significance. This requires systematic evaluation of:</p>
+<ul>
+<li>The genomic content of the deletion (which genes and regulatory elements are affected)</li>
+<li>The biological mechanism (haploinsufficiency, triplosensitivity, disruption of regulatory elements)</li>
+<li>Evidence from published literature and curated databases</li>
+<li>The patient’s clinical phenotype</li>
+</ul>
+<p>The Clinical Genome Resource (ClinGen) consortium has developed a standardized scoring framework for copy number variant interpretation. This rubric provides evidence-based criteria for classifying CNVs into five categories:</p>
+<ul>
+<li>Pathogenic</li>
+<li>Likely pathogenic</li>
+<li>Uncertain significance (VUS)</li>
+<li>Likely benign</li>
+<li>Benign</li>
+</ul>
+<p>The ClinGen framework is implemented as a technical standard by clinical laboratories worldwide and is the basis for CNV interpretation guidelines from the American College of Medical Genetics (ACMG).</p>
+</div>
+<div id="accessing-the-clingen-cnv-loss-calculator" class="section level3 hasAnchor">
+<h3>Accessing the ClinGen CNV Loss Calculator<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#accessing-the-clingen-cnv-loss-calculator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The ClinGen CNV interpretation process is facilitated by an interactive web-based tool that guides you through systematic evaluation of each evidence criterion.</p>
+<p><strong>Access procedure:</strong></p>
+<ol style="list-style-type: decimal">
+<li>Open a web browser</li>
+<li>Navigate to: <a href="https://cnvcalc.clinicalgenome.org/cnvcalc/cnv-loss">https://cnvcalc.clinicalgenome.org/cnvcalc/cnv-loss</a></li>
+<li>The ClinGen Dosage Sensitivity Curation page will load</li>
+<li>Select the “CNV Loss” calculator option</li>
+</ol>
+<p><strong>Overview of the calculator interface:</strong></p>
+<p>The calculator is organized into sections corresponding to ACMG/ClinGen scoring criteria:</p>
+<ul>
+<li>Section 1: Initial Assessment of Genomic Content (1A-1B)</li>
+<li>Section 2: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions (2A-2H)</li>
+<li>Section 3: Evaluation of Gene Number</li>
+<li>Section 4: Detailed Evaluation of Genomic Content Using Published Literature, Public Databases, and/or Internal Lab Data (4A-4O)</li>
+<li>Section 5: Evaluation of Inheritance Pattern/Family History for Patient Being Studied (5A-5H)</li>
+</ul>
+<p>Each section contains specific evidence criteria with associated point values. The calculator automatically tallies points and suggests a classification based on accumulated evidence.</p>
+</div>
+<div id="section-1---initial-assessment-of-genomic-content" class="section level3 hasAnchor">
+<h3>Section 1 - Initial Assessment of Genomic Content<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-1---initial-assessment-of-genomic-content" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Section 1 assesses what genes and genomic elements are affected by the deletion. The clinical significance of a CNV depends critically on the functional importance of the deleted genomic content.</p>
+</div>
+<div id="criterion-1a-does-the-cnv-include-any-protein-coding-or-other-critical-genomic-elements" class="section level3 hasAnchor">
+<h3>Criterion 1A: Does the CNV include any protein-coding or other critical genomic elements?<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-1a-does-the-cnv-include-any-protein-coding-or-other-critical-genomic-elements" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Objective:</strong> Determine whether the deletion affects functionally important genomic sequences.</p>
+<p>Evaluation procedure:</p>
+<ol style="list-style-type: decimal">
+<li>Identify genes within the deletion:
+<ul>
+<li>The deletion at chr19:1,221,191-1,222,025 affects the STK11 gene</li>
+<li>Specifically, exons 6 and 7 are included in the deletion.</li>
+<li>Both exons are protein-coding sequence</li>
+</ul></li>
+<li>Assess functional importance:
+<ul>
+<li>STK11 encodes serine/threonine kinase 11, a critical tumour suppressor</li>
+<li>The protein regulates cell polarity, metabolism, and growth control</li>
+<li>STK11 is definitively associated with Peutz-Jeghers syndrome (established gene-disease relationship)</li>
+</ul></li>
+</ol>
+<p>For this case:</p>
+<ul>
+<li>Continue evaluation</li>
+</ul>
+</div>
+<div id="section-2---overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions" class="section level3 hasAnchor">
+<h3><strong>Section 2 - Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-2---overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Section 2 evaluates whether the CNV overlaps with genes or genomic regions that have established or predicted haploinsufficiency (HI) or established benign status. This section is the most extensive portion of the ClinGen framework and evaluates whether the gene(s) affected by the CNV are sensitive to dosage imbalance.</p>
+</div>
+<div id="criterion-2a-does-the-cnv-completely-overlap-an-established-hi-gene-or-genomic-region" class="section level3 hasAnchor">
+<h3><strong>Criterion 2A: Does the CNV completely overlap an established HI gene or genomic region?</strong><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2a-does-the-cnv-completely-overlap-an-established-hi-gene-or-genomic-region" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Objective:</strong> Determine whether the deletion completely overlaps an established haploinsufficient gene or genomic region.</p>
+<p><strong>Understanding complete overlap:</strong></p>
+<p>Complete overlap means the deletion encompasses the entire established HI gene or critical region. This criterion applies when:</p>
+<ul>
+<li>The deletion includes all exons of a known HI gene from start to finish</li>
+<li>The deletion encompasses a complete established genomic region (e.g., 22q11.2 deletion syndrome region)</li>
+</ul>
+<p>For this case:</p>
+<ul>
+<li>There is no complete overlap</li>
+</ul>
+</div>
+<div id="criterion-2b-2e-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions" class="section level3 hasAnchor">
+<h3><strong>Criterion 2B-2E: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2b-2e-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>These criteria evaluate partial gene overlaps:</strong></p>
+<ul>
+<li>2B: Partial overlap of an established HI genomic region</li>
+<li>2C: Partial overlap with the 5’ end of an established HI gene</li>
+<li>2D: Partial overlap with the 3’ end of an established HI gene</li>
+<li>2E: Both breakpoints are within the same gene (intragenic deletion)</li>
+</ul>
+<p><strong>Understanding haploinsufficiency (HI):</strong></p>
+<p>Many genes tolerate loss of one allele with no phenotypic consequence because one functional copy produces adequate protein. However, haploinsufficient genes require both alleles for normal function. Loss of one allele results in disease through mechanisms including:</p>
+<ul>
+<li>Insufficient protein quantity (threshold effect)</li>
+<li>Disrupted stoichiometry in protein complexes</li>
+<li>Reduced compensatory capacity under cellular stress</li>
+</ul>
+<p><strong>Evaluation of STK 11 HI Status:</strong></p>
+<p>Review ClinGen haploinsufficiency curation:</p>
+<ul>
+<li>Navigate to: <a href="https://search.clinicalgenome.org/kb/gene-dosage?page=1&amp;size=25&amp;search">https://search.clinicalgenome.org/kb/gene-dosage?page=1&amp;size=25&amp;search</a></li>
+<li>Search for: STK11</li>
+<li>Select the STK11 gene page</li>
+<li>Locate the “Dosage Sensitivity” section</li>
+<li>Interpret the haploinsufficiency (HI) score:
+<ul>
+<li>3: Sufficient evidence for dosage pathogenicity</li>
+<li>2: Some evidence for dosage pathogenicity</li>
+<li>1: Little evidence for dosage pathogenicity</li>
+<li>0: No evidence for dosage pathogenicity</li>
+<li>40: Dosage sensitivity unlikely</li>
+</ul></li>
+</ul>
+<p>For STK11: Haploinsufficiency score = 3 (sufficient evidence)</p>
+<p><strong>For this case:</strong></p>
+<ul>
+<li>The deletion affects exons 6-7, which are internal exons of STK11 (not at either terminal end). This constitutes an intragenic deletion falling under Criterion 2E. Assign 0.45-0.90 points</li>
+</ul>
+</div>
+<div id="criterion-2f-g-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions" class="section level3 hasAnchor">
+<h3><strong>Criterion 2F-G: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions</strong><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-2f-g-overlap-with-establishedpredicted-hi-or-established-benign-genesgenomic-regions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The STK11 deletion does not overlap any established benign CNV regions documented in population databases. Since STK11 is a well-established haploinsufficient gene with definitive clinical evidence, computational HI predictors (Criterion 2H) do not contribute additional scoring. <strong>Score: 0 points</strong> (continue evaluation).</p>
+</div>
+<div id="section-3---evaluation-of-gene-number" class="section level3 hasAnchor">
+<h3><strong>Section 3 - Evaluation of Gene Number</strong><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-3---evaluation-of-gene-number" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Section 3 accounts for the number of genes affected by the deletion. Deletions affecting multiple genes may have additive effects on phenotype. For this case, the deletion affects <strong>one gene (STK11)</strong></p>
+<p><strong>Scoring for Section 3:</strong></p>
+<p>The calculator provides a dropdown menu to select gene count. Point values increase with gene number:</p>
+<p>0-24 genes: Variable points based on specific count</p>
+<p>25-34 genes: Higher point values</p>
+<p>35+ genes: Maximum point contribution</p>
+<p>For this case:</p>
+<ul>
+<li>Select: 3A 0-24 genes from dropdown menu. No points assigned</li>
+</ul>
+</div>
+<div id="section-4---detailed-evaluation-of-genomic-content-using-published-literature-public-databases-andor-internal-lab-data" class="section level3 hasAnchor">
+<h3><strong>Section 4 - Detailed Evaluation of Genomic Content Using Published Literature, Public Databases, and/or Internal Lab Data</strong><a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-4---detailed-evaluation-of-genomic-content-using-published-literature-public-databases-andor-internal-lab-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This section is used to evaluate literature and database evidence for genes or regions where haploinsufficiency has been reported but not yet formally established.</p>
+<p><strong>For this case:</strong></p>
+<ul>
+<li>The STK11 deletion overlaps an <strong>established haploinsufficient gene</strong> (ClinGen HI score = 3, scored in Section 2A). The scientific literature documenting pathogenic STK11 loss-of-function variants and deletions has already contributed to establishing STK11’s dosage sensitivity status and is reflected in the <strong>points</strong> assigned in Section 2A. To avoid double-counting evidence<strong>,</strong> we proceed directly to Section 5</li>
+</ul>
+<p>As an excersice, here is how you can determine the presence of other sinilar clinically reported variants</p>
+<ol style="list-style-type: decimal">
+<li>Navigate to the UCSC Genome Browser:
+<ul>
+<li>Go to the UCSC Genome Browser on Human (GRCh37/hg19): <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr19%3A1221191-1222025&amp;hgsid=3296387915_3wxp93QQggeMSDa41nPThCuN6Dtf">https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr19%3A1221191-1222025&amp;hgsid=3296387915_3wxp93QQggeMSDa41nPThCuN6Dtf</a></li>
+<li>Verify you are viewing the correct genome build (GRCh37/hg19) and region <code>chr19:1,221,191-1,222,025</code></li>
+</ul></li>
+<li>Enable the ClinVar and Clingen tracks:
+<ul>
+<li>Scroll down below the genome browser visualization to the track controls section</li>
+<li>Locate the section titled “Phenotype, Variants and Literature”</li>
+<li>Find the tracks labeled “ClinVar Variants” and “Clingen CNVs”</li>
+<li>Change the dropdown menu from “hide” to “pack” or “full” to make the track visible</li>
+<li>Click “refresh” to reload the browser with the track enabled</li>
+</ul></li>
+<li>Review ClinVar deletion entries:
+<ul>
+<li>Once the track is visible, you should see colored annotations representing known ClinVar variants in the STK11 region</li>
+<li>Click on individual variant entries to view details</li>
+<li>Relevant pathogenic (red) deletions affecting exons 6-7</li>
+</ul></li>
+</ol>
+</div>
+<div id="section-5---evaluation-of-inheritance-patternfamily-history-for-patient-being-studied" class="section level3 hasAnchor">
+<h3>Section 5 - Evaluation of Inheritance Pattern/Family History for Patient Being Studied<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#section-5---evaluation-of-inheritance-patternfamily-history-for-patient-being-studied" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This section evaluates whether the CNV is de novo, inherited, or shows segregation/non-segregation patterns in the patient’s family. Points are assigned based on inheritance data and how well the patient’s phenotype matches established disease presentations.</p>
+<p><strong>Understanding Section 5 criteria:</strong></p>
+<p>Section 5 is most informative when detailed family information is available:</p>
+<ul>
+<li><strong>De novo status</strong> (5A): Provides strong evidence for pathogenicity when the phenotype is specific and well-defined</li>
+<li><strong>Inherited from unaffected parent</strong> (5B-5C): May suggest reduced penetrance, variable expressivity, or benign variation</li>
+<li><strong>Segregation with disease</strong> (5D): Multiple affected family members with consistent phenotypes strengthen pathogenicity</li>
+<li><strong>Non-segregation</strong> (5E): Finding the variant in unaffected family members provides evidence against pathogenicity</li>
+<li><strong>Uninformative inheritance with specific phenotype</strong> (5G-5H): Can still contribute points when phenotype strongly matches the gene’s known disease</li>
+</ul>
+<p><strong>For this case:</strong></p>
+<p>Limited inheritance and family history information is available for this patient. This is a <strong>common situation in clinical genomics</strong>, where:</p>
+<ul>
+<li>Family members may not be available for testing</li>
+<li>Parental samples were not collected</li>
+<li>Pedigree information is incomplete</li>
+<li>Testing was performed as a singleton case</li>
+</ul>
+<p><strong>However, we can still apply criterion 5H.</strong></p>
+</div>
+<div id="criterion-5h-inheritance-information-unavailable-or-uninformative-with-highly-specific-consistent-phenotype" class="section level3 hasAnchor">
+<h3>Criterion 5H: Inheritance information unavailable or uninformative, with highly specific consistent phenotype<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#criterion-5h-inheritance-information-unavailable-or-uninformative-with-highly-specific-consistent-phenotype" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Despite lacking detailed family data, the patient presents with clinical features highly specific for Peutz-Jeghers syndrome:</p>
+<ul>
+<li>Characteristic mucocutaneous pigmentation (perioral, buccal, acral)</li>
+<li>Gastrointestinal hamartomatous polyps</li>
+<li>Family history consistent with autosomal dominant inheritance pattern</li>
+</ul>
+<p>These features match the well-defined Peutz-Jeghers syndrome phenotype associated with STK11 haploinsufficiency. The phenotype is highly specific (The combination of pigmentation and GI polyps is pathognomonic), well-documented (extensive literature describes this presentation), and consistent (patient’s features align with published case descriptions)</p>
+<p>For this case:</p>
+<ul>
+<li>Assign: 0.30 points. Inheritance uninformative, but patient has highly specific phenotype consistent with similar cases</li>
+</ul>
+</div>
+</div>
+<div id="step-6-calculating-the-final-classification" class="section level2 hasAnchor">
+<h2>Step 6: Calculating the Final Classification<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-6-calculating-the-final-classification" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The ClinGen calculator automatically tallies point values from all scored criteria and suggests a classification.</p>
+<p><strong>Point summary for this case:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Section</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Section 1: Initial Assessment of Genomic Content</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Section 2: Overlap with Established HI Genes/Regions</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Section 3: Evaluation of Gene Number</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Section 4: Detailed Evaluation of Genomic Content</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Section 5: Evaluation of Inheritance Pattern/Family History</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ClinGen classification thresholds:</strong></p>
+<p>The scoring framework uses the following point thresholds:</p>
+<ul>
+<li><strong>≥0.99 points:</strong> Pathogenic</li>
+<li><strong>0.90-0.98 points:</strong> Likely pathogenic</li>
+<li><strong>0.00-0.89 points:</strong> Uncertain significance (VUS)</li>
+<li><strong>−0.90 to −0.01 points:</strong> Likely benign</li>
+<li><strong>≤−0.99 points:</strong> Benign</li>
+</ul>
+</div>
+<div id="step-7-clinical-recommendations-and-validation" class="section level2 hasAnchor">
+<h2>Step 7: Clinical Recommendations and Validation<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#step-7-clinical-recommendations-and-validation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You have now completed the interpretation of a copy number loss variant using the ClinGen framework. The process comprised:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Quality assessment in IGV:</strong> Verification that the deletion call represents a true structural variant rather than technical artefact</li>
+<li><strong>Systematic evidence evaluation:</strong> Scoring multiple evidence criteria addressing genomic content, dosage sensitivity, patient phenotype, and population data</li>
+<li><strong>Classification:</strong> Integration of evidence to reach a pathogenic classification</li>
+<li><strong>Clinical recommendations:</strong> Validation testing and clinical management planning</li>
+</ol>
+<p>This workflow represents the standard approach used in clinical genomics laboratories for copy number variant interpretation. The methodology ensures consistent, reproducible classifications and supports defensible clinical decision-making.</p>
+<p><strong>Final activity:</strong> Synthesize your findings into a concise clinical summary that integrates the technical evidence with clinical context.</p>
+<p><strong>Instructions:</strong></p>
+<p>Write a <strong>200-300 word summary</strong> that addresses the following:</p>
+<ul>
+<li><strong>Variant description:</strong> Describe the STK11 deletion (genomic coordinates, size, affected exons)</li>
+<li><strong>Classification and scoring:</strong> State your final classification (Pathogenic/Likely Pathogenic/VUS/Likely Benign/Benign) based on the ACMG/ClinGen CNV scoring framework. Report your total score and which sections contributed points.</li>
+<li><strong>Clinical significance:</strong> Explain what this variant means for the patient’s diagnosis of Peutz-Jeghers syndrome</li>
+<li><strong>Supporting evidence:</strong> Briefly summarize the key evidence types that supported your classification:
+<ul>
+<li>Established haploinsufficiency of STK11</li>
+<li>Patient phenotype consistency</li>
+</ul></li>
+<li>Any other relevant factors</li>
+</ul>
+<p><strong>Format your summary as if it were part of a clinical laboratory report</strong> that would be interpreted by the ordering physician.</p>
+<hr />
+</div>
+<div id="references" class="section level2 hasAnchor">
+<h2>References<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="primary-literature" class="section level3 hasAnchor">
+<h3>Primary Literature<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#primary-literature" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>van Lier MG, Wagner A, Mathus-Vliegen EM, Kuipers EJ, Steyerberg EW, van Leerdam ME. High cancer risk in Peutz-Jeghers syndrome: a systematic review and surveillance recommendations. <em>Am J Gastroenterol</em>. 2010;105(6):1258-1265. <a href="doi:10.1038/ajg.2009.725" class="uri">doi:10.1038/ajg.2009.725</a>. <a href="https://pubmed.ncbi.nlm.nih.gov/20051941/">https://pubmed.ncbi.nlm.nih.gov/20051941/</a></li>
+<li>Jelsig AM, Karstensen JG, Overeem Hansen TV. Progress report: Peutz–Jeghers syndrome. <em>Familial Cancer</em>. 2024;23:409-417. <a href="https://doi.org/10.1007/s10689-024-00362-7">https://doi.org/10.1007/s10689-024-00362-7</a></li>
+<li>Wang Z, Churchman M, Avizienyte E, et al. Germline mutations of the LKB1 (STK11) gene in Peutz-Jeghers patients. <em>J Med Genet</em>. 1999;36(5):365-368. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1734361/">https://pmc.ncbi.nlm.nih.gov/articles/PMC1734361/</a></li>
+<li>Volikos E, Robinson J, Aittomäki K, et al. LKB1 exonic and whole gene deletions are a common cause of Peutz-Jeghers syndrome. <em>J Med Genet</em>. 2006;43(5):e18. <a href="https://ncbi.nlm.nih.gov/pmc/articles/PMC2564523/">https://ncbi.nlm.nih.gov/pmc/articles/PMC2564523/</a></li>
+</ol>
+</div>
+<div id="software-and-databases" class="section level3 hasAnchor">
+<h3>Software and Databases<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#software-and-databases" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Robinson JT, Thorvaldsdóttir H, Winckler W, et al. Integrative Genomics Viewer. <em>Nat Biotechnol</em>. 2011;29(1):24-26. IGV software available at: <a href="https://igv.org/doc/desktop/">https://igv.org/doc/desktop/</a></li>
+<li>ClinGen Dosage Sensitivity Map. Clinical Genome Resource. Available at: <a href="https://search.clinicalgenome.org/kb/gene-dosage?page=1&amp;size=25&amp;search">https://search.clinicalgenome.org/kb/gene-dosage?page=1&amp;size=25&amp;search</a></li>
+<li>ClinGen CNV Interpretation Calculator. Clinical Genome Resource. Available at: <a href="https://cnvcalc.clinicalgenome.org/cnvcalc/cnv-loss">https://cnvcalc.clinicalgenome.org/cnvcalc/cnv-loss</a></li>
+<li>UCSC Genome Browser (GRCh37/hg19). University of California Santa Cruz Genomics Institute. Available at: <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr19%3A1221191-1222025&amp;hgsid=3296387915_3wxp93QQggeMSDa41nPThCuN6Dtf">https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr19%3A1221191-1222025&amp;hgsid=3296387915_3wxp93QQggeMSDa41nPThCuN6Dtf</a></li>
+</ol>
+</div>
+<div id="guidelines-and-standards" class="section level3 hasAnchor">
+<h3>Guidelines and Standards<a href="module-4-lab---case-3-stk11-deletion-in-peutz-jeghers-syndrome.html#guidelines-and-standards" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Riggs ER, Andersen EF, Cherry AM, et al. Technical standards for the interpretation and reporting of constitutional copy-number variants: a joint consensus recommendation of the American College of Medical Genetics and Genomics (ACMG) and the Clinical Genome Resource (ClinGen). <em>Genet Med</em>. 2020;22(2):245-257.</li>
+</ol>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="module-3-lab-clinical-variant-interpretation-with-franklin.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="module-4-lab-microsatellite-instability-visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/bioinformaticsdotca/GPO_Hal-2511/blob/main/040-module-4.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
