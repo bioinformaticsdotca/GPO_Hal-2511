@@ -27,7 +27,7 @@ Before the workshop, please complete the following steps to ensure you are ready
 ### 1. Create a Franklin Account
 You will need a **Franklin** account for accessing genomics datasets and cloud-based tools used during the workshop.
 
-1. Go to [https://app.franklin.genoox.com/signup](https://app.franklin.genoox.com/signup)
+1. Go to [https://franklin.genoox.com/join](https://franklin.genoox.com/join)
 2. Register using your **institutional email address** (e.g., from your university, hospital, or research institute).
 3. Verify your email and log in to confirm your access.
 4. Once logged in, familiarize yourself with the interface — especially how to create a new workspace and upload a VCF file.
