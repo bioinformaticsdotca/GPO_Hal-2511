@@ -22,7 +22,34 @@ Welcome to the 2025 Genomics for Precision Oncology Canadian Bioinformatics Work
 
 ## Pre-work
 
-<!--[You can find your pre-work here.](LINK TO PREWORK) -->
+Before the workshop, please complete the following steps to ensure you are ready for the hands-on sessions:
+
+### 1. Create a Franklin Account
+You will need a **Franklin** account for accessing genomics datasets and cloud-based tools used during the workshop.
+
+1. Go to [https://app.franklin.genoox.com/signup](https://app.franklin.genoox.com/signup)
+2. Register using your **institutional email address** (e.g., from your university, hospital, or research institute).
+3. Verify your email and log in to confirm your access.
+4. Once logged in, familiarize yourself with the interface — especially how to create a new workspace and upload a VCF file.
+
+> 💡 **Tip:** If you already have a Franklin account, make sure you can access it and remember your password before the workshop.
+
+---
+
+### 2. Download and Install IGV (Integrative Genomics Viewer)
+
+We will use **IGV** to visualize genomic variants and alignments during the lab sessions.
+
+1. Visit the official IGV download page: [https://software.broadinstitute.org/software/igv/download](https://software.broadinstitute.org/software/igv/download)
+2. Choose the installer appropriate for your operating system:
+   - **Windows:** Download the `.exe` file
+   - **macOS:** Download the `.dmg` file
+   - **Linux:** Download the `.zip` or use the command-line installer
+3. Follow the installation instructions on the site.
+4. Launch IGV to confirm it opens correctly.
+
+> ⚠️ **Note:** IGV requires **Java 11+**. Most systems already have it, but if not, you can install OpenJDK from [https://adoptium.net/](https://adoptium.net/).
+
 
 ## Class Photo
 
