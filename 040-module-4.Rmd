@@ -684,7 +684,7 @@ Ensure you are viewing the region `chr19:1,221,191-1,222,025` (the deletion coor
 | Overlap with one problematic region track | Interpret cautiously; consider additional validation |
 | Overlap with multiple problematic region tracks | High probability of technical artifact; variant call may be false positive |
 
-### Step 6: Evaluation of Supporting Genetic Evidence
+### Section 6: Evaluation of Supporting Genetic Evidence
 
 Beyond coverage patterns, additional genetic evidence can support or contradict a deletion hypothesis.
 
@@ -708,7 +708,7 @@ If the patient is heterozygous for single nucleotide variants (SNVs) within the 
 - If no heterozygous SNVs are present: This does not confirm deletion (absence of evidence is not evidence of absence), but it does not contradict the deletion hypothesis.
 - If homozygous SNVs are present: This is consistent with a deletion (only one allele remains visible).
 
-### Step 7: Integrating Evidence and Reaching a Quality Assessment Conclusion
+### Section 7: Integrating Evidence and Reaching a Quality Assessment Conclusion
 
 After completing the evaluation, integrate all evidence to reach a conclusion about deletion authenticity. Create a summary of your findings:
 
