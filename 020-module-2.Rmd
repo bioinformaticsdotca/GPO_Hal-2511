@@ -177,7 +177,19 @@ Like FastQs, VCFs may be encountered in either their compressed (*.gz) or uncomp
 
 > **Note:** If you just google the term VCF you may encounter an entirely different file format which was created for cell phones a long time ago. Sometimes you have to specify genomics or variant or similar in a google search term!
 
-Uncompressed VCFs can be examined using the `less` command, while gzip/bgzip compressed VCFs can be examined with `zless`. As with other genomic file formats the metadata of a VCF file is contained in the header. The header of a VCF file are all of the lines that start with one or more '#' characters. The last of these is a line giving the column headers for the variant that follows. The variant data section of a VCF, like a BED file, is column-based, with each column separated by a tab character. 
+Uncompressed VCFs can be examined using the `less` command, while gzip/bgzip compressed VCFs can be examined with `zless`. As with other genomic file formats the metadata of a VCF file is contained in the header. The header of a VCF file are all of the lines that start with one or more '#' characters. The last of these is a line giving the column headers for the variant that follows. The variant data section of a VCF, like a BED file, is column-based, with each column separated by a tab character.
+
+The Header section of a VCF file contains information about various tags and fields in the VCF file. In addition, when a VCF file is annotated, all of the information about the annotations that are added to the INFO column of the data have their various tags explained here in the header. The various values that can be found in the FILTER column are also described here.
+
+An couple of example VCF files can be found in `~/CourseData/Module2/VCFs`. One of these is an extremely minimal test VCF while the other is the output of MuTect2, a somatic variant caller you will use later in this workshop. The general structure of the VCF file is more apparent if you investigate the `test_panel.GRCh38.minimal.vcf` file first, before looking at the `mutect2_tumour_normal.filtered.regions_of_interest.vcf.gz` file.
+
+> **Question:** What file format specification was used for each file? Is it the same or different?
+
+> **Question:** In the Mutec2 generated VCF how many different values can the FILTER field take?
+
+> **Question:** What is the ID in the FORMAT field for the Approximate read Depth at a site/variant?
+
+> **Question:** What are the genomic coordinates of the first variant listed in the file? What are the Reference and Alt alleles? What entries are given in the filter field?
 
 
 ## Lab (Part 2) - Implementing the GATK Best Practices Workflow
@@ -198,7 +210,13 @@ docker run --rm -v /home/ubuntu/CourseData:/data -v /home/ubuntu/workspace:/work
 
 FastQC can even be run on more than one FastQ file at a time. Take a look at the command line options for FastQC by running `docker run --rm pegi3s/fastqc -h` and then modify the above command to run on all of the FastQ files in the FastQ directory.
 
-You can view the contents of your `~/workspace` directory by going to: http://[num].uhn-hpc.ca/ where [num] is the number for your particular AWS instance. You can click on any of the HTML files in the FastQC directory to open the FastQC reports directly.
+You can view the contents of your `~/workspace` directory by going to: http://NUM.uhn-hpc.ca/ where NUM is the number for your particular AWS instance. You can click on any of the HTML files in the FastQC directory to open the FastQC reports directly.
+
+> **Question:** How many reads are in the normal_test_1.fastq.gz file according to its FastQC output? How many total bases?
+
+> **Question**: What is the GC % of th data?
+
+> **Question:** What is the average quality per read?
 
 
 ### Alignment/Short-Read Mapping with BWA-MEM
@@ -210,7 +228,7 @@ Like This
 
 May not be complete. They will server as guidance for building the complete and proper command-line yourself.
 
-The first step of the GATK workflow is to use a short-read mapping algorithm to align our FastQs to a Human Reference Genome (GRCh38). We will use the program [BWA](https://github.com/lh3/bwa) for this, again running BWA-MEM from a docker container. BWA-MEM as general input takes 1 or more FastQ files and a reference genome file, and then outputs the results to standard out in the uncompressed SAM format. We will re-route that output to a file. In this case, and for many of our intermediate processing steps, we will not output our results to the `~/workspace` directory, but instead will output them to locations in the `~/CourseData` directory. Since the outputs of one program will be the inputs of the next program in our chain this is generally more convenient. We will do all of our intermediate processing in the `~/CourseData/Module2/Processing` directory. We also have a tumour and a normal sample in our FastQs, each of these steps, until we get to variant calling, we run on each of those individually. For convenience the command-lines provided below will assum you are running on the Normal tissue sample. Simply repeat, changing file names as appropriate for the tumour output.
+The first step of the GATK workflow is to use a short-read mapping algorithm to align our FastQs to a Human Reference Genome (GRCh38). We will use the program [BWA](https://github.com/lh3/bwa) for this, again running BWA-MEM from a docker container. BWA-MEM as general input takes 1 or more FastQ files and a reference genome file, and then outputs the results to standard out in the uncompressed SAM format. We will re-route that output to a file. In this case, and for many of our intermediate processing steps, we will not output our results to the `~/workspace` directory, but instead will output them to locations in the `~/CourseData` directory. Since the outputs of one program will be the inputs of the next program in our chain this is generally more convenient. We will do all of our intermediate processing in the `~/CourseData/Module2/Processing` directory. We also have a tumour and a normal sample in our FastQs, each of these steps, until we get to variant calling, we run on each of those individually. For convenience the command-lines provided below will assume you are running on the Normal tissue sample. Simply repeat, changing file names as appropriate for the tumour output.
 
 
 We can view all of the command-line options for BWA-mem by running the following command, which will also serve as the base for all of our BWA-MEM commands.
@@ -221,7 +239,7 @@ docker run --rm -v "/home/ubuntu/CourseData:/data" pegi3s/bwa bwa mem
 
 We see the basic usage is: `bwa mem [options] <idxbase> <in1.fq> [in2.fq]`. In our case we have two FastQ files, which are gzipped (bwa-mem reads gzipped FastQs just fine). Our GRCh38 humans reference is located at: `~/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta`.
 
-**Question:** What other files are located in the `~/CourseData/tools/reference/GATK-bundle-GRCh38/` directory? Hint: The various iterations on Homo_sapiens_assembly38.fasta with extra extensions are index files used by various programs to efficiently use the FASTA reference file.
+> **Question:** What other files are located in the `~/CourseData/tools/reference/GATK-bundle-GRCh38/` directory? Hint: The various iterations on Homo_sapiens_assembly38.fasta with extra extensions are index files used by various programs to efficiently use the FASTA reference file.
 
 So the command-line structure for BWA-MEM (without the docker bits added on) looks like this to align two gzipped FastQ files to a reference FASTA file and output to a SAM file:
 
@@ -252,7 +270,7 @@ Some hints, if you use the same volume mounting paths and names as I did above w
 
 and the prociessing directory path would be `/data/Module2/Processing`.
 
-#### Use samtools to sort the results and convert a SAM to a BAM
+#### Use Samtools to sort the results and convert a SAM to a BAM
 
 For further processing with the GATK we need to sort the SAM so that it is coordinate, and not read sorted, and convert it to a BAM file. We can do this from inside our `~/CourseData/Module2/Processing` directory and we can do it in a single step:
 
@@ -262,16 +280,29 @@ samtools sort -@ 4 -O bam -o normal.bam normal.sam
 
 Replace normal.bam and normal.sam with whatever you called your SAM file and whatever you want to call the BAM version of that file. Typically we would keep the file names the same and just change the extension. Repeat for the tumour SAM.
 
+> **Question:** What command-line flag could you give to the samtools sort command above to have it automatically create an index file for the output BAM?
+
+> **Question:** If you wanted to sort the SAM, but output to a SAM file instead how would you modify the file? What about if you wanted to create a BAM file but change its compression level to 0? Making a binary but uncompressed file?
+
 ### GATK Pre-Processing
 Aligned BAM files are not yet ready for variant calling, and some intermediate pre-processing needs to be done.
 
 #### Add Read Group Data
 First, we want to add Read Groups to our data which gives a sample name and information like Library and Lane IDs, as well as other metadata like the kind of sequencing that was used. Here we will use the GATK software package itself, which we are running from another docker container. Again the example below will just be for the normal sample, you'll need to repeat it for the tumour. I will assume that your BAM file is just called `normal.bam` so you'll need to change that and other possible parameters in order to match this to your own preferences. You can call files pretty much anything you want after all, but I will use some naming conventions here that I find helpful for tracking where in the workflow a file was produced.
 
-You can read more about Read Groups [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups).
+You can read more about Read Groups [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups). Also in the SAM specification that you were provided earlier.
+
+The Basic Docker part of your command-line for the GATK should be:
 
 ```
-docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk AddOrReplaceReadGroups -I /gatk/Module2/Processing/normal.bam -O /gatk/Module2/Processing/normal.rg.bam --RGID normal_lane1 --RGLB normal_lane1 --RGSM normal --RGPL ILLUMINA --RGPU Illumina
+docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk
+
+```
+
+I will assume this portion in the command-lines below and replace that with \[docker gatk\]. Remember that the \[\] here is not meant to by typed literally, this is indicating a variable where you will replace it with the appropriate value, like the docker associated command-line above.
+
+```
+[docker gatk] AddOrReplaceReadGroups -I /gatk/Module2/Processing/normal.bam -O /gatk/Module2/Processing/normal.rg.bam --RGID normal_lane1 --RGLB normal_lane1 --RGSM normal --RGPL ILLUMINA --RGPU Illumina
 ```
 You can put whatever you want in the various RG tabs you are adding. Here I am giving Read Group IDs (RGID) and lanes the same value, and specifying the data came from Lane 1 of the Flowcell. You can alter this to whatever the Lane was that the normal and tumour came from in their respective files for accuracy. I have also given it the sample name of 'normal'. In the tumour you would want to use --RGSM tumour. This will be important for variant calling later on!
 
@@ -282,7 +313,7 @@ Modify this command-line however you need to, and also modify and run again for 
 The next step runs the SetNmMdAndUqTags tool. This isn't always required, but some upstream tools in similar workflows or ways of handling and merging BAM files may mean these particular tags aren't set. I have found it to be good practice to run it here. These tags report the number of mismatches, mismatching positions, and the unique quality of our alignments compared to the reference sequence.
 
 ```
-docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk SetNmMdAndUqTags -I /gatk/CourseData/Module2/Processing/normal.rg.bam -O /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta
+[docker gatk] SetNmMdAndUqTags -I /gatk/CourseData/Module2/Processing/normal.rg.bam -O /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta
 ```
 
 #### Recalibrated Base Qualities
@@ -292,18 +323,18 @@ The Base Quality Scores that come from Illumina Sequencing data are good, but th
 The recalibration here uses some additional reference files, VCF files that contain variant information from dbSNP and GnomAD. Two databases of population allele references. This gives us locations of known polymorphisms in the human genome which is an input to the model.
 
 ```
-docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk BaseRecalibrator -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.dbsnp138.vcf --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table
+[docker gatk] BaseRecalibrator -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.dbsnp138.vcf --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table
 ```
 
 Now apply it:
 
 ```
-docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk ApplyBQSR -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/Processing/normal.fixed.bam --bqsr-recal-file /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table -O /gatk/CourseData/Module2/BAMs/normal.recalibrated.bam
+[docker gatk] ApplyBQSR -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/Processing/normal.fixed.bam --bqsr-recal-file /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table -O /gatk/CourseData/Module2/BAMs/normal.recalibrated.bam
 ```
 
 At this point we have a complete and pre-processed BAM file ready for variant calling!
 
-**Question:** We changed the output here for the final recalibrated BAM file as this is a 'final' output. Why is this good practice?
+> **Question:** We changed the output here for the final recalibrated BAM file as this is a 'final' output. Why is this good practice?
 
 ### Putting Everything Together
 Running commands one-by-one on the command-line is the best way to learn the ins and outs of a process and how to use specific tools. However, if we are going to do this more than once we want our work to be *reproducible*, which means putting things together as a script that we can simply configure and run whenever we need it. When you hear a bioinformatician refer to a *pipeline* that is all they really mean. A bit of code infrastructure that automates a process, taking inputs through a series of steps to get a final output.
@@ -359,24 +390,50 @@ There are two easy ways to navigate to particular regions of the genome in IGV. 
 
 By default IGV will show base pairs where the base in the sequencing read and that in the reference genome match as just a grey block. Mismatches will have the base shown and coloured, insertions in the read show up as an **I** character, and deletions as a **-** character.
 
-**Question:**: What genes of interest were included in the regions selected for your BAM files? Which of these are tumour suppressors and which are oncogenes?
+> **Question:**: What genes of interest were included in the regions selected for your BAM files? Which of these are tumour suppressors and which are oncogenes?
 
 You will use IGV more heavily tomorrow, epsecially when reviewing data for the Cases!
 
 ### Somatic Variant Calling with MuTect2
+> **If you have time, you can continue on with Variant Calling and Variant Annotation, which will get you started for Day 2!**
+
 Once both your tumour and normal Recalibrated BAM files are produced, you are ready for Variant Calling. However, the simple test data we have used so far won't produce any mutation calls. After all we only aligned 100,000 sequencing reads across the entire human genome. Instead we will use the more complete BAMs you investigated with IGV above for variant calling.
 
-```
-docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk --java-options "-Xmx12G" Mutect2 -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/BAMs/C-GIAB.tumour.regions_of_interest.bam -I /gatk/CourseData/Module2/BAMs/C-GIAB.normal.regions_of_interest.bam -normal normal --germline-resource /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.regions_of_interest.vcf.gz
-```
+MuTect2 is included in the GATK package and is run the same way, with the same docker-associated code on your command-line. Variant calling is more resource intensive on the RAM usage side, and so the java machine in the docker container needs to be given some more specific options to make use of the RAM. In this case we are going to give it 12 gigs of RAM (our virtual machine has 16) with the `--java-options "-Xmx12G"`.
+
+MuTect2 needs a Reference FASTA file like we have used previously, and of course when running any sort of genomics analysis you will always use the exact same reference throughout.
+
+MuTect2 can be run in a few different modes, and is a somatic variant caller optimized for tumour data. It can run with a tumour-only or with matched tumour-normal data. This second option is what we will be using. To run in this mode you specify the `-I` input file flag twice, giving it both the tumour BAM and the normal BAM, and then use the `-normal` flag to give it the name of the normal sample. This needs to match the Sample (SM) Read Group tag you have during the GATK pre-processing steps early, in this case 'normal' was the string we used.
+
+MuTect2 can be run with lots of different options (see [here](https://gatk.broadinstitute.org/hc/en-us/articles/5358911630107-Mutect2)).
+
+In this case we will also be giving it a germline resource VCF with the `--germline-resource` command-line parameter and are using the GnomAD set here, which contains allele frequency information for polymorphisms and mutations seen in tens of thousands of genomes.
 
 ```
-docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk --java-options "-Xmx12G" FilterMutectCalls -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -V /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.regions_of_interest.vcf.gz -O /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.filtered.regions_of_interest.vcf.gz
+[docker gatk] --java-options "-Xmx12G" Mutect2 -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/BAMs/C-GIAB.tumour.regions_of_interest.bam -I /gatk/CourseData/Module2/BAMs/C-GIAB.normal.regions_of_interest.bam -normal normal --germline-resource /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.regions_of_interest.vcf.gz
 ```
+
+After running baseline somatic variant calling with MuTect2 we can also apply the [FilterMutectCalls](https://gatk.broadinstitute.org/hc/en-us/articles/5358835082779-FilterMutectCalls) program. This can incorporate various additional pieces of information for Read Bias artifacts when dealing with FFPE data or information about potential contamination. We have neither of those here but will run FilterMuTectCalls anyway.
+
+> **Note:** The output file name provided here will overwrite the existing VCF in the VCFs directory. You should change its name to be unique, or output it to the workspace directory!
+
+```
+[docker gatk] --java-options "-Xmx12G" FilterMutectCalls -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -V /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.regions_of_interest.vcf.gz -O /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.filtered.regions_of_interest.vcf.gz
+```
+
+The output here is now a 'complete' VCF.
 
 ### Variant Annotation with VEP
-Called variants on their own are not generally the most useful.
+Called variants on their own are not generally the most useful. If we want to gather information like what Gene a mutation is in, what the impact of a mutation is at the transcript and protein levels, whether a mutation is a known polymrphism in the GnomAD database or a known pathogenic mutation in ClinVar, we have to add annotations.
+
+The annotator we will use here is VEP (Variant Effect Predictor) from Ensembl ([Documentation](https://useast.ensembl.org/info/docs/tools/vep/index.html)).
+
+We won't be using a docker container here, but something similar called apptainer. You can see it works much the same way, although the `-B` flags here are used instead of `-v`.
+
+Here we are going to annotate using a GRCh38 reference set, and are telling VEP to give us 'everything'. VEP can be modified with all sort sof plug-ins and modules that go beyond what is added here, but this will be plenty to get you started looking at annotations!
 
 ```
-apptainer exec -B $(pwd):/data -B /media/cbwdata/CourseData/tools/vep_data:/cache ~/CourseData/tools/ensembl-vep.sif vep -i /data/test_panel.GRCh38.minimal.vcf -o /data/test_panel_GRCh38.minimal.vep.txt --cache --dir_cache /cache --species homo_sapiens --assembly GRCh38 --everything
+apptainer exec -B /home/ubuntu/CourseData/Module2/VCFs:/data -B /media/cbwdata/CourseData/tools/vep_data:/cache ~/CourseData/tools/ensembl-vep.sif vep -i /data/test_panel.GRCh38.minimal.vcf -o /data/test_panel_GRCh38.minimal.vep.txt --cache --dir_cache /cache --species homo_sapiens --assembly GRCh38 --everything
 ```
+
+## Answers to Guiding Questions
