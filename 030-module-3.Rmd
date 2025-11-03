@@ -1,6 +1,1270 @@
-# Module 3
+# Module 3 Lab: Clinical Variant Interpretation with Franklin
 
-## Lecture
+Summary: This lab focuses on clinical variant interpretation using the Franklin platform, emphasizing ACMG classification criteria. Participants will create accounts, navigate the interface, and classify variants from a hereditary cancer case. Key learning objectives include distinguishing automated predictions from manual curation, interpreting population frequency data, and understanding the classification process. The lab highlights the importance of human input in variant interpretation despite automation, the role of phenotype matching, and the value of literature curation in clinical settings.
+Text: Clinical Variant Interpretation with Franklin
+
+## Learning Objectives
+
+By the end of this lab, you will:
+
+- Navigate a clinical variant interpretation platform used in diagnostic laboratories
+- Apply ACMG classification criteria to real variants
+- Distinguish between automated predictions and manual curation requirements
+- Interpret population frequency data, in silico predictions, and clinical evidence
+
+## Lab Overview
+
+This lab shifts focus from computational variant calling to clinical interpretation. You've seen how variants are detected algorithmically, and now you'll learn how clinical labs determine which variants matter.
+
+We're using a hereditary cancer case because these variants illustrate key principles that apply to both germline and somatic contexts. The variant classification process you'll practice here is what molecular geneticists perform daily when reporting diagnostic results.
+
+**Why Franklin?** Franklin (by Genoox, now Qiagen) offers free academic accounts with full VCF upload capability. More importantly, it provides surprisingly accurate automated ACMG code assignment. The platform applies the same evidence rules used in certified diagnostic labs, which makes it a realistic training environment.
+
+You'll review each assigned ACMG criterion, adjust evidence strength when appropriate, and understand why certain variants remain difficult to classify.
+
+## Part 1: Account Creation and Platform Navigation
+
+### Creating Your Franklin Account
+
+**Step 1: Access the registration page**
+
+Navigate to: [https://franklin.genoox.com](https://franklin.genoox.com)
+
+Click "Sign Up" in the upper right corner.
+
+**Step 2: Register with your institutional email**
+
+Fill in the registration form:
+
+- **Email:** Use your university/institutional email (required for academic access)
+- **Password:** Standard requirements (8+ characters, mixed case, number)
+- Click "Continue"
+- **First and Last Name:** Your actual name (this appears in case reports)
+- **Organization Name:** Your affiliated organization (You can create any)
+- **Professional Role:** Select what fits better for you
+
+**Important:** Check your email for a verification link. Some email systems flag this as spam, so check your junk folder if you don't see it within 5 minutes.
+
+You now have access to the full platform. Franklin operates on a "freemium" model (the free tier includes unlimited cases and full ACMG classification tools, which is everything we need for this workshop).
+
+### Platform Navigation: Understanding the Main Interface
+
+When you first log in, Franklin displays the **Search page** as your landing screen. The interface is organized into three main sections accessible via the top navigation banner.
+
+**Top Navigation Tabs:**
+
+**1. Search (default landing page)**
+
+- Central search functionality for querying variants across all accessible cases
+- Allows you to search by variant nomenclature, gene name, or genomic coordinates
+- Returns results from your cases and (if enabled) the community variant database
+
+**2. Knowledge Base**
+
+- Contains pre-defined gene panels for common clinical indications
+- Allows creation of custom gene panels for research or clinical use
+- Links to curated gene-disease relationships and dosage sensitivity information
+- Useful for batch analysis of variants within specific gene sets
+
+**3. My Cases**
+
+- Lists all cases you've created or been granted access to
+- Shows case status (In Progress, Classified, Reviewed)
+- Searchable by patient identifier, gene, or variant
+- Supports team-based workflows (see below)
+
+**Collaborative Features:**
+
+Franklin supports team-based variant interpretation. You can:
+
+- Invite colleagues to review specific cases
+- Assign roles (curator, reviewer, approver)
+- Track who made classification decisions and when
+- Add internal comments and discussion threads
+
+This is particularly valuable in clinical settings where variant interpretation requires consensus among multiple specialists.
+
+### Creating and Searching for Variants
+
+**The Central Search Bar**
+
+The search interface occupies the middle of the screen. Here you can manually enter variants or search existing classifications.
+
+**Understanding Variant Nomenclature:**
+
+Click on "Examples" near the search bar to view supported nomenclature formats:
+
+- **SNP (Single Nucleotide Variants):** Uses HGVS notation
+    - Example: `MSH6:c.4082delA`
+    - Example: `chr2:47641560-C-T`
+- **CNV (Copy Number Variants):** Genomic coordinates format
+    - Example: `DEL:chr1-216138600-216270555`
+    - Example: `arr\[GRCh37\] 7q31.2(116714478_116715973)x1`
+- **ROH (Runs of Homozygosity):** Region-based notation
+    - Used for consanguinity assessment or uniparental disomy detection
+
+**Reference Genome Build Selection:**
+
+Critical setting located next to the search bar:
+
+- Dropdown menu displays current reference build (default may be hg19 or hg38)
+- **For this workshop: Ensure "hg19" (GRCh37) is selected**
+- Mismatched genome builds will cause variant coordinates to be incorrect
+
+**Case Type Selection:**
+
+Next to the reference build selector, choose the variant analysis framework:
+
+- **Germline:** Applies ACMG/AMP germline variant classification criteria (what we'll use today)
+- **Somatic:** Applies AMP/ASCO/CAP somatic variant interpretation guidelines (for cancer tumour variants)
+
+The case type determines which evidence codes and classification rules Franklin applies. For hereditary cancer variants, select "Germline" even though the gene is cancer-related.
+
+### Creating New Cases
+
+Below the search bar, three options allow case creation from different data types:
+
+**1. CMA (Chromosomal Microarray Analysis)**
+
+- Upload microarray data files (.CEL, .CHP, or processed CNV calls)
+- Generates CNV calls and quality metrics
+- Primarily used for constitutional disorders and developmental delay cases
+
+**2. Report**
+
+- Manual entry of a single variant or small variant list
+- Useful when you have variant calls from external pipelines
+- Requires HGVS notation or genomic coordinates
+
+**3. VCF**
+
+- Upload variant call format files from sequencing pipelines
+- Supports both single-sample and multi-sample VCFs
+- Franklin automatically filters and prioritises variants
+- **This is the method we'll use at the end of this section.** If you prefer to start uploading your VCF now, you can skip ahead to Part 3, Step 2 for detailed instructions on case creation and file upload.
+
+### Understanding Franklin's Automated Classification Logic
+
+Franklin scans multiple databases and assigns ACMG evidence codes based on specific thresholds defined in the 2015 ACMG/AMP guidelines:
+
+- **Population frequency (PM2, BA1, BS1):** Queries gnomAD, ExAC, 1000 Genomes. If a variant is absent in these databases, it automatically assigns PM2 (moderate evidence of pathogenicity). If frequency exceeds 5%, it assigns BA1 (benign standalone).
+- **Computational predictions (PP3, BP4):** Aggregates SIFT, PolyPhen-2, CADD, REVEL, and others. If multiple algorithms agree on "deleterious," it suggests PP3. If they agree on "benign," it suggests BP4.
+- **Functional consequence (PVS1, PM4):** Recognises null variants (nonsense, frameshift, canonical splice sites) in loss-of-function intolerant genes and assigns PVS1 (very strong pathogenicity). In-frame indels in critical regions get PM4.
+- **Known pathogenic variants (PS1, PM5):** Cross-references ClinVar. If your variant matches a known pathogenic entry at the same codon or amino acid, Franklin flags PS1 or PM5.
+
+**What requires manual curation:**
+
+- **Segregation data (PP1, BS4):** You need to enter family history and co-segregation evidence manually.
+- **Functional studies (PS3, BS3):** If you have lab data showing altered protein function, you add this evidence yourself.
+- **Allelic data (PM3, BP2):** Whether a variant is in trans with a known pathogenic variant (for recessive conditions).
+- **De novo status (PS2, PM6):** Requires parental testing confirmation, which you document manually.
+- **Clinical correlation (PP4):** Patient phenotype matching gene-disease associations.
+
+Franklin's automation handles about 60-70% of the evidence gathering. The remaining 30-40% depends on clinical context that only you can provide. This is why variant interpretation remains a skilled professional task despite computational advances.
+
+## Part 2: Exploring Variant Classification
+
+Before uploading, you start working on your case-specific VCF file, we'll quickly explore Franklin's classification workspace using a demonstration variant. This walkthrough uses an MSH2 variant to show you the complete evidence evaluation process.
+
+### Step 1: Searching for a Variant
+
+To demonstrate Franklin's classification interface, we'll search for an existing variant in the MSH2 gene (a mismatch repair gene associated with Lynch syndrome).
+
+**Procedure:**
+
+1. Ensure you're on the Search page (default landing screen)
+2. In the central search bar, type: `MSH6:c.4082del`
+3. Verify your settings before searching:
+    - **Reference build:** hg19 (GRCh37)
+    - **Case type:** Germline
+4. Press Enter or click the search button.
+
+Franklin will query its database and display the variant classification page if this variant exists in the system. If you're creating a new variant assessment, you would instead click "Create New Case" and the platform would generate a fresh classification workspace.
+
+<aside>
+💡
+
+**Note:** The variant notation here uses HGVS coding sequence nomenclature (c. prefix indicates coding DNA). Franklin accepts multiple notation formats, but HGVS is the clinical standard.
+
+</aside>
+
+### Step 2: Understanding the Classification Workspace
+
+When Franklin loads a variant, the page organises into several key sections. Understanding this layout helps you efficiently navigate the evidence.
+
+**Page Header (Top Section):**
+
+- **Variant identifier:** Displays the genomic coordinates, reference/alternate alleles, and HGVS notation
+- **Gene and transcript:** Shows which gene is affected and which transcript Franklin is using (typically the MANE Select transcript)
+- **Suggested classification:** Franklin's automated prediction based on accumulated evidence (VUS/Likely Pathogenic/Pathogenic/Likely Benign/Benign)
+- **Classification scale:** A visual "thermometer" showing where the variant falls on the benign-to-pathogenic spectrum
+
+**Main Content Tabs:**
+
+The workspace has multiple tabs, but you'll primarily use:
+
+- **Franklin ACMG Classification:** The main evidence evaluation workspace (this is where you'll spend most of your time)
+- **Variant Assessment:** Additional computational predictions and population frequency details
+- **Publications:** Linked literature from PubMed
+- **Gene Assessment:** Gene-level information (constraint scores, disease associations, dosage sensitivity)
+
+### Step 3: Reviewing Automatically Assigned ACMG Codes
+
+The Franklin ACMG Classification tab displays all 28 ACMG evidence criteria organised into categories. Each criterion shows:
+
+- **Evidence code:** (e.g., PM2, PVS1, PP3, BA1)
+- **Description:** Brief explanation of what the code represents
+- **Status:** Whether Franklin automatically assigned this code
+- **Strength:** The evidence level (Very Strong, Strong, Moderate, Supporting)
+
+**Understanding the Evidence Display:**
+
+Franklin uses colour coding to indicate code status:
+
+- **Red badge (Pathogenic codes like PM2, PVS1):** Assigned and contributing points toward pathogenic classification
+- **Green badge (Benign codes like BA1, BP4):** Assigned and contributing points toward benign classification
+- **Grey/collapsed codes:** Not automatically assigned; may require manual evaluation
+
+The **"Unmet"** codes section at the bottom lists criteria that Franklin could not evaluate automatically. These typically require clinical information that you must provide manually.
+
+### Step 4: Deep Dive into Population Data (PM2 Example)
+
+Let's examine how Franklin evaluates population frequency, one of the most commonly assigned codes. Scroll down in the Franklin ACMG Classification tab until you find the **"Population Data"** evidence category. You should see the PM2 code if this variant is rare: **PM2 (Moderate Evidence of Pathogenicity)** - "Absent from controls (or at extremely low frequency) in gnomAD Exome or Genome or Exome Sequencing Project"
+
+Click **"See Details"** so Franklin shows you the evidence used:
+
+- gnomAD maximal non-founder subpopulations frequency: 0.0%
+- gnomAD maximal founder subpopulations frequency: 0.0%
+- Recommended PM2 frequency threshold for gene: 0.05% (this is gene-specific)
+- Most frequent known pathogenic variant in gene: Lists examples with their frequencies
+
+**Why does Franklin assign PM2 here?**
+
+The variant is absent (frequency = 0.0%) in all gnomAD populations. The ACMG guidelines state that variants absent from large population databases can be assigned PM2, with the caveat that the frequency threshold must be appropriate for the gene's disease mechanism and inheritance pattern.
+
+### Step 5: Editing Evidence Strength
+
+Franklin's automated assignments are starting points. Your role is to review each assigned code and decide whether you agree with both the code assignment and its strength.
+
+**How to adjust evidence:**
+
+1. **Locate an assigned ACMG code** (e.g., PM2 with the red badge)
+2. **Click on the "Edit" section of the code** to expand its detail view
+3. You'll see two main controls:
+    - **Met/Unmet toggle:** Switches the code on or off, and determines whether the code contributes to the classification (ON) or not (OFF).
+    - **Strength selector:** Dropdown menu to adjust evidence weight. Some ACMG codes allow strength adjustments. For example, PM2 (Moderate) can potentially be adjusted to:
+        - **Supporting (PP2-like):** If frequency is at the threshold boundary
+        - **Moderate (PM2):** Standard assignment (Genoox's suggestion)
+        - **Strong (PS2-like):** Generally not applicable for frequency evidence alone
+
+**The "Preview" Feature:**
+
+After you adjust any evidence code, Franklin displays a **"Preview"** section showing:
+
+- **Suggested classification:** How the classification changes with your edit
+- **Visual scale:** Updated position on the benign-to-pathogenic thermometer
+- **Point total:** Recalculated evidence score
+
+This real-time feedback helps you understand how each piece of evidence contributes to the final classification.
+
+### Step 6: Exploring Additional Evidence Categories
+
+Beyond population frequency, Franklin organises evidence into several other categories. Scroll through the Franklin ACMG Classification tab to explore:
+
+**Effect on Protein (Functional Consequence):**
+
+- **PVS1:** Null variant (nonsense, frameshift, canonical splice site) in a gene where loss of function causes disease
+- **PM4:** Protein length changes (in-frame deletions/insertions in non-repeat regions)
+
+Franklin automatically detects variant consequences using transcript annotations. For PVS1, it checks:
+
+- Whether the gene is known to cause disease via loss of function
+- Whether the variant truly disrupts protein function (not all nonsense variants do due to alternate transcripts or rescue mechanisms)
+- Whether the variant affects a critical exon
+
+**In Silico Predictions:**
+
+- **PP3:** Multiple computational algorithms predict deleterious effect
+- **BP4:** Multiple computational algorithms predict benign effect
+
+Franklin aggregates predictions from SIFT, PolyPhen-2, REVEL, CADD, and others. The criterion is met when the majority of algorithms agree. You can expand this section to see individual tool scores.
+
+<aside>
+⚠️
+
+**Important caveat:** In silico predictions should not be used as standalone evidence. They're supporting evidence that strengthens other findings but cannot drive classification alone (especially for VUS to Likely Pathogenic upgrades).
+
+</aside>
+
+## Part 3: Uploading and Classifying Your Case VCF (45 minutes)
+
+Now that you've explored Franklin's classification interface, you'll upload your own VCF file and work through a complete variant interpretation workflow.
+
+### Step 1: Download Your Case Data
+
+Before creating a case in Franklin, you need to download the VCF file from the JupyterHub environment.
+
+**Procedure:**
+
+1. Return to your JupyterHub session (the browser tab with the file browser)
+2. Navigate to the `Module3/Hereditary` directory
+3. Locate the file: **`hereditary_partial.hard-filtered.vcf.gz`**
+4. Right-click on the file and select **"Download"**
+5. Save it to a location you can easily access (e.g., your Desktop or Downloads folder)
+
+<aside>
+💡
+
+**Why this file?** The `hereditary_partial.hard-filtered.vcf.gz` file contains variant calls from a hereditary cancer case, already filtered to remove low-quality calls. This is a realistic representation of what you'd receive from a sequencing core facility or bioinformatics pipeline. The "partial" designation means we've subset to a manageable number of variants for this exercise.
+
+</aside>
+
+### Step 2: Create a New Case in Franklin
+
+Return to your Franklin browser tab and navigate to the **Search page** (the default landing screen).
+
+**Creating the case:**
+
+1. In the centre of the page, you'll see three case creation options. Click on **"VCF"** (the third option)
+2. Franklin opens the case creation form with several sections to complete
+
+**Case Configuration Form:**
+
+**Case Type Selection:**
+
+- Select **"Inherited Disease"** (this applies germline ACMG classification rules)
+- Choose **"Single Case"** (we're analysing one individual, not a family trio or cohort)
+
+**Case Information Section:**
+
+You'll see several fields to fill in. Here's what to enter:
+
+- **Case Name (required):** Choose something you'll recognise as your practice exercise
+    - Examples: `Module3_Exercise`, `Hereditary_Workshop`, `Your_Name_VCF_Lab`
+    - Avoid generic names like "Test" or "Case1" if multiple people are using the same account
+- **Patient ID (optional):** You can leave this blank or use a placeholder like `Patient_001`
+- **Gender (optional):** Select any option (this affects X-linked variant interpretation, but we won't focus on that today)
+- **Date of Birth (optional):** Can be left blank for this exercise
+- **Referring Physician (optional):** Can be left blank
+- **Clinical Indication (optional):** If you want to practise, you could enter "Hereditary cancer syndrome" or similar
+
+<aside>
+⚠️
+
+**Important:** The case name is the only field that truly matters for this exercise. Everything else is optional metadata that would be relevant in a clinical setting. Don't spend time overthinking these fields, since you can always modify case details later.
+
+</aside>
+
+**VCF File Upload:**
+
+- Scroll to the bottom of the case creation form
+- You'll see a file upload section labelled **"VCF File"**
+- Click **"Choose File"** or drag-and-drop your downloaded `hereditary_partial.hard-filtered.vcf.gz` file
+- Franklin accepts gzipped VCF files directly (no need to decompress)
+
+**Reference VCF & Genome Verification:**
+
+- Before clicking "Create Case," verify the reference genome selection is **hg19 (GRCh37)**
+- This should match the genome build used in the variant calling pipeline
+
+- Check the VCF file format version (should be VCFv4.2)
+```
+    zgrep "^##fileformat" hereditary_partial.hard-filtered.vcf.gz
+```
+
+- Check the reference genome or contig naming (should mention hg19 or GRCh37)
+```
+    zgrep "^##reference" hereditary_partial.hard-filtered.vcf.gz
+```
+
+**Create the Case:**
+- Click **"Create Case"** at the bottom of the form
+- Franklin will upload your VCF and begin processing (this typically takes 30-60 seconds)
+
+<aside>
+⏸️
+
+**Break Time:** While your VCF uploads and processes, take a short break. When you return, we'll navigate to your case and begin the variant classification workflow.
+
+</aside>
+
+## Part 4: Variant interpretation
+
+### Step 3: Navigating to Your Case
+
+Locate your newly created case in Franklin.
+
+**Procedure:**
+
+1. Click on the **"My Cases"** tab in the top navigation bar
+2. You should see your case listed with the name you chose (e.g., `Module3_Exercise_Germline`)
+3. The case status will show as **"In Progress"** with a count of variants detected
+4. Click on the case name to open the variant workbench
+
+Franklin will display the variant classification workspace you saw in Part 2, but now populated with variants from your uploaded VCF file.
+
+### Step 4: Reviewing BRCA2 Variants in Your Case
+
+Your VCF file contains two clinically relevant BRCA2 variants that we'll focus on for this exercise. In your **Workbench** section, you should see: 
+
+- **BRCA2:c.1813dup** (also written as c.1813dupA or p.Ile605Asnfs*4)
+- **BRCA2:c.1310_1313del** (also written as c.1310_1313delAAGA or p.Glu437Valfs*22)
+
+<aside>
+💡
+
+**Why these variants?** Both are frameshift variants in BRCA2, a gene associated with hereditary breast and ovarian cancer syndrome. Frameshift variants typically trigger PVS1 (very strong evidence of pathogenicity) because they create premature stop codons and result in loss of protein function.
+
+</aside>
+
+Click on **BRCA2:c.1813dup** to open its classification workspace (Use the arrow head to the right of the variant bar). Take note of:
+
+- **Automatically assigned ACMG codes:** Franklin should have assigned several codes based on the variant's properties
+- **Suggested classification:** Check whether Franklin suggests this as Pathogenic, Likely Pathogenic, or VUS
+- **Population frequency:** Review the PM2 evidence if assigned
+- **Functional consequence:** Look for PVS1 assignment (null variant in a loss-of-function gene)
+
+Repeat this process for **BRCA2:c.1310_1313del** and compare the evidence profiles. Do both variants receive similar classifications? Are there any differences in the evidence codes assigned?
+
+### Step 5: Adding Patient Phenotype Information
+
+Clinical variant interpretation is significantly enhanced when you provide patient phenotype data. Franklin uses Human Phenotype Ontology (HPO) terms to prioritize variants in genes associated with the patient's clinical features.
+
+**Understanding the Phenotype JSON File:**
+
+Your course materials include a file called **`phenotips_data.json`** located in `CourseData/Module3/Hereditary/`. This file was exported from a clinical phenotyping system and contains structured patient information.
+
+**Extracting Relevant HPO Terms:**
+
+1. Open the `phenotips_data.json` file in a text editor (or view it in the Jupyter notebook)
+```
+    less phenotips_data.json
+```
+2. Look for the **"features"** section, which contains a list of phenotypic observations
+3. For each feature, check the **"observed"** field:
+    - `"observed": "yes"` → Include this HPO term
+    - `"observed": "no"` → Do NOT include this HPO term
+
+**Expected HPO Terms to Extract:**
+
+From the JSON file, you should find the following observed phenotypes:
+
+- **HP:0100615** - Ovarian neoplasm
+- **HP:0032317** - Family history of cancer
+- **HP:0012378** - Fatigue
+- **HP:0000819** - Diabetes mellitus
+
+You can also extact relevant phenotype terms using a quick one-line command:
+```
+jq -r '.features[] | select(.observed=="yes") | "\(.id) - \(.label)"' phenotips_data.json
+```
+Here is a breakdown of the code:
+
+    jq : A small tool for reading and filtering JSON files.
+    -r :Raw output (no quotes around strings).
+    .features[]	: Start at the top of the JSON, then iterate over each item in the features list.
+    select(.observed=="yes")  :  Keep only features where "observed" equals "yes".
+    "\(.id) - \(.label)"   : Print the HPO ID and its label on one line.
+    phenotips_data.json	: The JSON file you’re reading.
 
 
-## Lab
+<aside>
+⚠️
+
+**Important:** Do NOT add HP:0001737 (Pancreatic cysts). This has `"observed": "no"` in the JSON file, meaning the patient does NOT have this feature.
+
+</aside>
+
+**Adding Phenotypes to Your Franklin Case:**
+
+1. In your case view, locate the **"Phenotype"** section (typically in the right sidebar or case details panel)
+2. Click **"Add/**Remove **Phenotype"** or the **"+"** icon
+3. In the search box, enter either the HPO ID (e.g., `HP:0100615`) or the phenotype name (e.g., `Ovarian neoplasm`)
+4. Franklin will provide autocomplete suggestions - select the correct term
+5. The term will be added to your phenotype list
+6. Repeat for all four observed phenotypes listed above
+
+**Adding Patient Demographics:**
+
+While in the case details, you can also add:
+
+- **Age:** 45 years old
+- **Sex:** Female
+
+**How Phenotypes Affect Variant Prioritization:**
+
+After adding the HPO terms, return to your variant list. You should notice:
+
+- The **"Phenotype Match"** column will show scores indicating how well each variant's gene matches the patient's clinical features
+- Franklin may automatically filter or deprioritize variants in genes unrelated to the patient's presentation.
+
+### Step 6: Exploring Case-Level Quality Control and Variant Filtering
+
+Before diving into detailed variant interpretation, it's valuable to explore the additional information Franklin provides about your case. Understanding these features will help you assess data quality and efficiently filter variants.
+
+**Quality Control Tab:**
+
+Navigate to the **Quality Control** tab in your case view. You'll likely see several warnings or quality metrics displayed.
+
+<aside>
+ℹ️
+
+**Important context:** Because you're working with a partial VCF file (subset of variants from the complete case), some quality calculations may not be accurate. However, it's still important to understand what quality parameters Franklin monitors in a complete clinical workflow.
+
+</aside>
+
+**Key Quality Metrics to Review:**
+
+**1. Sex Detection and Ploidy Parameters (not apploicable to this case)**
+
+Franklin analyzes the ratio of X and Y chromosome variants to determine biological sex. This is critical for:
+
+- Verifying sample identity (does the detected sex match the clinical record?)
+- Interpreting X-linked variants correctly
+- Detecting sample mix-ups or contamination
+
+For example, if the case metadata says "Female" but Franklin detects XY chromosomes, this indicates a potential sample labelling error.
+
+**2. Average Variant Depth**
+
+This metric shows the mean read depth across all called variants. For your case, this should be approximately **140×** coverage, which is typical for exome sequencing.
+
+Why this matters:
+
+- **Low average depth (<20×):** May miss variants, especially heterozygous ones
+- **Expected range (100-150×):** Appropriate for clinical exome analysis
+- **Very high depth (>500×):** Typical for targeted panels, not relevant here
+
+**3. Other Quality Indicators**
+
+Franklin may also display:
+
+- **Variant-to-reference ratio:** Helps detect contamination
+- **Transition/transversion ratio:** Should be ~2.0-2.1 for exomes (genome-wide quality metric)
+- **Coverage uniformity:** Percentage of target regions meeting minimum depth thresholds
+
+<aside>
+⚠️
+
+**Clinical practice note:** In a real diagnostic workflow, you would carefully review all quality warnings before proceeding with interpretation. Any failures would require troubleshooting or repeat analysis.
+
+</aside>
+
+**Exploring the Variant Tab:**
+
+Now navigate to the **Variants** tab on the left side of your case view. This is where you'll see a significant difference from the Workbench.
+
+**Workbench vs. Variants Tab:**
+
+- **Workbench:** Shows only variants likely to be clinically reportable (typically classified as Pathogenic, Likely Pathogenic, or clinically relevant VUS)
+- **Variants Tab:** Displays **all variants** present in your VCF file, including benign polymorphisms and low-quality calls that passed initial filtering
+
+**Understanding the Filter Panel:**
+
+On the left side of the Variants tab, Franklin provides comprehensive filtering options. These filters allow you to narrow down variants based on various criteria:
+
+**1. Phenotype Filters**
+
+If you've added HPO terms (as you did in Step 5), you'll see a **Phenotypes** filter section at the top. You can:
+
+- Filter to show only variants in genes associated with your patient's phenotypes
+- This dramatically reduces the variant list to clinically relevant candidates
+
+**2. Franklin Classification Filter**
+
+One of the most useful filters for clinical workflows:
+
+- Click on the **"Franklin Classification"** filter
+- Select **"Pathogenic"** to see only variants Franklin suggests as Pathogenic
+- You should see your two BRCA2 frameshift variants appear
+
+Try toggling between different classification categories (Pathogenic, Likely Pathogenic, VUS, Likely Benign, Benign) to see how the variant list changes.
+
+**3. Additional VCF-Based Filters**
+
+Franklin exposes all the information encoded in your VCF file as filterable parameters:
+
+- **Variant Type:** SNV, insertion, deletion, complex
+- **Genomic Region:** Exonic, intronic, splice site, UTR
+- **Gene:** Filter by specific gene names
+- **Quality Metrics:** Depth, quality score, allele fraction
+- **Population Frequency:** Filter by gnomAD frequency thresholds
+- **Consequence:** Missense, nonsense, frameshift, synonymous
+- **Inheritance Pattern:** Match to disease inheritance models
+
+**Practical Exercise:**
+
+Try the following filtering combinations to see how they affect your variant list:
+
+1. **Filter by Franklin Classification = "Pathogenic"**
+    - Result: Should show your two BRCA2 frameshift variants
+2. **Filter by Phenotype = "Ovarian neoplasm"**
+    - Result: Should prioritise variants in genes associated with ovarian cancer
+3. **Filter by Variant Type = "Deletion"**
+    - Result: Shows only deletion variants, including BRCA2:c.1310_1313del
+
+### Step 7: Deep Dive into Variant Classification: BRCA2:c.1813dup
+
+Now that you've explored the case-level features, let's perform an interpretation of one of your BRCA2 variants. We'll use **BRCA2:c.1813dup** as our example, though you can apply the same process to any variant in your case.
+
+**Opening the Detailed Variant View:**
+
+1. Navigate back to your **Workbench** tab
+2. Locate **BRCA2:c.1813dup** in your variant list
+3. Click anywhere on the variant bar **EXCEPT** the arrow icon on the right. It should open the detailed variant assessment view
+
+Franklin will load a variant detail page with multiple tabs and information panels (similar to what you saw with the initial example).
+
+### Reviewing the Franklin ACMG Classification
+
+The first tab you'll see is **Franklin ACMG Classification**. This is where you evaluate the automatically assigned evidence codes and understand how they contribute to the classification. The thermometer position is calculated based on the cumulative strength of evidence codes assigned. For BRCA2:c.1813dup (a frameshift variant), you should see the marker positioned in the **Pathogenic** range.
+
+**ClinGen Gene-Specific Guidelines:**
+
+Below the thermometer, you'll notice a Franklin Highlight section stating: **"ClinGen has gene-specific guidelines for BRCA2".** Click on this link to access the ClinGen Expert Panel specifications for BRCA2. This is important because:
+
+- Different genes have different tolerances for variation
+- Some ACMG codes may not apply to certain genes or disease mechanisms
+- Evidence strength may be adjusted based on gene-disease relationships
+- Specific code combinations may be recommended or cautioned against
+
+**What you'll find in the ClinGen BRCA2 guidelines:**
+
+When you click through to ClinGen, scroll down to review:
+
+1. **Gene-disease relationship:** BRCA2 and hereditary breast-ovarian cancer (HBOC)
+2. **Recommended modifications to ACMG criteria:**
+    - Which codes are particularly informative for BRCA2
+    - Any codes that should NOT be used
+    - Strength adjustments for specific evidence types
+3. **Code-by-code specifications:** Detailed guidance on applying each ACMG criterion to BRCA2 variants
+
+<aside>
+⚠️
+
+**When to consult gene-specific guidelines:** These are particularly valuable when you have borderline classifications (e.g., a VUS that's close to Likely Pathogenic, or a Likely Pathogenic that might be upgraded to Pathogenic). The expert panel guidance can provide the justification needed for appropriate classification.
+
+</aside>
+
+**Reviewing Assigned ACMG Codes:**
+
+Scroll through the Franklin ACMG Classification tab and review each assigned code. For BRCA2:c.1813dup, you should see codes like:
+
+- **PVS1:** Null variant in a gene where loss of function is a known disease mechanism
+- **PM2:** Absent from population databases (or extremely rare)
+- **PP3:** Multiple computational predictions suggest a deleterious effect (if applicable to frameshift context)
+
+Take time to expand each code and review the supporting evidence Franklin used to make the assignment.
+
+### Exploring the Variant Assessment Tab
+
+Click on the **Variant Assessment** tab. This tab contains multiple information panels organized on the left sidebar. Each panel provides different types of evidence to support your interpretation.
+
+**1. Links**
+
+The first section provides quick access to external databases:
+
+- **rs80359306:** dbSNP reference SNP ID (click to view in NCBI dbSNP)
+- **UCSC:** Opens the UCSC Genome Browser at this variant's genomic location
+- **gnomAD:** Direct link to this variant's entry in the gnomAD database
+
+These links allow you to verify Franklin's annotations and explore additional information in the source databases.
+
+**2. Region Viewer**
+
+This interactive panel shows how other variants in the same genomic region are classified in ClinVar.
+
+**Features to explore:**
+
+- **Genomic context:** Visual representation of the BRCA2 gene region surrounding your variant
+- **ClinVar variant overlay:** Red and green markers showing pathogenic and benign variants respectively
+- **Filter buttons:**
+    - **LOF (Loss of Function):** Shows nonsense, frameshift, and splice variants
+    - **Missense:** Shows amino acid substitution variants
+    - **Non-coding and Synonymous:** Shows variants outside coding regions or with no amino acid change
+
+**Using the Region Viewer:**
+
+1. Click **LOF** to filter the view to show only loss-of-function variants like yours
+2. Observe the distribution of pathogenic (red) vs. benign (green) markers
+3. Click **"Select Track"** on the right to add additional annotation tracks (e.g., protein domains, conservation scores)
+
+<aside>
+💡
+
+**Interpretation insight:** If you see many pathogenic LOF variants clustered in this region of BRCA2, it strengthens the evidence that null variants in this part of the gene are disease-causing. Conversely, if you saw many benign LOF variants, it might suggest this region tolerates protein truncation (which is NOT the case for BRCA2).
+
+</aside>
+
+**3. Franklin Community Frequency**
+
+This section shows how many times this variant has been observed in the Franklin user community.bFor BRCA2:c.1813dup, you should see: **"80 cases - Very Rare variant in Franklin community".** This indicates that while the variant has been observed, it remains rare across Franklin's user base.
+
+<aside>
+ℹ️
+
+**Context:** Franklin Community data is distinct from gnomAD population data. Franklin users are typically clinical cases undergoing genetic testing, whereas gnomAD represents general population controls. A variant can be rare in gnomAD but relatively more common in Franklin if it's a recurrent pathogenic mutation.
+
+</aside>
+
+**4. Variant Priority**
+
+This metric assesses how likely this variant is to be clinically reportable based on:
+
+- Classification (Pathogenic/Likely Pathogenic = high priority)
+- Gene-disease association strength
+- Phenotype match (if you added HPO terms)
+
+For your BRCA2 variant with the ovarian neoplasm phenotype, this should show high priority.
+
+**5. Confidence**
+
+This section displays quality metrics from the VCF file to assess whether the variant call is reliable or potentially an artifact.
+
+**Key metrics to review:**
+
+- **Allele Fraction (AF):** For a germline heterozygous variant, expect ~50%
+    - For BRCA2:c.1813dup, you should see approximately **56% AF**
+    - This is close to the expected 50%, confirming this is likely a true heterozygous variant
+    - Deviations from 50% could indicate:
+        - Copy number changes affecting the region
+        - Subclonal mosaicism
+        - Technical artifacts or contamination
+- **Read Depth (DP):** Number of reads covering this position
+    - Higher depth = more confidence in the call
+    - For exome data, expect 100-200× depth at well-covered exons
+- **Genotype Quality (GQ):** Phred-scaled confidence in the genotype call
+    - GQ ≥20 is typically considered high confidence (99% certainty)
+
+<aside>
+✅
+
+**Quality checkpoint:** The ~56% allele fraction with high depth confirms this is a real heterozygous variant, not a sequencing artifact. You can proceed with interpretation confidently.
+
+</aside>
+
+**6. Clinical Evidence**
+
+This section links your variant to existing clinical interpretations in ClinVar.
+
+Click to expand and review:
+
+- **ClinVar classification:** How other labs have classified this variant
+- **Submission count:** How many independent labs have reported this variant
+- **Star rating:** ClinVar's confidence level based on agreement across submitters
+- **Review status:** Whether the classification has expert panel review
+
+For BRCA2:c.1813dup, you should see existing Pathogenic classifications from multiple submitters, providing strong supporting evidence.
+
+**7. Predictions**
+
+This section displays in silico algorithm predictions about the variant's functional impact.
+
+**Important context for frameshift variants:**
+
+Since BRCA2:c.1813dup is a frameshift (not a missense variant), most amino acid substitution predictors (SIFT, PolyPhen-2, etc.) are not applicable. Instead, you'll primarily see:
+
+- **SpliceAI:** Predicts whether the variant affects RNA splicing
+    - For frameshifts, splicing disruption can compound the truncation effect
+    - Check if SpliceAI predicts splice donor/acceptor gain or loss
+
+<aside>
+💡
+
+**Missense vs. Frameshift predictions:** If you were analyzing a missense variant instead, this section would show SIFT, PolyPhen-2, REVEL, CADD, and other algorithms that assess amino acid substitution consequences. For LOF variants, these tools are less informative, so Franklin appropriately shows only splice-relevant predictions.
+
+</aside>
+
+**8. Internal Frequency**
+
+This metric would show how frequently the variant appears in your own cohort or laboratory's previous cases. For this workshop exercise with a single case, this field is not applicable.
+
+In a clinical laboratory setting with hundreds of cases, this helps identify:
+
+- Recurrent pathogenic mutations
+- Technical artifacts that appear repeatedly across runs
+- Population-specific variants in your patient population
+
+**9. Population Frequencies**
+
+This critical section queries multiple population databases to determine variant rarity.
+
+**Databases queried:**
+
+- **gnomAD (primary):** Genome Aggregation Database with >140,000 individuals
+- **ExAC:** Exome Aggregation Consortium (now incorporated into gnomAD)
+- **1000 Genomes Project:** International reference dataset
+- **ESP (Exome Sequencing Project):** NHLBI dataset
+- **Population-specific databases:** TopMed, UK10K, etc.
+
+**What to look for:**
+
+For BRCA2:c.1813dup, you should see:
+
+- **gnomAD frequency: 0.0%** (absent in all populations)
+- This supports the PM2 ACMG code assignment (absent/rare in controls)
+
+**Critical interpretation rule:**
+
+- Variants with >5% frequency in any population are typically classified as Benign (BA1 code)
+- Variants with >1% frequency require careful consideration (BS1 code may apply)
+- Variants absent or extremely rare (<0.01%) support pathogenicity (PM2 code)
+
+**10. Transcripts and References**
+
+This section provides HGVS nomenclature for the variant across different transcript isoforms and reference sequences.
+
+**Information provided:**
+
+- **HGVS coding (c.):** c.1813dup (coding DNA level)
+- **HGVS protein (p.):** p.Ile605Asnfs*4 (protein level - indicates frameshift starting at isoleucine 605)
+- **Alternate nomenclature:** How this variant may be referenced in older publications
+- **Effect across transcripts:** Whether the variant affects all BRCA2 isoforms or only specific ones
+
+When searching literature for prior reports of this variant, authors may use different transcript references. This section helps you identify all possible names for the same variant.
+
+**11. Suspected Compound Variants**
+
+This section identifies other variants in the same gene (BRCA2) that appear in your case.
+
+**Clinical relevance:**
+
+- **For autosomal recessive conditions:** Two variants in the same gene (one on each chromosome) are required for disease
+- **For BRCA2 (dominant condition):** This is less relevant, but can still be informative
+- **Phasing requirement:** To determine if variants are in *cis* (same chromosome) or *trans* (different chromosomes), you need parental samples
+
+**12. Gene Coverage**
+
+This section would display read depth coverage across the BRCA2 gene if a BAM file were uploaded.
+
+This section will show "No coverage data available." However, you can still visualize coverage using the BAM file from your Jupyter Notebook environment.
+
+**Alternative visualization with IGV (optional):**
+
+1. Download and install IGV (Integrative Genomics Viewer) from [igv.org](http://igv.org)
+2. Download the `hereditary_partial.bam` file from your `Module3/Hereditary/` directory. Once downloaded, load .bam into IGV (make sure that the .bai file is in the same folder
+3. Navigate to the BRCA2 gene (chr13:32,907,420 in hg19/GRCh37)
+4. Zoom into the region around c.1813dup
+5. Observe:
+    - Read depth across the region
+    - Individual reads supporting the reference vs. alternate allele
+    - Read quality and mapping quality
+    - Presence of any alignment artifacts
+
+This manual inspection can help you identify potential technical issues that automated callers might miss.
+
+**13. Additional Tools and Resources**
+
+Scroll to the bottom of the Variant Assessment tab to find links to:
+
+- **Sequence Browser:** Explore the DNA sequence context around the variant
+
+### Exploring Associated Conditions
+
+Navigate to the **Associated Conditions** tab to see how your variant connects to clinical phenotypes. This view integrates three key elements: the variant, the gene (BRCA2), and the patient phenotypes you added earlier.
+
+**Top Section: Primary Condition Match**
+
+At the top of this view, you'll see the primary conditions associated with BRCA2 alongside the phenotypes you added to your case (ovarian neoplasm, family history of cancer, fatigue, diabetes mellitus).
+
+**Key features to observe:**
+
+- **Association strength gauge:** On the left side, you'll see a visual gauge indicating the strength of association between BRCA2 and your observed phenotypes
+    - The gauge position reflects how strongly BRCA2 variants are linked to these clinical features in the literature
+    - For ovarian neoplasm and family history of cancer, expect a strong association given BRCA2's well-established role in hereditary breast-ovarian cancer syndrome
+
+**Scrolling Through Associated Conditions**
+
+As you scroll down, Franklin displays other conditions associated with BRCA2 variants:
+
+- **Condition descriptions:** Brief summaries of each disease phenotype
+- **Phenotype matching indicators:** Franklin highlights which of your patient's phenotypes match each condition
+    - Green checkmarks or highlighted terms indicate perfect matches
+    - Grey or absent terms indicate phenotypes not observed in your patient
+
+**Expanding Condition Details**
+
+Click on any condition to see more specific information:
+
+1. Click the condition name to expand the detail panel
+2. Click the arrow icon on the right side to access condition-specific information
+3. You'll see:
+    - **Complete HPO term list:** All phenotypes associated with this specific condition or sub-specification
+    - **Matched terms highlighted in green:** HPO terms from the condition that match your patient's phenotypes
+    - **Inheritance pattern:** Whether the condition follows autosomal dominant, recessive, or X-linked inheritance
+    - **Age of onset:** Typical age range when symptoms appear
+
+<aside>
+💡
+
+**Clinical value:** This feature helps you assess whether your patient's presentation matches the expected phenotype for a BRCA2-related condition. Strong phenotype matches increase confidence that a variant is clinically relevant to the patient's case.
+
+</aside>
+
+### Using the Publications Tab
+
+Click on the **Publications** tab to access Franklin's curated scientific literature relevant to your variant and case. This is one of Franklin's most powerful features for clinical variant interpretation.
+
+**Why this matters:**
+
+Variant interpretation often requires literature review to find:
+
+- Prior case reports describing this exact variant
+- Functional studies demonstrating pathogenic mechanism
+- Clinical outcome data supporting actionability
+- Genotype-phenotype correlation studies
+
+Franklin's algorithm automatically curates and ranks publications by relevance, saving you significant time compared to manual PubMed searches.
+
+**Understanding the Scope Filter**
+
+When you first open the Publications tab, Franklin displays papers by default at the **whole gene** level. Use the **Scope** dropdown to refine your search:
+
+- **Variant:** Papers specifically mentioning your exact variant (BRCA2:c.1813dup)
+    - For this variant, expect approximately **53 articles**
+- **Amino Acid:** Papers discussing variants at this specific amino acid position
+- **Domain:** Papers about the protein domain containing your variant
+- **Whole Gene:** All BRCA2-related publications (thousands of papers)
+
+**Recommended workflow:**
+
+1. Start with **Scope = Variant** to see if this exact variant has been reported
+2. If no variant-specific papers exist, expand to **Amino Acid** or **Domain**
+3. Use **Whole Gene** scope for background reading on BRCA2 function and disease associations
+
+**Reviewing Individual Publications**
+
+Each publication entry displays:
+
+- **Title:** Full publication title
+- **Authors and journal:** Publication details
+- **PMID (PubMed ID):** Click to open the full record in PubMed
+- **Abstract preview:** Click the publication to expand and read the abstract within Franklin
+
+**Practical filtering strategy:**
+
+As you review a few articles for BRCA2:c.1813dup, you can prioritize based on:
+
+1. **Case reports:** Skim abstracts to verify the variant and patient phenotype match your case
+2. **Functional studies:** Read in detail if they provide experimental evidence of pathogenicity
+3. **Population studies:** Note allele frequencies in specific populations
+4. **Review articles:** Use for background understanding but don't cite as primary evidence
+
+<aside>
+📝
+
+**For your report:** Select 2-3 key publications that provide the strongest evidence for your variant's pathogenicity. You might include:
+
+- A case report demonstrating clinical impact
+- A functional study showing loss of protein function
+- A large cohort study confirming recurrence in affected families
+</aside>
+
+### Gene Assessment Tab
+
+The final core section for variant interpretation is the **Gene Assessment** tab. This provides gene-level context that complements your variant-specific evidence.
+
+**Why review gene-level information?**
+
+When reporting a variant clinically, you typically include:
+
+1. Variant-specific evidence (what you've reviewed so far)
+2. Gene-level summary (function, disease mechanism, constraint metrics)
+
+This dual approach helps clinicians understand both the specific variant and the broader biological context.
+
+**1. Gene Summary**
+
+At the top of the Gene Assessment tab, you'll see:
+
+- **Function description:** Summarizes BRCA2's biological role (typically sourced from RefSeq or NCBI Gene)
+    - For BRCA2, this will describe its role in DNA repair, homologous recombination, and tumour suppression
+- **Disease mechanism:** How loss of BRCA2 function leads to cancer predisposition
+
+**2. Curated Variations Distribution**
+
+This section shows the breakdown of all reported BRCA2 variants by type and classification.
+
+**Variant type categories:**
+
+- **LOF (Loss of Function):** Nonsense, frameshift, canonical splice variants
+- **Missense:** Amino acid substitutions
+- **In-frame Indels:** Insertions or deletions that don't shift the reading frame
+- **Non-coding:** Intronic, UTR, or intergenic variants
+- **Synonymous:** Silent variants that don't change amino acids
+
+**Classification breakdown:**
+
+For each variant type, you'll see counts for:
+
+- **Pathogenic** (red bars)
+- **VUS** (yellow bars)
+- **Benign** (green bars)
+
+**Interpreting the distribution for BRCA2:**
+
+You should observe that LOF variants in BRCA2 have a **significantly higher proportion classified as Pathogenic** compared to other variant types. This confirms that:
+
+- BRCA2 is highly sensitive to loss of function
+- Null variants are a well-established disease mechanism
+- Your frameshift variant (BRCA2:c.1813dup) falls into a variant class with strong prior evidence of pathogenicity
+
+<aside>
+💡
+
+**Clinical interpretation tip:** If you were analyzing a gene where LOF variants were predominantly benign or VUS, it would suggest the gene tolerates loss of function, and you'd need stronger evidence to classify a frameshift as pathogenic. The BRCA2 distribution strongly supports PVS1 code assignment for your variant.
+
+</aside>
+
+**3. Gene Pathogenicity Metrics**
+
+Scroll down to the **Gene Pathogenicity** section to review constraint and dosage sensitivity data from multiple sources.
+
+**ClinGen Dosage Sensitivity:**
+
+- **Haploinsufficiency:** Does losing one functional copy of the gene cause disease?
+    - For BRCA2, this should show **"Sufficient evidence for haploinsufficiency"**
+    - This confirms that heterozygous loss-of-function variants (like yours) are pathogenic
+- **Triplosensitivity:** Does gene duplication cause disease?
+    - Less relevant for BRCA2, but important for other genes (e.g., dosage-sensitive developmental genes)
+
+**ClinVar Pathogenicity Summary:**
+
+Franklin displays aggregated ClinVar data showing:
+
+- Total number of BRCA2 variants in ClinVar
+- Breakdown by classification (Pathogenic, Likely Pathogenic, VUS, Benign)
+- Most common variant types reported
+
+**gnomAD Constraint Metrics:**
+
+This section shows statistical evidence for negative selection against variants in BRCA2.
+
+**Key metrics explained:**
+
+- **pLI (probability of Loss of Intolerance):** Score from 0-1 indicating how intolerant a gene is to loss-of-function variants
+    - pLI > 0.9 suggests the gene is highly intolerant (LOF variants are under strong negative selection)
+    - For BRCA2, expect a moderate to high pLI score
+- **Z-score:** Compares observed vs. expected missense variants
+    - Positive Z-score = fewer variants observed than expected (intolerant to variation)
+    - Negative Z-score = more variants than expected (tolerant to variation)
+- **Observed/Expected (o/e) ratio:** Direct calculation of variant burden
+    - o/e < 0.35 suggests strong constraint
+    - o/e close to 1.0 suggests no constraint
+
+If gnomAD shows significantly **fewer LOF variants observed than expected** in the general population, it indicates strong selection pressure against loss of BRCA2 function. This supports:
+
+- The gene is critical for human health
+- LOF variants are likely to be pathogenic
+- Your frameshift variant fits the expected disease mechanism
+
+You can click the gnomAD link to explore detailed constraint metrics directly in the gnomAD browser.
+
+**4. Gene Expression Data (GTEx)**
+
+The final section provides tissue expression information from GTEx (Genotype-Tissue Expression project). Here you’ll see
+
+- **Tissue expression heatmap:** Shows in which tissues BRCA2 is expressed
+    - For BRCA2, you should see broad expression across many tissues, including ovarian tissue (relevant to your patient's phenotype)
+- **Expression level:** Relative expression intensity (darker colours = higher expression)
+- **Transcript-level expression:** Some exons may be preferentially expressed in certain tissues
+
+**Why this is clinically relevant:**
+
+For BRCA2, you already know the gene is relevant to ovarian tissue because of its well-established role in hereditary cancer. However, for less well-characterized genes, confirming tissue expression is critical:
+
+- If your patient has a kidney disorder, but the gene is not expressed in kidney tissue, the variant is unlikely to be causative
+- If multiple transcripts exist, confirming which transcript is expressed in the relevant tissue helps determine if your variant affects the functional isoform
+
+**Exploring GTEx in detail (optional):**
+
+Click the **GTEx Portal** link to access:
+
+- Quantitative expression levels across 54 tissues
+- Exon-level expression patterns
+- Transcript isoform usage in different tissues
+- eQTL data (if common variants affect gene expression)
+
+**5. GWAS Traits (optional)**
+
+At the bottom of the Gene Assessment tab, you may see **GWAS (Genome-Wide Association Study) Traits** linking BRCA2 to population-level traits or disease risks. This information is supplementary and not required for clinical variant interpretation.
+
+<aside>
+✅
+
+**You've now reviewed all core sections of Franklin's variant interpretation workspace.** You've examined:
+
+- Automated ACMG classification and evidence codes
+- Population frequency data
+- Computational predictions
+- Clinical evidence from ClinVar
+- Associated phenotypes and conditions
+- Scientific literature
+- Gene-level constraint and expression data
+
+This comprehensive review equips you with the evidence needed to confidently classify and report BRCA2:c.1813dup.
+
+</aside>
+
+### Step 8: Finalizing Your Classification and Creating a Clinical Report
+
+Now that you've reviewed all the evidence, it's time to formalize your classification and generate a report that can be shared with clinicians and other team members.
+
+**Locating the Classification Controls**
+
+In the detailed variant view where you've been working, look at the **top right corner** of the page. You'll see several action buttons:
+
+- **Remove from Workbench:** Removes the variant from your prioritized list (don't use this for BRCA2:c.1813dup, as it's clearly clinically relevant)
+- **Add to Report:** Marks this variant as reportable for the final clinical report
+- **Classify Variant:** Opens the classification form (this is what you'll click)
+
+**1. Click "Classify Variant"**
+
+Franklin will open a classification form with several sections to complete.
+
+**2. Select Your Classification**
+
+The first dropdown asks you to choose a classification tier based on your interpretation:
+
+- **Pathogenic**
+- **Likely Pathogenic**
+- **VUS (Variant of Uncertain Significance)**
+- **Likely Benign**
+- **Benign**
+
+For BRCA2:c.1813dup, based on the evidence you've reviewed (PVS1 + PM2 + supporting evidence), this should be classified as **Pathogenic**.
+
+**3. Assign Associated Condition and Inheritance**
+
+In the next section, you'll specify:
+
+- **Associated condition:** Select the most appropriate disease phenotype for this variant
+    - For BRCA2:c.1813dup, choose **"Hereditary breast and ovarian cancer syndrome"** or similar terminology that Franklin provides
+- **Inheritance pattern:** Select the mode of inheritance
+    - For BRCA2, select **"Autosomal dominant"**
+
+This information helps clinicians understand the genetic counselling implications and family screening recommendations.
+
+**4. Write Your Interpretation Summary**
+
+This is one of the most critical sections. You'll provide a brief narrative explaining your classification decision.
+
+**Key principles for writing interpretation text:**
+
+- **Use plain language:** Avoid ACMG jargon that clinicians may not understand
+    - ❌ **Don't say:** "This variant meets PM2, PVS1, and PP3 criteria"
+    - ✅ **Do say:** "This variant is absent from population databases, creates a premature stop codon in a gene where loss of function causes disease, and is predicted to be deleterious by multiple computational algorithms"
+- **Be concise:** Aim for 3-5 sentences that summarize the key evidence
+- **Include clinical context:** Reference the patient's phenotype if relevant
+
+**Example interpretation for BRCA2:c.1813dup:**
+
+> This variant is a frameshift deletion resulting in a premature stop codon at amino acid position 605. The variant is absent from large population databases (gnomAD, ExAC), indicating it is not a common benign polymorphism. BRCA2 is a well-established tumor suppressor gene where loss-of-function variants cause hereditary breast and ovarian cancer syndrome through an autosomal dominant mechanism. This variant has been reported multiple times in ClinVar with consistent Pathogenic classifications from multiple clinical laboratories. The patient's clinical presentation of ovarian neoplasm and strong family history of cancer is consistent with BRCA2-associated disease.
+> 
+
+**5. Add Supporting References (Optional)**
+
+If you identified particularly strong publications during your literature review, you can add them here:
+
+- Enter the **PMID (PubMed ID)** of relevant papers
+- Include papers that provide:
+    - Functional evidence of loss of protein function
+    - Case reports with similar phenotypes
+    - Population studies confirming pathogenicity
+
+<aside>
+📝
+
+You don't need to cite every paper you reviewed. Select 2-3 key publications that provide the strongest supporting evidence. Prioritize functional studies and expert panel consensus statements over individual case reports.
+
+</aside>
+
+**6. Review and Edit the Classification Summary**
+
+Franklin provides a structured summary based on the information you've entered. You can:
+
+- **Accept the default summary:** If Franklin's auto-generated text is accurate
+- **Edit the summary:** Modify any sections that need clarification or additional detail
+- **Add gene-level context:** Include information about BRCA2 function and disease mechanism if not already present
+
+**7. Assign ACMG Evidence Codes**
+
+The final section of the form allows you to document which ACMG criteria support your classification explicitly.
+
+Click the checkbox or toggle next to each code to include it in your formal classification.
+
+<aside>
+⚠️
+
+**Important:** Only assign codes where you have verified the supporting evidence. Don't accept all of Franklin's automated suggestions if you identified reasons to remove or downgrade any codes during your review.
+
+</aside>
+
+**8. Submit Your Classification**
+
+Once you've completed all sections of the form, click the **"Submit"** button in the top right corner.
+
+You'll see two submission options:
+
+- **Submit as Draft:** Saves your classification to the report repository but marks it as requiring review
+    - Use this option for this workshop exercise.
+    - In a clinical setting, this allows supervisors or genetic counsellors to review your work before finalization
+- **Submit as Final:** Locks the classification and generates a final report
+    - Only use this if you have sign-off authority (typically molecular geneticists or licensed genetic counsellors)
+
+**Understanding the Collaborative Workflow:**
+
+The variant interpretation process you've just completed mirrors real-world clinical laboratory workflows:
+
+**1. Genome Analysts / Bioinformaticians:**
+
+- Perform initial variant calling and quality control
+- Run automated annotation and filtering
+- Generate prioritized variant lists
+- Assign preliminary ACMG codes based on computational evidence.
+
+**2. Genetic Counsellors:**
+
+- Deep dive into patient phenotype and clinical history
+- Assess gene-disease associations and inheritance patterns
+- Review family history and segregation evidence
+- Ensure phenotype matches expected disease presentation.
+
+**3. Molecular Geneticists / Laboratory Directors:**
+
+- Final review of all evidence
+- Sign off on classification decisions
+- Ensure compliance with ACMG/AMP guidelines and regulatory standards
+- Authorize release of report to ordering physician
+
+## Part 5: Extension Exercise (Optional)
+
+If you have additional time, try classifying the second BRCA2 variant in your case:
+
+**BRCA2:c.1310_1313del (p.Glu437Valfs*22)**
+
+1. Click on this variant in your Workbench
+2. Work through the same systematic review process:
+    - Check Franklin ACMG Classification codes
+    - Review Variant Assessment evidence
+    - Check Associated Conditions and Publications
+    - Review Gene Assessment information
+3. Complete the classification form
+4. Compare your classification between the two BRCA2 variants
+
+**Discussion questions:**
+
+- Do both variants receive the same classification?
+- Are there any differences in the supporting evidence?
+- Which variant would you report first if you could only report one?
+- How would you counsel this patient based on both findings?
+
+## Summary
+
+This lab shows the transition from computational variant calling to clinical interpretation. You've seen how:
+
+1. **Automation handles data processing but requires human curation:** Franklin's algorithms assign ~60-70% of ACMG evidence automatically, but you must verify assignments and add clinical context
+2. **Population frequency is powerful but not sufficient:** Rarity alone doesn't prove pathogenicity; you need functional consequence, gene constraint, and clinical evidence
+3. **Phenotype matching strengthens interpretation:** HPO terms help prioritize variants and confirm gene-disease associations
+4. **Literature curation saves time:** Franklin's automated literature ranking is one of its most valuable features, but you must still evaluate publications
+5. **Classification is a team effort:** Real diagnostic labs involve multiple specialists with complementary expertise

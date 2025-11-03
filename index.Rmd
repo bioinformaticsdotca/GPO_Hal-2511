@@ -32,7 +32,7 @@ You will need a **Franklin** account for accessing genomics datasets and cloud-b
 3. Verify your email and log in to confirm your access.
 4. Once logged in, familiarize yourself with the interface — especially how to create a new workspace and upload a VCF file.
 
-> 💡 **Tip:** If you already have a Franklin account, make sure you can access it and remember your password before the workshop.
+> 💡 **Tip:** See Module 3, Part 1 for more detialed instructions. If you already have a Franklin account, make sure you can access it and remember your password before the workshop.
 
 ---
 
@@ -49,7 +49,7 @@ We will use **IGV** to visualize genomic variants and alignments during the lab 
 4. Launch IGV to confirm it opens correctly.
 
 > ⚠️ **Note:** IGV requires **Java 11+**. Most systems already have it, but if not, you can install OpenJDK from [https://adoptium.net/](https://adoptium.net/).
-
+> 💡 **Tip:** See Module 4, Section 1 for more detialed instructions.
 
 ## Class Photo
 
