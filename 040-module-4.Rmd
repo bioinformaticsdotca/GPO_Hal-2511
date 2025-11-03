@@ -466,7 +466,7 @@ Resolution:
 - Increase IGV memory allocation as described in Section 1 troubleshooting
 - Hide alignment tracks and view only coverage histograms
 
-### Section 4: Quality Assessment of the Suspected Deletion
+## Section 4: Quality Assessment of the Suspected Deletion
 
 Copy number variant detection from sequencing data usually requires quality assessment before clinical interpretation. Automated variant callers flag potential deletions based on statistical models, but these algorithms cannot fully account for technical artifacts arising from sequence complexity, capture efficiency, or sample quality. **Your objective in this section is to systematically evaluate whether the suspected STK11 deletion represents:**
 
