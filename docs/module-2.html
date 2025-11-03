@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 2 | Genomics for Precision Oncology 2025</title>
   <meta name="description" content="Workshop website for the 2025 Genomics for Precision Oncology Canadian Bioinformatics Workshop" />
-  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 2 | Genomics for Precision Oncology 2025" />
   <meta property="og:type" content="book" />
@@ -128,7 +128,13 @@
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html"><i class="fa fa-check"></i>Module 2</a>
 <ul>
 <li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lecture-1"><i class="fa fa-check"></i>Lecture</a></li>
-<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-1"><i class="fa fa-check"></i>Lab</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#lab-1"><i class="fa fa-check"></i>Lab</a>
+<ul>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#aws-and-unix-basics"><i class="fa fa-check"></i>AWS and Unix Basics</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#docker"><i class="fa fa-check"></i>Docker</a></li>
+<li class="chapter" data-level="" data-path="module-2.html"><a href="module-2.html#investigating-some-genomics-file-formats-and-metadata"><i class="fa fa-check"></i>Investigating Some Genomics File Formats and Metadata</a></li>
+<li><a href="module-2.html#section" id="toc-section"></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="module-3.html"><a href="module-3.html"><i class="fa fa-check"></i>Module 3</a>
 <ul>
@@ -177,7 +183,69 @@
 </div>
 <div id="lab-1" class="section level2 hasAnchor">
 <h2>Lab<a href="module-2.html#lab-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="aws-and-unix-basics" class="section level3 hasAnchor">
+<h3>AWS and Unix Basics<a href="module-2.html#aws-and-unix-basics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>See Materials from pre-workshop session</li>
+</ul>
+</div>
+<div id="docker" class="section level3 hasAnchor">
+<h3>Docker<a href="module-2.html#docker" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Docker is what is known as a container service. Basically docker containers are like miniature versions of Virtual Machines, containing a base operating system and other code. Most often these exist to run specific programs in a controlled and self-contained environment, allowing you to run programs which may have complex software dependencies without needing to install them.</p>
+<p>In this lab many of the software tools you will use are ones where we will use the version that is distributed in a docker container. Docker itself could be the subject of an entire workshop, but getting started with Docker can be easy. For our purposes we will only need to be able to run a program via Docker and understand how Docker containers interact with the file system of the AWS virtual machine we are using.</p>
+<p>First, verify docker is installed:</p>
+<p>’’’
+which docker
+’’’</p>
+<p><strong>Question:</strong> What is the path for the docker executable installed on your system?</p>
+<p>Docker containers come in the form of an image, these can be pulled (like code can be pulled with git) from remote repositories. A number of docker images have already been pulled for this AWS instance. You can see what images are already available on a system with the following command:</p>
+<p>’’’ docker image list ’’’</p>
+<p>There should be three images on the system already. These images are listed as <em>repository</em>/<em>image name</em>. Repositories can have a directory structure, and so everything to the left of the final / is the repository and directory path, while the string to the right of the terminal / is the image name. Images are also tagged with names that may provide version numbers or the names of what is known as a <em>release</em>. The most recent release of an image in a repository is also given the tage <em>latest</em>.</p>
+<p><strong>Question</strong>: What are the names of the 3 docker images on the system? What repository did they come from? Can you use this informaton to find where on the internet the repository is for the two images that come from the same repository?</p>
+<p>Docker images/containers are run on a system using the <strong>docker run</strong> command. This takes on the following structure:</p>
+<p>’’’ docker run [repository]/[image name] [command] [command-line options]’’’</p>
+</div>
+<div id="investigating-some-genomics-file-formats-and-metadata" class="section level3 hasAnchor">
+<h3>Investigating Some Genomics File Formats and Metadata<a href="module-2.html#investigating-some-genomics-file-formats-and-metadata" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="fastq-files" class="section level4 hasAnchor">
+<h4>FastQ Files<a href="module-2.html#fastq-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>FastQ File Format</li>
+<li>GZip Compression</li>
+<li>less/zless, cat/zcat, wc -l, grep/zgrep, head, tail</li>
+<li>Counting number of lines and number of reads</li>
+<li>grep for @ symbol</li>
+</ul>
+</div>
+<div id="bed-files" class="section level4 hasAnchor">
+<h4>BED Files<a href="module-2.html#bed-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Required and optional columns</li>
+<li>Simple text file</li>
+<li>Whitespace, tabs, etc -&gt; viewing special characters in text files</li>
+</ul>
+</div>
+<div id="bam-files" class="section level4 hasAnchor">
+<h4>BAM Files<a href="module-2.html#bam-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>BAM files are compressed versions of SAM files (rarely used). How can I view this file?</li>
+<li>Index files</li>
+<li>Sort Orders</li>
+<li>Read Groups</li>
+<li>Dictionary</li>
+</ul>
+</div>
+<div id="vcf-files" class="section level4 hasAnchor">
+<h4>VCF Files<a href="module-2.html#vcf-files" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<ul>
+<li>Compressed and Uncompressed VCFs</li>
+</ul>
+</div>
+</div>
+<div id="section" class="section level3">
+<h3></h3>
 
+</div>
 </div>
 </div>
             </section>
