@@ -19,7 +19,7 @@
      which docker
  ```
 
- **Question:** What is the path for the docker executable installed on your system?
+>  **Question:** What is the path for the docker executable installed on your system?
 
  Docker containers come in the form of an image, these can be pulled (like code can be pulled with git) from remote repositories. A number of docker images have already been pulled for this AWS instance. You can see what images are already available on a system with the following command:
 
@@ -29,9 +29,9 @@
 
  There should be three images on the system already. These images are listed as *repository*/*image name*. Repositories can have a directory structure, and so everything to the left of the final / is the repository and directory path, while the string to the right of the terminal / is the image name. Images are also tagged with names that may provide version numbers or the names of what is known as a *release*. The most recent release of an image in a repository is also given the tage *latest*.
 
- **Question**: What are the names of the 3 docker images on the system? What repository did they come from? Can you use this informaton to find where on the internet the repository is for the two images that come from the same repository?
+> **Question**: What are the names of the 3 docker images on the system? What repository did they come from? Can you use this informaton to find where on the internet the repository is for the two images that come from the same repository?
 
- Docker images/containers are run on a system using the **docker run** command. This takes on the following structure, many of these are optional arguments:
+ Docker images/containers are run on a system using the `docker run` command. This takes on the following structure, many of these are optional arguments:
 
  ```
      docker run [docker options] [repository]/[image name]:[tag] [command] [command options]
@@ -45,7 +45,7 @@
 
  BWA is an example of a program that when run without any options it prints out a help message and exits, giving you information on how to run the program. These messages often provide other information as well, such as the version of the software being run.
 
- **Question**: What is the version of BWA being run with this docker container?
+ > **Question**: What is the version of BWA being run with this docker container?
 
  One important aspect of Docker containers is that because they are self-contained pieces of code, they have their own filesystem "inside" the container. This exists in memory as the container is run, and is gone when the container stops running. Without some help a docker container doesn't "see" your filesystem and can't read or write files on that filesystem, it can only interact with files in its own system.
 
@@ -55,13 +55,19 @@
     docker run -v [host path]:[container path] [other docker options] [repository]/[image name]:[tag] [command] [command options]
  ```
 
- You can even specify -v [host path]:[container path] multiple times to mount multiple different directories inside your running container. This is absolutely crucial with most genomics programs we will be running. It is possible to run a container in interactive mode with the -it commnad-line flag so you can navigate and work "inside" the container. This can be very useful for understanding all of the software that may exist within the container as well as its internal filesystem structure. In this tutorial you will be given appropriate examples of volume mounting in order to mount ~/CourseData and ~/workspace.
+ You can specify `-v [host path]:[container path]`` multiple times to mount multiple different directories inside your running container. It is possible to run a container in interactive mode with the `-it` commnad-line flag so you can navigate and work "inside" the container. This can be useful for understanding all of the software that may exist within the container as well as its internal filesystem structure. In this tutorial you will be given appropriate examples of volume mounting in order to mount `~/CourseData` and `~/workspace`.
 
 
 ### Investigating Some Genomics File Formats and Metadata
 
 #### FastQ Files
-For most Next-Generation sequencing machines the primary output is the FastQ file, which is most often encountered in its compressed form: *.fastq.gz (remember that Linux doesn't actually care about filename extensions and several alternatives such as *.fq.gz are in common use). You can examine FastQ files, gzipped or not, from the command-line of a linux or MacOS system, with standard tools. One commonly used tool for viewing plain-text files from the command-line in chunks instead of loading the whole thing into memory (which would be a bad idea with msot FastQ files as they are very large) is less. When dealing with compressed files a version of the tool called zless is used instead. There are several small FastQ files we will use in this Lab in `/home/ubuntu/CourseData/Module2/FastQs/`.
+For most Next-Generation sequencing instruments the primary output is in the form of FastQ files, which are most often encountered in their compressed form: *.fastq.gz (remember that Linux doesn't actually care about filename extensions and several alternatives such as *.fq.gz are in common use).
+
+You can examine FastQ files, gzipped or not, from the command-line of a linux or MacOS system, with standard tools. One commonly used tool for viewing plain-text files from the command-line in chunks instead of loading the whole thing into memory (which would be a bad idea with msot FastQ files as they are very large) is the `less` command. When dealing with compressed files a version of the tool called `zless` is used instead. There are several small FastQ files we will use in this Lab in `/home/ubuntu/CourseData/Module2/FastQs/`.
+
+> **Note:** these 'z' forms exist for many common command-line tools: `grep/zgrep`, `less/zless`, and `cat/zcat` among others.
+
+> **Note:** If you want to hear a story of deeply nerdy humour, and why the tool less is called less, feel free to ask.
 
 Take a look at the files (one at a time) `normal_test_1.fastq.gz` and `normal_test_1.fastq.gz` in that directory using the zless tool. To page through the file hit the spacebar.
 
@@ -70,15 +76,15 @@ zless normal_test_1.fastq.gz
 zless normal_test_2.fastq.gz
 ```
 
-**Questions**: How many base pairs are the sequencing reads? What is the instrument ID of the sequencer these sequencing reads were generated on? What sequencing lane were the reads from in the normal and the tumour? What were the flowcell IDs?
+> **Questions**: How many base pairs are the sequencing reads? What is the instrument ID of the sequencer these sequencing reads were generated on? What sequencing lane were the reads from in the normal and the tumour? What were the flowcell IDs?
 
-Because of the structure of a FastQ File, you can use the number of lines in a file to determine the number of sequencing reads, zcat will output all of the lines to standard out, and we can pass that to wc -l to count the number of lines, dividing by 4 will give you the number of reads. This can be especially important to ensure that the Read 1 and Read 2 files are the same size. If they aren't, something is wrong with your data or it has come from a source where you know have unpaired reads.
+Because of the structure of a FastQ File, you can use the number of lines in a file to determine the number of sequencing reads, `zcat` will output all of the lines to standard out, and we can pass that to `wc -l` to count the number of lines, dividing by 4 will give you the number of reads. This can be especially important to ensure that the Read 1 and Read 2 files are the same size. If they aren't, something may be wrong with your data or it has come from a source where you have unpaired (singleton) reads.
 
 ```
 zcat normal_test_1.fastq.gz | wc -l
 ```
 
-**Questions**: How many reads are in the files? Are they all the same size?
+> **Questions**: How many reads are in the files? Are they all the same size?
 
 Because FastQ ID lines start with the @ symbol, you might think you could use the grep matching command to count the number of reads without needing to do any math. And on this particular data, it may actually work. Test it yourself:
 
@@ -86,11 +92,13 @@ Because FastQ ID lines start with the @ symbol, you might think you could use th
 zgrep "@" normal_test_1.fastq.gz | wc -l
 ```
 
-**Question:*** Why would this be a bad idea in practice?
+> **Question:*** Why would this be a bad idea in practice?
 
 #### BED Files
 
-BED (Browser Extensible data) files are used most often to represent **genomic ranges**. Many programs can use BED files to draw representations, like lines, on top of some sort of genomic data structure. For instance the UCSC Genome Browser, or IGV which you will use later on in this workshop. An example BED file can be found in `/home/ubuntu/CourseData/Module2/accessory_files`.
+BED (Browser Extensible data) files are used most often to represent **genomic features**. Many programs can use BED files to draw representations, like lines, on top of some sort of genomic data structure. For instance the UCSC Genome Browser, or IGV which you will use later on in this workshop. An example BED file can be found in `/home/ubuntu/CourseData/Module2/accessory_files`. A common use case for BED files is to give genomic ranges.
+
+The BED format didn't have a formal specification until 2021! The original UCSC description of the file format is [here](https://genome.cse.ucsc.edu/FAQ/FAQformat.html#format1). The formal 1.0 specification from the Global Alliance for Genomics and Health is [here](https://www.ga4gh.org/news_item/ga4gh-bed-v1-0-a-formal-standard-sets-ground-rules-for-genomic-features/).
 
 You can print the full contents of this file to standard output:
 
@@ -100,7 +108,9 @@ cat gene_target_regions.bed
 
 This is a minimal BED file with only the 3 required columns.
 
-**Question:** What does each column represent?
+> **Question:** What does each column represent?
+
+> **Note:** BED files use a 0-based coordinate system, such that the first base pair of a contig (typically a chromosome in our work) is a 0 instead of a 1.
 
 BED files are structured into column based data, where each column should be separated by a tab character. Tabs and other whitespace (like simple spaces) can't be distinguished when we output a file like this, but mixing up tabs and spaces is a common source of files not behaving, or not behaving correctly, in genomics output. Unix lets us see these special characters, like tabs and new line characters.
 
@@ -108,7 +118,7 @@ BED files are structured into column based data, where each column should be sep
 cat -A gene_target_regions.bed
 ```
 
-**Question:** What combination of characters are used to represent tabs and newlines?
+> **Question:** What combination of characters are used to represent tabs and newlines?
 
 Make a copy of this file `cp gene_target_regions.bed test.bed` and then edit the copy you made using the command-line program nano: `nano test.bed`. This opens a simple text editor that you can navigate with your keyboard arrows but not with your mouse. Delete a tab and replace it with several spaces instead and repeat the `cat -A` command but on your edited `test.bed` file. Notice the difference between tabs and spaces when you view the file this way.
 
@@ -116,9 +126,11 @@ Make a copy of this file `cp gene_target_regions.bed test.bed` and then edit the
 #### BAM Files
 BAM files (Binary SAM), are another file format for containing information about sequencing reads. While we most often see these for storing alignment (short-read mapping) data, they can actually contain unaligned sequencing reads as well. In fact the newer versions of the GATK pipeline we are dealing with here often start by converting FastQ files to Unaligned BAMs. We aren't going to do that here. BAM files are often (but not always) accompanied by an index file (*.bai). Because BAMs are compressed and generally sorted in some fashion (usuually by genomic coordinate but sometimesby Read Name), Index files allow other tools to efficiently move through and read that file. For instance by jumping directly to the part of a file where a genomic coordinate starts instead of reading it line by line.
 
+The SAM/BAM [specification](https://samtools.github.io/hts-specs/SAMv1.pdf) gives you the current format specifications of SAM and BAM files. Remember, a BAM is a compressed binary version of the SAM specification, which is encoded in plain text, although there are some differences, for instance SAM files use a 1-based coordinate system while BAMs are 0-based.
+
 Here we will use the tool `samtools` to explore BAM files. We have some example BAM files in `/home/ubuntu/CourseData/Module2/BAMs`
 
-All of the metadata associated with a file is found in its header. To view the header of the Normal sample in this directory:
+All of the metadata associated with a file is found in its header. SAM/BAM files contain a number of different 'tags' like @RG and @SQ in the header. Information on what these tags are is found in section 1.3 of the linked specification PDF (page 3). View the header of your provided BAM file and reference the specification to interpret what each of these tagged sections is referencing. To view the header of the Normal sample in this directory:
 
 ```
 samtools head C-GIAB.normal.regions_of_interest.bam
@@ -131,11 +143,11 @@ samtools head C-GIAB.normal.regions_of_interest.bam | less
 
 You'll see the sort order of a BAM file is specified with the SO tag.
 
-**Question:** What are the sort orders of the sample BAM files?
+> **Question:** What are the sort orders of the sample BAM files?
 
 After the @SQ tags, which give you the sequences the reads were aligned against, @PG tags give you different programs and command-lines that have been used on the data, appearing in the order they were used. In this case there have been some very lengthy command-lines with lots of options used on these files! Luckily the program is listed first with the ID field giving its name, and then all of the options
 
-**Question:** What programs were used on this file?
+> **Question:** What programs were used on this file?
 
 We can use samtools to do lots of things. Most commonly we use it to sort files into different sort orders, to convert from SAM to BAM or vise versa, and can even use it to view alignments.
 
@@ -147,14 +159,25 @@ samtools sort -n -@ 4 -O BAM -o [output_file_name.bam] [input.bam]
 
 Remember to specify paths if necessary for input and output files, and that the output filename doesn't already exist. Specifying `samtools sort -h` will give you the list of options you can use with samtools sort.
 
-**Question:** What do the -n, -@ and -O command-line flags do?
+> **Question:** What do the -n, -@ and -O command-line flags do?
 
 To output the read information back into FastQ format you use the `samtools fastq` command:
 
 ```
 samtools fastq -1 [output_file_name_1.fastq.gz] -2 [output_file_name_2.fastq.gz] -@ 2 [input_file.bam]
 ```
-**Question:** If you use zless to look at these FastQ files, what do you notice compared to the ones you looked at previously?
+> **Question:** If you use zless to look at these FastQ files, what do you notice compared to the ones you looked at previously?
+
+#### VCF Files
+Variant Call Format (VCF) files are used to store information about **genomic variants**, a more generic term than **mutation**. The current specification for VCF format is [here](https://samtools.github.io/hts-specs/VCFv4.2.pdf).
+
+> **Note:** VCF files are 1-based coordinate systems. Keep this in mind when converting back and forth between BAMs, BEDs, and VCFs! Conversion tools will handle this for you, but this often trips people up when looking at mutations from VCF files in BAM files for instance, which you will be doing later!
+
+Like FastQs, VCFs may be encountered in either their compressed (*.gz) or uncompressed format. VCFs are typically compressed with `bgzip`, which is mutually compatible with the standard `gzip` command and uses the same file extension. BGzip is basically a special version of gzip that was created specifically for genomics file formats like the VCF. Like BAMs, compressed VCFs should be indexed (here the command/tool for indexing a compressed VCF is `tabix`).
+
+> **Note:** If you just google the term VCF you may encounter an entirely different file format which was created for cell phones a long time ago. Sometimes you have to specify genomics or variant or similar in a google search term!
+
+Uncompressed VCFs can be examined using the `less` command, while gzip/bgzip compressed VCFs can be examined with `zless`. As with other genomic file formats the metadata of a VCF file is contained in the header. The header of a VCF file are all of the lines that start with one or more '#' characters. The last of these is a line giving the column headers for the variant that follows. The variant data section of a VCF, like a BED file, is column-based, with each column separated by a tab character. 
 
 
 ## Lab (Part 2) - Implementing the GATK Best Practices Workflow
@@ -275,12 +298,45 @@ docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-g
 Now apply it:
 
 ```
-docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk ApplyBQSR -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/Processing/normal.fixed.bam --bqsr-recal-file /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table -O /gatk/CourseData/Module2/Processing/normal.recalibrated.bam
+docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk ApplyBQSR -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/Processing/normal.fixed.bam --bqsr-recal-file /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table -O /gatk/CourseData/Module2/BAMs/normal.recalibrated.bam
 ```
 
 At this point we have a complete and pre-processed BAM file ready for variant calling!
 
+**Question:** We changed the output here for the final recalibrated BAM file as this is a 'final' output. Why is this good practice?
+
+### Putting Everything Together
+Running commands one-by-one on the command-line is the best way to learn the ins and outs of a process and how to use specific tools. However, if we are going to do this more than once we want our work to be *reproducible*, which means putting things together as a script that we can simply configure and run whenever we need it. When you hear a bioinformatician refer to a *pipeline* that is all they really mean. A bit of code infrastructure that automates a process, taking inputs through a series of steps to get a final output.
+
+In the pre-work for this course you learned about simple shell scripting. While there are more complex ways of implementing a pipeline, these are usually only needed when you are going to run lots of data and want robust error handling and other features. If you are only going to occasionally run a task, are working primarily on a server like this one, and don't need to handle a lot of complex data then a simple shell script will suffice.
+
+Take the commands you have execute so far and put them into a basic shell script. To make it more useful so that you don't have edit all your commands to change file names everytime you want to run it you should look for all of the places that you can substitute out values for variable names. That way you can simply change variable names as appropriate.
+
+The Module2 directory structure is a good one for this kind of work. It organizes inputs (FastQs and accessory files), gives locations for final outputs (BAMs and VCFs), and has a central Processing directory whose contents can be safely deleted once the final outputs are created.
+
+The best targets for variables are:
+- Paths to specific directories, especially a 'base' working directory of some kind. For instance /home/ubuntu/CourseData/Module2 here.
+- Sample names or IDs that can be substituted into file names
+- Paths to specific files that get used a lot, like for instance the GRCh38 reference sequence
+- Long strings of supporting code that gets used again and again, like some of the docker wrapping code used here for many programs.
+
+Some other pointers for good script writing:
+- Scripts execute the commands inside them 'silently', so it is good practice to use `echo` in your scripts to output a command you are executing to standard output before executing.
+- Outputting some basic information at the top of a script, like printing out what sample name or IDs are being used, references, binaries, etc can also be useful
+- Repeat exact code as little as possible to minimize the number of places you need to make changes for fixing bugs or altering code
+- Define as many variables as possible at the top of the code
+- Try and keep all the places you need to make edits for having the script run on a different sample be at the top
+
+Once you have a shell script you should be able to execute it:
+
+```
+sh [scriptname]
+```
+
+
 ### Viewing BAMs in IGV
+Some additional BAMs, made from the same data source as what we have been using so far, have been provided in the `~/CourseData/Module2/BAMs` directory. Here a complete alignment of all of the data was made, and then the BAM was "subset" so that it only contained data from a few regions of the genome. The regions of interest are the ones specified in the BED file we investigated earlier. We will investigate these BAMs in IGV to see what genes were included in our BAM.
+
 The Integrative Genomics Viewer (IGV) is a tool primarily used for viewing BAM files so you can visually see how the reads are aligned, the context of mutations, etc. You can download the program [here](https://igv.org/doc/desktop/#DownloadPage/). While there is an alternative version that runs in a browser window without installing, in my opinion that should only be used in the last resort. At the Download link there are a number of versions available depending on your operating system and CPU chipset in the case of MacOS versions. Go ahead and download and install IGV on your computer.
 
 In order to make downloading the BAM files in the `~/CourseData/Module2/BAMs` directory and their associated index files easy, we will create what is known as a soft-link to them in the `~/workspace` directory so you can download them from the browser. Here is the general form of the command:
@@ -291,19 +347,36 @@ ln -s /path/to/original_file_or_directory /path/to/symlink
 
 Run for each of the BAMs and BAI files in the Module2 BAMs directory and also do it for the BED file in the `~/CourseData/Module2/accessory_files` directory. You can then download them via the browser like how you viewed the FastQC outputs previously.
 
-When you have IGV installed and running, you can open files in it with File -> Load From File.
+First make sure the correct reference sequence is selected in the drop down menu in the upper left. The default for a new installation should be the human GRCh38 reference, which is what we want to use. IGV can be used with any reference, not just human sequences so if you ever find yourself doing microbial or viral genomics, IGV is still a useful tool!
+
+Learning all of the ins and outs of IGV is beyond the scope of this lab; however, using it to view the basics of a BAM file only requires default options.
+
+When you have IGV installed and running, you can open files in it with `File -> Load From File`. You can use this to load BAM files, and you can open multiple files at once. Navigate to where you downloaded the BAMs and thier BAI index files, select both BAM files (no need to select the BAIs) and then open them. Files load as Tracks in IGV, on the very bottom we have a representative of the reference sequence. Each BAM loads two tracks, one for the alignments themselves (only viewable when zoomed in to an appropriate resolution level) and one for plotting the coverage.
+
+We can also load VCF files, which will then indicate mutations from that file as their own Track, and BED files which will plot the ranges from that file in their own Track. VCFs will tend to load as tracks at the top while BEDs will load at the bottom. Use `File -> Load From File` to open the BED file you downloaded as well, which plots the targeted regions of the genome that are of interest.
 
 There are two easy ways to navigate to particular regions of the genome in IGV. You can type in a gene name, like KRAS, or specify genomic coordinates (like that are in your BED file) with the format: `chr9:1000-1500`. You can then change zoom levels in and out to view your alignment. Try navigating to the KRAS gene and also to each of the genomic coordinates in the BED file to inspect your BAM.
 
 By default IGV will show base pairs where the base in the sequencing read and that in the reference genome match as just a grey block. Mismatches will have the base shown and coloured, insertions in the read show up as an **I** character, and deletions as a **-** character.
 
-**Question:**: What genes were included in your BAM files? Which of these are tumour suppressors and which are oncogenes?
+**Question:**: What genes of interest were included in the regions selected for your BAM files? Which of these are tumour suppressors and which are oncogenes?
 
 You will use IGV more heavily tomorrow, epsecially when reviewing data for the Cases!
 
 ### Somatic Variant Calling with MuTect2
-Once both your tumour and normal Recalibrated BAM files are produced, you are ready for Variant Calling. However, the simple test data we have used so far won't produce any mutation calls. After all we only aligned 100,000 sequencing reads across the entire human genome.
+Once both your tumour and normal Recalibrated BAM files are produced, you are ready for Variant Calling. However, the simple test data we have used so far won't produce any mutation calls. After all we only aligned 100,000 sequencing reads across the entire human genome. Instead we will use the more complete BAMs you investigated with IGV above for variant calling.
 
-Some additional BAMs, made from the same data source as what we have been using so far, have been provided in the `~/CourseData/Module2/BAMs` directory. Here a complete alignment of all of the data was made, and then the BAM was "subset" so that it only contained data from a few regions of the genome. The regions of interest are the ones specified in the BED file we investigated earlier. We will investigate these BAMs in IGV to see what genes were included in our BAM.
+```
+docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk --java-options "-Xmx12G" Mutect2 -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/BAMs/C-GIAB.tumour.regions_of_interest.bam -I /gatk/CourseData/Module2/BAMs/C-GIAB.normal.regions_of_interest.bam -normal normal --germline-resource /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.regions_of_interest.vcf.gz
+```
+
+```
+docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk --java-options "-Xmx12G" FilterMutectCalls -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -V /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.regions_of_interest.vcf.gz -O /gatk/CourseData/Module2/VCFs/mutect2_tumour_normal.filtered.regions_of_interest.vcf.gz
+```
 
 ### Variant Annotation with VEP
+Called variants on their own are not generally the most useful.
+
+```
+apptainer exec -B $(pwd):/data -B /media/cbwdata/CourseData/tools/vep_data:/cache ~/CourseData/tools/ensembl-vep.sif vep -i /data/test_panel.GRCh38.minimal.vcf -o /data/test_panel_GRCh38.minimal.vep.txt --cache --dir_cache /cache --species homo_sapiens --assembly GRCh38 --everything
+```
