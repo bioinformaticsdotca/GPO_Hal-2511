@@ -302,7 +302,7 @@ docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-g
 I will assume this portion in the command-lines below and replace that with \[docker gatk\]. Remember that the \[\] here is not meant to by typed literally, this is indicating a variable where you will replace it with the appropriate value, like the docker associated command-line above.
 
 ```
-[docker gatk] AddOrReplaceReadGroups -I /gatk/Module2/Processing/normal.bam -O /gatk/Module2/Processing/normal.rg.bam --RGID normal_lane1 --RGLB normal_lane1 --RGSM normal --RGPL ILLUMINA --RGPU Illumina
+[docker gatk] AddOrReplaceReadGroups -I /gatk/CourseData/Module2/Processing/normal.bam -O /gatk/CourseData/Module2/Processing/normal.rg.bam --RGID normal_lane1 --RGLB normal_lane1 --RGSM normal --RGPL ILLUMINA --RGPU Illumina
 ```
 You can put whatever you want in the various RG tabs you are adding. Here I am giving Read Group IDs (RGID) and lanes the same value, and specifying the data came from Lane 1 of the Flowcell. You can alter this to whatever the Lane was that the normal and tumour came from in their respective files for accuracy. I have also given it the sample name of 'normal'. In the tumour you would want to use --RGSM tumour. This will be important for variant calling later on!
 
@@ -321,8 +321,10 @@ PCR duplication rates vary, but even at their lowest are around 1-2%, so even in
 
 > **Note:** While we refer to this step colloquially as "Duplicate Removal" we are actually only marking them in this step. The duplicate reads are still in the BAM file, but a flag is set that marks them as being a PCR duplicate. Therefore this is what we call a lossless step.
 
+The preferred method of doing this is with the MarkDuplicatesSpark tool; however, because of the java version in use in our container we need to use the non-spark version with this test setup. The command to invoke them is nearly identical. MarkDuplicatesSpark scales better on real data as it can use multiple CPU threads. But for our purposes this works just as well.
+
 ```
-[docker gatk] MarkDuplicatesSpark -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -O /gatk/CourseData/Module2/Processing/normal.dup_marked.bam
+[docker gatk] MarkDuplicates -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -O /gatk/CourseData/Module2/Processing/normal.dup_marked.bam -M /gatk/CourseData/Module2/Processing/normal.duplicate_metrics.txt
 ```
 
 #### Recalibrated Base Qualities
