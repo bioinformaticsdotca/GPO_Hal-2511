@@ -328,6 +328,8 @@ The preferred method of doing this is with the MarkDuplicatesSpark tool; however
 [docker gatk] MarkDuplicates -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -O /gatk/CourseData/Module2/Processing/normal.dup_marked.bam -M /gatk/CourseData/Module2/Processing/normal.duplicate_metrics.txt
 ```
 
+>**Question:**: What information is found in the duplicate_metrics.txt file? How many Duplicates were marked by this process?
+
 #### Recalibrated Base Qualities
 
 The Base Quality Scores that come from Illumina Sequencing data are good, but the GATK uses several models based on the data to recalibrate these based on their own models as well as the data in your alignment. This step works best with Whole Genome Sequencing. This is a step that runs in two parts, first we do a calculation that creates a recalibration table, and then we apply it.
@@ -347,6 +349,19 @@ Now apply it:
 At this point we have a complete and pre-processed BAM file ready for variant calling!
 
 > **Question:** We changed the output here for the final recalibrated BAM file as this is a 'final' output. Why is this good practice?
+
+#### Alternatives to Try
+Some tools can be run in different modes or with differe t options, and are worth exploring. For instance, it is possible to add Read Group information while running `bwa mem` with the `-R flag` flollowed by a string for adding the information:
+
+```
+-R '@RG\tID:foo\tSM:bar'
+```
+
+Try taking the RG tags you added with the GATK tool `AddOrReplaceReadGroups` and use this option with BWA MEM to add them in one go. You can them use `samtools head` to view the headers of your files and compare the @RG sections. Try taking this sam, convering it into a BAM, and then proceeding with downstream GATK tools. You can skip the AddOrReplaceReadGroups step, adjust your BAM file names accordingly.
+
+You can also try skipping the SetNmMdAndUqTags step.
+
+>**Question:** What does your command line look like?
 
 ### Putting Everything Together
 Running commands one-by-one on the command-line is the best way to learn the ins and outs of a process and how to use specific tools. However, if we are going to do this more than once we want our work to be *reproducible*, which means putting things together as a script that we can simply configure and run whenever we need it. When you hear a bioinformatician refer to a *pipeline* that is all they really mean. A bit of code infrastructure that automates a process, taking inputs through a series of steps to get a final output.
