@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Module 2 | Genomics for Precision Oncology 2025</title>
   <meta name="description" content="Workshop website for the 2025 Genomics for Precision Oncology Canadian Bioinformatics Workshop" />
-  <meta name="generator" content="bookdown 0.45 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.44 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Module 2 | Genomics for Precision Oncology 2025" />
   <meta property="og:type" content="book" />
@@ -398,6 +398,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Module 2<a href="module-2.html#module-2" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="lecture-1" class="section level2 hasAnchor">
 <h2>Lecture<a href="module-2.html#lecture-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<iframe src="https://docs.google.com/presentation/d/12IvfBisKAab6eynvqeVk6vbb2X8ItoBd/preview" width="640" height="480" allow="autoplay">
+</iframe>
 </div>
 <div id="lab-part-1" class="section level2 hasAnchor">
 <h2>Lab (Part 1)<a href="module-2.html#lab-part-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -577,7 +579,7 @@ zless normal_test_2.fastq.gz</code></pre>
 <p><strong>Question:</strong> What other files are located in the <code>~/CourseData/tools/reference/GATK-bundle-GRCh38/</code> directory? Hint: The various iterations on Homo_sapiens_assembly38.fasta with extra extensions are index files used by various programs to efficiently use the FASTA reference file.</p>
 </blockquote>
 <p>So the command-line structure for BWA-MEM (without the docker bits added on) looks like this to align two gzipped FastQ files to a reference FASTA file and output to a SAM file:</p>
-<pre><code>bwa mem /path/to/reference.fasta /path/to/sample_1.fastq.gz /path/to/sample_2.fastq.gz &gt; /path/to/output.sam</code></pre>
+<pre><code>bwa mem /path/to/reference.fasta /path/to/sample_1.fastq.gz /path/to/sample_2.fastq.gz -o /path/to/output.sam</code></pre>
 <p>You have test FastQ files for the normal sample:</p>
 <pre><code>/home/ubuntu/CourseData/Module2/FastQs/normal_test_1.fastq.gz
 /home/ubuntu/CourseData/Module2/FastQs/normal_test_2.fastq.gz</code></pre>
@@ -588,7 +590,7 @@ zless normal_test_2.fastq.gz</code></pre>
 <p>Some hints, if you use the same volume mounting paths and names as I did above with this docker command <code>docker run --rm -v "/home/ubuntu/CourseData:/data" pegi3s/bwa bwa mem</code> then the normal FastQ files would have the following paths in the Docker container:</p>
 <pre><code>/data/Module2/FastQs/normal_test_2.fastq.gz
 /data/Module2/FastQs/normal_test_1.fastq.gz</code></pre>
-<p>and the prociessing directory path would be <code>/data/Module2/Processing</code>.</p>
+<p>and the processing directory path would be <code>/data/Module2/Processing</code>.</p>
 <div id="use-samtools-to-sort-the-results-and-convert-a-sam-to-a-bam" class="section level4 hasAnchor">
 <h4>Use Samtools to sort the results and convert a SAM to a BAM<a href="module-2.html#use-samtools-to-sort-the-results-and-convert-a-sam-to-a-bam" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>For further processing with the GATK we need to sort the SAM so that it is coordinate, and not read sorted, and convert it to a BAM file. We can do this from inside our <code>~/CourseData/Module2/Processing</code> directory and we can do it in a single step:</p>
@@ -613,7 +615,7 @@ zless normal_test_2.fastq.gz</code></pre>
 <pre><code>docker run -v /home/ubuntu/CourseData:/gatk/CourseData --rm public.ecr.aws/aws-genomics/broadinstitute/gatk:4.2.6.1-corretto-11 gatk
 </code></pre>
 <p>I will assume this portion in the command-lines below and replace that with <span class="math display">\[docker gatk\]</span>. Remember that the [] here is not meant to by typed literally, this is indicating a variable where you will replace it with the appropriate value, like the docker associated command-line above.</p>
-<pre><code>[docker gatk] AddOrReplaceReadGroups -I /gatk/Module2/Processing/normal.bam -O /gatk/Module2/Processing/normal.rg.bam --RGID normal_lane1 --RGLB normal_lane1 --RGSM normal --RGPL ILLUMINA --RGPU Illumina</code></pre>
+<pre><code>[docker gatk] AddOrReplaceReadGroups -I /gatk/CourseData/Module2/Processing/normal.bam -O /gatk/CourseData/Module2/Processing/normal.rg.bam --RGID normal_lane1 --RGLB normal_lane1 --RGSM normal --RGPL ILLUMINA --RGPU Illumina</code></pre>
 <p>You can put whatever you want in the various RG tabs you are adding. Here I am giving Read Group IDs (RGID) and lanes the same value, and specifying the data came from Lane 1 of the Flowcell. You can alter this to whatever the Lane was that the normal and tumour came from in their respective files for accuracy. I have also given it the sample name of ‘normal’. In the tumour you would want to use –RGSM tumour. This will be important for variant calling later on!</p>
 <p>Modify this command-line however you need to, and also modify and run again for the tumour sample.</p>
 </div>
@@ -622,16 +624,38 @@ zless normal_test_2.fastq.gz</code></pre>
 <p>The next step runs the SetNmMdAndUqTags tool. This isn’t always required, but some upstream tools in similar workflows or ways of handling and merging BAM files may mean these particular tags aren’t set. I have found it to be good practice to run it here. These tags report the number of mismatches, mismatching positions, and the unique quality of our alignments compared to the reference sequence.</p>
 <pre><code>[docker gatk] SetNmMdAndUqTags -I /gatk/CourseData/Module2/Processing/normal.rg.bam -O /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta</code></pre>
 </div>
+<div id="markduplicates" class="section level4 hasAnchor">
+<h4>MarkDuplicates<a href="module-2.html#markduplicates" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>PCR duplication rates vary, but even at their lowest are around 1-2%, so even in our 100,000 test reads we probably have a few. Either way, for whole genome sequencing workflows this is a crucial data quality control step.</p>
+<blockquote>
+<p><strong>Note:</strong> While we refer to this step colloquially as “Duplicate Removal” we are actually only marking them in this step. The duplicate reads are still in the BAM file, but a flag is set that marks them as being a PCR duplicate. Therefore this is what we call a lossless step.</p>
+</blockquote>
+<p>The preferred method of doing this is with the MarkDuplicatesSpark tool; however, because of the java version in use in our container we need to use the non-spark version with this test setup. The command to invoke them is nearly identical. MarkDuplicatesSpark scales better on real data as it can use multiple CPU threads. But for our purposes this works just as well.</p>
+<pre><code>[docker gatk] MarkDuplicates -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -O /gatk/CourseData/Module2/Processing/normal.dup_marked.bam -M /gatk/CourseData/Module2/Processing/normal.duplicate_metrics.txt</code></pre>
+<blockquote>
+<p><strong>Question:</strong>: What information is found in the duplicate_metrics.txt file? How many Duplicates were marked by this process?</p>
+</blockquote>
+</div>
 <div id="recalibrated-base-qualities" class="section level4 hasAnchor">
 <h4>Recalibrated Base Qualities<a href="module-2.html#recalibrated-base-qualities" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The Base Quality Scores that come from Illumina Sequencing data are good, but the GATK uses several models based on the data to recalibrate these based on their own models as well as the data in your alignment. This step works best with Whole Genome Sequencing. This is a step that runs in two parts, first we do a calculation that creates a recalibration table, and then we apply it.</p>
 <p>The recalibration here uses some additional reference files, VCF files that contain variant information from dbSNP and GnomAD. Two databases of population allele references. This gives us locations of known polymorphisms in the human genome which is an input to the model.</p>
-<pre><code>[docker gatk] BaseRecalibrator -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.dbsnp138.vcf --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table</code></pre>
+<pre><code>[docker gatk] BaseRecalibrator -I /gatk/CourseData/Module2/Processing/normal.dup_marked.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.dbsnp138.vcf --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table</code></pre>
 <p>Now apply it:</p>
 <pre><code>[docker gatk] ApplyBQSR -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta -I /gatk/CourseData/Module2/Processing/normal.fixed.bam --bqsr-recal-file /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table -O /gatk/CourseData/Module2/BAMs/normal.recalibrated.bam</code></pre>
 <p>At this point we have a complete and pre-processed BAM file ready for variant calling!</p>
 <blockquote>
 <p><strong>Question:</strong> We changed the output here for the final recalibrated BAM file as this is a ‘final’ output. Why is this good practice?</p>
+</blockquote>
+</div>
+<div id="alternatives-to-try" class="section level4 hasAnchor">
+<h4>Alternatives to Try<a href="module-2.html#alternatives-to-try" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Some tools can be run in different modes or with differe t options, and are worth exploring. For instance, it is possible to add Read Group information while running <code>bwa mem</code> with the <code>-R flag</code> flollowed by a string for adding the information:</p>
+<pre><code>-R &#39;@RG\tID:foo\tSM:bar&#39;</code></pre>
+<p>Try taking the RG tags you added with the GATK tool <code>AddOrReplaceReadGroups</code> and use this option with BWA MEM to add them in one go. You can them use <code>samtools head</code> to view the headers of your files and compare the <span class="citation">(<a href="#ref-RG"><strong>RG?</strong></a>)</span> sections. Try taking this sam, convering it into a BAM, and then proceeding with downstream GATK tools. You can skip the AddOrReplaceReadGroups step, adjust your BAM file names accordingly.</p>
+<p>You can also try skipping the SetNmMdAndUqTags step.</p>
+<blockquote>
+<p><strong>Question:</strong> What does your command line look like?</p>
 </blockquote>
 </div>
 </div>
