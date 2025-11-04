@@ -244,7 +244,7 @@ We see the basic usage is: `bwa mem [options] <idxbase> <in1.fq> [in2.fq]`. In o
 So the command-line structure for BWA-MEM (without the docker bits added on) looks like this to align two gzipped FastQ files to a reference FASTA file and output to a SAM file:
 
 ```
-bwa mem /path/to/reference.fasta /path/to/sample_1.fastq.gz /path/to/sample_2.fastq.gz > /path/to/output.sam
+bwa mem /path/to/reference.fasta /path/to/sample_1.fastq.gz /path/to/sample_2.fastq.gz -o /path/to/output.sam
 ```
 You have test FastQ files for the normal sample:
 
@@ -268,7 +268,7 @@ Some hints, if you use the same volume mounting paths and names as I did above w
 /data/Module2/FastQs/normal_test_1.fastq.gz
 ```
 
-and the prociessing directory path would be `/data/Module2/Processing`.
+and the processing directory path would be `/data/Module2/Processing`.
 
 #### Use Samtools to sort the results and convert a SAM to a BAM
 
@@ -316,6 +316,15 @@ The next step runs the SetNmMdAndUqTags tool. This isn't always required, but so
 [docker gatk] SetNmMdAndUqTags -I /gatk/CourseData/Module2/Processing/normal.rg.bam -O /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta
 ```
 
+#### MarkDuplicates
+PCR duplication rates vary, but even at their lowest are around 1-2%, so even in our 100,000 test reads we probably have a few. Either way, for whole genome sequencing workflows this is a crucial data quality control step.
+
+> **Note:** While we refer to this step colloquially as "Duplicate Removal" we are actually only marking them in this step. The duplicate reads are still in the BAM file, but a flag is set that marks them as being a PCR duplicate. Therefore this is what we call a lossless step.
+
+```
+[docker gatk] MarkDuplicatesSpark -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -O /gatk/CourseData/Module2/Processing/normal.dup_marked.bam
+```
+
 #### Recalibrated Base Qualities
 
 The Base Quality Scores that come from Illumina Sequencing data are good, but the GATK uses several models based on the data to recalibrate these based on their own models as well as the data in your alignment. This step works best with Whole Genome Sequencing. This is a step that runs in two parts, first we do a calculation that creates a recalibration table, and then we apply it.
@@ -323,7 +332,7 @@ The Base Quality Scores that come from Illumina Sequencing data are good, but th
 The recalibration here uses some additional reference files, VCF files that contain variant information from dbSNP and GnomAD. Two databases of population allele references. This gives us locations of known polymorphisms in the human genome which is an input to the model.
 
 ```
-[docker gatk] BaseRecalibrator -I /gatk/CourseData/Module2/Processing/normal.fixed.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.dbsnp138.vcf --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table
+[docker gatk] BaseRecalibrator -I /gatk/CourseData/Module2/Processing/normal.dup_marked.bam -R /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.fasta --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/Homo_sapiens_assembly38.dbsnp138.vcf --known-sites /gatk/CourseData/tools/reference/GATK-bundle-GRCh38/af-only-gnomad.hg38.vcf.gz -O /gatk/CourseData/Module2/Processing/normal.bqsr_recal.table
 ```
 
 Now apply it:
