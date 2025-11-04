@@ -49,7 +49,7 @@ We will use **IGV** to visualize genomic variants and alignments during the lab 
 4. Launch IGV to confirm it opens correctly.
 
 > ⚠️ **Note:** IGV requires **Java 11+**. Most systems already have it, but if not, you can install OpenJDK from [https://adoptium.net/](https://adoptium.net/).
-> 💡 **Tip:** See Module 4, Section 1 for more detialed instructions.
+> 💡 **Tip:** See Module 4, Section 1 for more detailed instructions.
 
 ## Class Photo
 
