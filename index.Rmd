@@ -32,7 +32,7 @@ You will need a **Franklin** account for accessing genomics datasets and cloud-b
 3. Verify your email and log in to confirm your access.
 4. Once logged in, familiarize yourself with the interface — especially how to create a new workspace and upload a VCF file.
 
-> 💡 **Tip:** See Module 3, Part 1 for more detialed instructions. If you already have a Franklin account, make sure you can access it and remember your password before the workshop.
+> 💡 **Tip:** See Module 3, Part 1 for more detailed instructions. If you already have a Franklin account, make sure you can access it and remember your password before the workshop.
 
 ---
 
