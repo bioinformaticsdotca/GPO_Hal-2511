@@ -1,4 +1,10 @@
-# Module 3 Lab: Clinical Variant Interpretation with Franklin
+# Module 3
+
+## Lecture
+
+<iframe src="https://docs.google.com/presentation/d/1UiSzjDtgdLw__vSQcKMxY_v6-O5z-sd6/preview" width="640" height="480" allow="autoplay"></iframe>
+
+## Lab: Clinical Variant Interpretation with Franklin
 
 Summary: This lab focuses on clinical variant interpretation using the Franklin platform, emphasizing ACMG classification criteria. Participants will create accounts, navigate the interface, and classify variants from a hereditary cancer case. Key learning objectives include distinguishing automated predictions from manual curation, interpreting population frequency data, and understanding the classification process. The lab highlights the importance of human input in variant interpretation despite automation, the role of phenotype matching, and the value of literature curation in clinical settings.
 Text: Clinical Variant Interpretation with Franklin
