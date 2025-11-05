@@ -308,7 +308,7 @@ Now that you've explored Franklin's classification interface, you'll upload your
 
 ### Step 1: Download Your Case Data
 
-Before creating a case in Franklin, you need to download the VCF file from the JupyterHub environment.
+Before creating a case in Franklin, you need to download the VCF file from the JupyterHub environment. Visit ##.uhn-hpc.ca:8000 in your browser. The password is in the Slack channel.
 
 **Procedure:**
 
