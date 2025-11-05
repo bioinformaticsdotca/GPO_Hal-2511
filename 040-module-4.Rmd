@@ -1,4 +1,10 @@
-# Module 4 Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome
+# Module 4
+
+# Lecture
+
+<iframe src="https://docs.google.com/presentation/d/1BQjPiROARQ4qD40DWMMSoW9HM25ySXJp/preview" width="640" height="480" allow="autoplay"></iframe>
+
+## Lab - Case 3: STK11 Deletion in Peutz-Jeghers Syndrome
 
 Summary: The laboratory session focuses on assessing the STK11 deletion in Peutz-Jeghers syndrome, emphasizing systematic quality evaluation of copy number variants (CNVs) using IGV. Participants will learn to classify CNVs based on genomic content and patient phenotype, integrate bioinformatic evidence, and determine variant pathogenicity. The session covers the clinical implications of Peutz-Jeghers syndrome, the role of the STK11 gene, and the rationale for manual review of variant calls. Key steps include installing IGV, acquiring case study data, loading data into IGV, and performing quality assessments to differentiate true deletions from technical artifacts.
 Text: Module 4 Lab - Case Study on STK11 Deletion in Peutz-Jeghers Syndrome
