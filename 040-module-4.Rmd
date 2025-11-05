@@ -9,7 +9,7 @@
 Summary: The laboratory session focuses on assessing the STK11 deletion in Peutz-Jeghers syndrome, emphasizing systematic quality evaluation of copy number variants (CNVs) using IGV. Participants will learn to classify CNVs based on genomic content and patient phenotype, integrate bioinformatic evidence, and determine variant pathogenicity. The session covers the clinical implications of Peutz-Jeghers syndrome, the role of the STK11 gene, and the rationale for manual review of variant calls. Key steps include installing IGV, acquiring case study data, loading data into IGV, and performing quality assessments to differentiate true deletions from technical artifacts.
 Text: Module 4 Lab - Case Study on STK11 Deletion in Peutz-Jeghers Syndrome
 
-## Learning Objectives
+### Learning Objectives
 
 By the end of this laboratory session, you will be able to:
 
@@ -17,9 +17,9 @@ By the end of this laboratory session, you will be able to:
 2. Apply the ClinGen dosage sensitivity framework to classify copy number variants based on genomic content, haploinsufficiency evidence, and patient phenotype concordance
 3. Integrate bioinformatic evidence with clinical context to determine variant pathogenicity in the context of hereditary cancer syndromes
 
-## Background
+### Background
 
-### Peutz-Jeghers Syndrome
+#### Peutz-Jeghers Syndrome
 
 Peutz-Jeghers syndrome (PJS) is an autosomal dominant hereditary cancer predisposition syndrome caused by pathogenic variants in the STK11 gene.[[1]](https://pubmed.ncbi.nlm.nih.gov/20051941/) In autosomal dominant inheritance, a single mutated allele is sufficient to cause disease manifestation. Affected individuals have a 50% probability of transmitting the variant to each offspring.
 
@@ -31,7 +31,7 @@ The clinical presentation of PJS includes:
 
 While the hamartomatous polyps themselves are typically benign, they frequently cause complications, including intussusception and bowel obstruction.[[2]] The substantially elevated lifetime cancer risks require intensive surveillance throughout the patient's life.
 
-### The STK11 Gene and Disease Mechanism
+#### The STK11 Gene and Disease Mechanism
 
 STK11 (serine/threonine kinase 11), also known as LKB1, is located at chromosomal position 19p13.3. This tumour suppressor gene encodes a master kinase that regulates cellular polarity, energy metabolism, and growth control through the AMPK signaling pathway.[[3]](https://www.cell.com/ajhg/fulltext/S0002-9297(07)61608-5)
 
@@ -39,7 +39,7 @@ PJS operates through a haploinsufficiency mechanism. Loss of one functional STK1
 
 Exon 7 of STK11 is particularly significant from a clinical perspective. This exon encodes part of the catalytic kinase domain, and mutations affecting this region have been frequently reported in PJS patients.[[4]](https://pmc.ncbi.nlm.nih.gov/articles/PMC1734361/)
 
-### Rationale for Manual Review
+#### Rationale for Manual Review
 
 Clinical genomic analysis frequently encounters variant calls that require expert human interpretation beyond automated pipeline classification. This case presents a deletion call affecting STK11 exons 6 and 7 with characteristics that need to be evaluated.
 
@@ -56,9 +56,9 @@ This region presents known technical challenges. The sequence context is GC-rich
 
 </aside>
 
-## Section 1: Installing the Integrative Genomics Viewer
+### Section 1: Installing the Integrative Genomics Viewer
 
-### Overview of IGV
+#### Overview of IGV
 
 The Integrative Genomics Viewer (IGV) is a genome browser application developed at the Broad Institute for visualization and interactive exploration of genomic data. IGV enables integration of multiple data types, including aligned sequencing reads, variant calls, and genomic annotations.
 
@@ -69,9 +69,9 @@ For this analysis, you will use IGV to:
 - Compare patient and control samples from the same sequencing run
 - Identify supporting evidence such as heterozygous single nucleotide variants (or their absence in deleted regions)
 
-### Step 1: Download IGV
+#### Step 1: Download IGV
 
-### Windows Systems
+#### Windows Systems
 
 1. **Access the download repository:**
     - Navigate to [https://igv.org/doc/desktop/](https://igv.org/doc/desktop/) using your web browser
@@ -81,7 +81,7 @@ For this analysis, you will use IGV to:
     - File name format: `IGV_Win_[version]_WithJava.exe`
     - Save to your Downloads directory
 
-### macOS Systems
+#### macOS Systems
 
 1. **Access the download repository:**
     - Navigate to [https://igv.org/doc/desktop/](https://igv.org/doc/desktop/)
@@ -90,9 +90,9 @@ For this analysis, you will use IGV to:
     - File name format: `IGV_MacApp_[version]_[WithJava.zip](http://WithJava.zip)`
     - Save to Downloads directory
 
-### Step 2: Installation Procedures
+#### Step 2: Installation Procedures
 
-### Windows Installation
+#### Windows Installation
 
 1. **Execute the installer:**
     - Navigate to Downloads directory
@@ -106,7 +106,7 @@ For this analysis, you will use IGV to:
     - Use the desktop shortcut or locate IGV via the Start menu
     - Initial launch requires 15-30 seconds for Java initialization
 
-### macOS Installation
+#### macOS Installation
 
 1. **Locate the application file:**
     - Open Finder and navigate to Downloads
@@ -119,7 +119,7 @@ For this analysis, you will use IGV to:
     - IGV should display its main interface
     - Initial launch requires 15-30 seconds
 
-### Step 3: Installation Verification
+#### Step 3: Installation Verification
 
 Upon successful launch, the IGV interface displays:
 
@@ -134,23 +134,23 @@ Upon successful launch, the IGV interface displays:
 
 </aside>
 
-### Troubleshooting Common Issues
+#### Troubleshooting Common Issues
 
-### Java Runtime Not Found
+#### Java Runtime Not Found
 
 The recommended installers bundle the Java runtime. If you encounter a Java-related error:
 
 - Verify you downloaded the "WithJava" installer variant
 - Alternatively, install Java 11 or later
 
-### macOS Gatekeeper Restrictions
+#### macOS Gatekeeper Restrictions
 
 Follow the right-click procedure described above. Alternatively:
 
 - Open System Preferences > Security & Privacy > General
 - Locate the IGV security notice and select "Open Anyway"
 
-### Application Launch Failure
+#### Application Launch Failure
 
 First, verify that the available system memory meets the 4 GB minimum requirement. If memory is adequate but crashes persist:
 
@@ -158,9 +158,9 @@ First, verify that the available system memory meets the 4 GB minimum requiremen
 - Edit the launch script ([`igv.sh`](http://igv.sh) for macOS/Linux, `igv.bat` for Windows)
 - Modify the heap memory parameter from `-Xmx2g` to `-Xmx4g`
 
-## Section 2: Acquiring Case Study Data Files
+### Section 2: Acquiring Case Study Data Files
 
-### **Binary Alignment Map (BAM) Files and Indices**
+#### **Binary Alignment Map (BAM) Files and Indices**
 
 | **File Name** | **Contents** |
 | --- | --- |
@@ -172,7 +172,7 @@ First, verify that the available system memory meets the 4 GB minimum requiremen
 
 Each BAM file requires its corresponding BAI index file in the same directory. IGV cannot efficiently access BAM files without valid indices. These files represent region-specific extracts rather than complete exome data. Full whole exome BAM files typically range from 5-50 GB per sample, which would be impractical for workshop distribution. The region extracts contain all reads mapping to the STK11 locus plus flanking sequence, preserving complete analytical capability while reducing file size.
 
-### **Browser Extensible Data (BED) Annotation Tracks**
+#### **Browser Extensible Data (BED) Annotation Tracks**
 
 | **File Name** | **Annotation Content** |
 | --- | --- |
@@ -185,7 +185,7 @@ Each BAM file requires its corresponding BAI index file in the same directory. I
 
 These annotation tracks will appear as colored intervals in IGV.
 
-### Step 1: Accessing Data Files via Jupyter Notebook
+#### Step 1: Accessing Data Files via Jupyter Notebook
 
 All case study data files are accessible through the Jupyter Notebook environment you are currently using. 
 
@@ -195,7 +195,7 @@ All case study data files are accessible through the Jupyter Notebook environmen
 2. Locate the directory path: `Case1_Hereditary/IGV/`
 3. You should see all BAM files, BAI indices, and BED annotation files listed
 
-### Step 2: Local Directory Organization
+#### Step 2: Local Directory Organization
 
 Before downloading files to your local machine, create your local workspace.
 
@@ -225,7 +225,7 @@ cd BioinformaticsWorkshop/Module4_StructuralVariants/Case1_STK11/IGV_data
 
 Alternatively, use Finder (macOS) to create the directory structure manually.
 
-### Step 3: Downloading Files from Jupyter to Your Local Machine
+#### Step 3: Downloading Files from Jupyter to Your Local Machine
 
 **Batch File Download via Jupyter Interface**
 
@@ -244,7 +244,7 @@ Alternatively, use Finder (macOS) to create the directory structure manually.
 - Ensure each BAM file has its corresponding BAI index file
 - Keep BAM and BAI file pairs in the same directory
 
-## Section 3: Loading Data into IGV and Navigating to STK11
+### Section 3: Loading Data into IGV and Navigating to STK11
 
 We recommend to load data files into IGV in a specific order:
 
@@ -260,7 +260,7 @@ When BAM files are loaded first, followed by BED files, IGV automatically positi
 
 </aside>
 
-### Step 1: Verifying Genome Build Selection
+#### Step 1: Verifying Genome Build Selection
 
 Before loading any data files, confirm that IGV is configured to use the correct reference genome build. **All analyses in this case study use the GRCh37/hg19 reference genome build.** Using an incorrect genome build will result in misaligned data and invalid interpretations. To verify the genome build:
 
@@ -271,7 +271,7 @@ Before loading any data files, confirm that IGV is configured to use the correct
     - Select "Human (GRCh37/hg19)" from the available options
     - IGV will reload the reference genome (requires a few seconds)
 
-### Step 2: Loading BAM Alignment Files
+#### Step 2: Loading BAM Alignment Files
 
 BAM files contain the actual sequencing read alignments that form the basis of your coverage analysis. You will load all five samples (patient and controls) together.
 
@@ -307,7 +307,7 @@ Each BAM track consists of two components:
 - **Coverage track:** A histogram displaying read depth across genomic positions
 - **Alignment track:** Individual sequencing reads (visible only at high magnification)
 
-### Step 3: Loading BED Annotation Files
+#### Step 3: Loading BED Annotation Files
 
 BED files provide genomic interval annotations that establish interpretive context for sequencing data. Loading these files after BAM files positions them at the top of the visualization panel for easy reference.
 
@@ -333,7 +333,7 @@ BED files provide genomic interval annotations that establish interpretive conte
     - IGV will process the files (typically 1-5 seconds per file)
     - BED annotation tracks will appear at the top of the visualization panel
 
-### Step 4: Navigating to the STK11 Gene Region
+#### Step 4: Navigating to the STK11 Gene Region
 
 After loading all data files, you will not immediately see coverage or alignment data. The region-specific BAM files contain sequencing data only for the STK11 locus, which represents a small fraction of the genome currently displayed. To visualize the data, you must navigate to the STK11 gene region.
 
@@ -360,7 +360,7 @@ Viewing the complete STK11 gene provides context before focusing on the suspecte
 - Observe the relationship between coverage patterns and gene structure
 - Familiarize yourself with the data quality and characteristics for this case
 
-### Step 5: Normalizing Coverage Scale Across Samples
+#### Step 5: Normalizing Coverage Scale Across Samples
 
 By default, IGV displays coverage histograms using an independent scale for each sample. Each coverage track is automatically scaled from 0 to its own maximum value. This setup creates issues challenges for comparative analysis. For example, if the patient sample has maximum coverage of 180X and a control sample has maximum coverage of 300X, both histograms will fill the available vertical space. Visual comparison becomes unreliable because the same histogram height represents different absolute coverage depths.
 
@@ -394,7 +394,7 @@ To enable accurate visual comparison, you must normalize all coverage tracks to 
 
 </aside>
 
-### Step 6: Focused Navigation to the Deletion Region
+#### Step 6: Focused Navigation to the Deletion Region
 
 The suspected deletion affects STK11 exons 6 and 7, spanning genomic coordinates chr19:1,221,191 to 1,222,025 (GRCh37/hg19 reference). For detailed analysis of coverage patterns and read alignments, navigate to this specific region: 
 
@@ -408,7 +408,7 @@ The suspected deletion affects STK11 exons 6 and 7, spanning genomic coordinates
     - Individual exons will become clearly distinguishable
     - Coverage patterns within exons 6 and 7 will be visible at high resolution
 
-### Step 7: Verification
+#### Step 7: Verification
 
 After navigating to the STK11 region, verify that all data tracks are displaying correctly.
 
@@ -429,7 +429,7 @@ After navigating to the STK11 region, verify that all data tracks are displaying
     - Individual sequencing reads displayed as horizontal bars
     - Become visible when viewing regions smaller than approximately 30 kilobases
 
-### Common Issues and Troubleshooting
+#### Common Issues and Troubleshooting
 
 Issue: BAM tracks show "Index not found" error
 
@@ -472,7 +472,7 @@ Resolution:
 - Increase IGV memory allocation as described in Section 1 troubleshooting
 - Hide alignment tracks and view only coverage histograms
 
-## Section 4: Quality Assessment of the Suspected Deletion
+### Section 4: Quality Assessment of the Suspected Deletion
 
 Copy number variant detection from sequencing data usually requires quality assessment before clinical interpretation. Automated variant callers flag potential deletions based on statistical models, but these algorithms cannot fully account for technical artifacts arising from sequence complexity, capture efficiency, or sample quality. **Your objective in this section is to systematically evaluate whether the suspected STK11 deletion represents:**
 
@@ -486,7 +486,7 @@ This assessment follows the laboratory standard operating procedures used in cli
 3. Alignment pattern inspection
 4. Integration of supporting and contradictory evidence
 
-### Step 1: Configuring IGV Display Settings for Coverage Analysis
+#### Step 1: Configuring IGV Display Settings for Coverage Analysis
 
 **Collapsing alignment tracks to maximize coverage visibility:**
 
@@ -502,7 +502,7 @@ Individual alignment reads provide valuable information but consume substantial 
 
 You can expand alignment tracks later when examining read-level evidence.
 
-### Step 2: Quantitative Coverage Analysis
+#### Step 2: Quantitative Coverage Analysis
 
 Accurate coverage quantification requires measurement at specific genomic positions within the suspected deletion boundaries. You will record coverage values for both exons 6 and 7 across all five samples.
 
@@ -572,7 +572,7 @@ For a heterozygous deletion, the expected ratio is approximately 0.5 (50% reduct
 - Ratio 0.8-1.2: Coverage difference not consistent with deletion
 - Ratio <0.1 or >1.8: Homozygous deletion or duplication
 
-### Step 3: Mapping Quality Assessment
+#### Step 3: Mapping Quality Assessment
 
 Read mapping quality (MAPQ) quantifies the confidence that each sequencing read is aligned to the correct genomic location. Reads with low mapping quality may be mismapped, which can artificially reduce apparent coverage and create false positive deletion calls. MAPQ is expressed on a Phred-scaled logarithmic scale:
 
@@ -623,7 +623,7 @@ Assessing mapping quality in IGV:
 3. Sample 5-10 reads in the deletion region
 4. Verify that most reads exceed MAPQ 30
 
-### Step 4: Deletion Breakpoint Definition
+#### Step 4: Deletion Breakpoint Definition
 
 For a true structural deletion, the coverage reduction should have clearly defined boundaries corresponding to the deletion breakpoints. Gradual coverage transitions or irregular boundaries suggest technical artefacts.
 
@@ -654,7 +654,7 @@ For a true structural deletion, the coverage reduction should have clearly defin
 - Irregular or poorly defined boundaries
 - Absence of supporting structural variant evidence at transitions
 
-### Step 5: Assessment of Problematic Genomic Regions
+#### Step 5: Assessment of Problematic Genomic Regions
 
 The BED annotation tracks loaded earlier identify regions with known technical challenges. Coverage reductions that overlap with these problematic regions have higher probability of representing technical artefacts.
 
@@ -690,7 +690,7 @@ Ensure you are viewing the region `chr19:1,221,191-1,222,025` (the deletion coor
 | Overlap with one problematic region track | Interpret cautiously; consider additional validation |
 | Overlap with multiple problematic region tracks | High probability of technical artifact; variant call may be false positive |
 
-### Section 6: Evaluation of Supporting Genetic Evidence
+#### Section 6: Evaluation of Supporting Genetic Evidence
 
 Beyond coverage patterns, additional genetic evidence can support or contradict a deletion hypothesis.
 
@@ -714,7 +714,7 @@ If the patient is heterozygous for single nucleotide variants (SNVs) within the 
 - If no heterozygous SNVs are present: This does not confirm deletion (absence of evidence is not evidence of absence), but it does not contradict the deletion hypothesis.
 - If homozygous SNVs are present: This is consistent with a deletion (only one allele remains visible).
 
-### Section 7: Integrating Evidence and Reaching a Quality Assessment Conclusion
+#### Section 7: Integrating Evidence and Reaching a Quality Assessment Conclusion
 
 After completing the evaluation, integrate all evidence to reach a conclusion about deletion authenticity. Create a summary of your findings:
 
@@ -753,13 +753,13 @@ Based on your evidence summary, select the most appropriate conclusion:
 
 Document your quality assessment conclusion with specific supporting evidence. In clinical practice, this documentation is included in the variant interpretation report.
 
-### Proceeding to Clinical Variant Interpretation
+#### Proceeding to Clinical Variant Interpretation
 
 If your quality assessment supports a true deletion (categories 1 or 2 above), proceed to Section 5 for clinical interpretation using the ClinGen CNV Loss framework. If your assessment suggests a technical artifact (category 4), skip to the final discussion section.
 
-## Section 5: Clinical Interpretation of Copy Number Loss Using ClinGen Guidelines
+### Section 5: Clinical Interpretation of Copy Number Loss Using ClinGen Guidelines
 
-### Overview of ClinGen CNV Interpretation Framework
+#### Overview of ClinGen CNV Interpretation Framework
 
 After confirming that a copy number variant is likely genuine through quality assessment, the next critical step is determining its clinical significance. This requires systematic evaluation of:
 
@@ -778,7 +778,7 @@ The Clinical Genome Resource (ClinGen) consortium has developed a standardized s
 
 The ClinGen framework is implemented as a technical standard by clinical laboratories worldwide and is the basis for CNV interpretation guidelines from the American College of Medical Genetics (ACMG).
 
-### Accessing the ClinGen CNV Loss Calculator
+#### Accessing the ClinGen CNV Loss Calculator
 
 The ClinGen CNV interpretation process is facilitated by an interactive web-based tool that guides you through systematic evaluation of each evidence criterion.
 
@@ -801,11 +801,11 @@ The calculator is organized into sections corresponding to ACMG/ClinGen scoring 
 
 Each section contains specific evidence criteria with associated point values. The calculator automatically tallies points and suggests a classification based on accumulated evidence.
 
-### Section 1 - Initial Assessment of Genomic Content
+#### Section 1 - Initial Assessment of Genomic Content
 
 Section 1 assesses what genes and genomic elements are affected by the deletion. The clinical significance of a CNV depends critically on the functional importance of the deleted genomic content.
 
-### Criterion 1A: Does the CNV include any protein-coding or other critical genomic elements?
+#### Criterion 1A: Does the CNV include any protein-coding or other critical genomic elements?
 
 **Objective:** Determine whether the deletion affects functionally important genomic sequences.
 
@@ -824,11 +824,11 @@ For this case:
 
 - Continue evaluation
 
-### **Section 2 - Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions**
+#### **Section 2 - Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions**
 
 Section 2 evaluates whether the CNV overlaps with genes or genomic regions that have established or predicted haploinsufficiency (HI) or established benign status. This section is the most extensive portion of the ClinGen framework and evaluates whether the gene(s) affected by the CNV are sensitive to dosage imbalance.
 
-### **Criterion 2A: Does the CNV completely overlap an established HI gene or genomic region?**
+#### **Criterion 2A: Does the CNV completely overlap an established HI gene or genomic region?**
 
 **Objective:** Determine whether the deletion completely overlaps an established haploinsufficient gene or genomic region.
 
@@ -843,7 +843,7 @@ For this case:
 
 - There is no complete overlap
 
-### **Criterion 2B-2E: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions**
+#### **Criterion 2B-2E: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions**
 
 **These criteria evaluate partial gene overlaps:**
 
@@ -881,11 +881,11 @@ For STK11: Haploinsufficiency score = 3 (sufficient evidence)
 
 - The deletion affects exons 6-7, which are internal exons of STK11 (not at either terminal end). This constitutes an intragenic deletion falling under Criterion 2E. Assign 0.45-0.90 points
 
-### **Criterion 2F-G: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions**
+#### **Criterion 2F-G: Overlap with Established/Predicted HI or Established Benign Genes/Genomic Regions**
 
 The STK11 deletion does not overlap any established benign CNV regions documented in population databases. Since STK11 is a well-established haploinsufficient gene with definitive clinical evidence, computational HI predictors (Criterion 2H) do not contribute additional scoring. **Score: 0 points** (continue evaluation).
 
-### **Section 3 - Evaluation of Gene Number**
+#### **Section 3 - Evaluation of Gene Number**
 
 Section 3 accounts for the number of genes affected by the deletion. Deletions affecting multiple genes may have additive effects on phenotype. For this case, the deletion affects **one gene (STK11)**
 
@@ -903,7 +903,7 @@ For this case:
 
 - Select: 3A 0-24 genes from dropdown menu. No points assigned
 
-### **Section 4 - Detailed Evaluation of Genomic Content Using Published Literature, Public Databases, and/or Internal Lab Data**
+#### **Section 4 - Detailed Evaluation of Genomic Content Using Published Literature, Public Databases, and/or Internal Lab Data**
 
 This section is used to evaluate literature and database evidence for genes or regions where haploinsufficiency has been reported but not yet formally established.
 
@@ -927,7 +927,7 @@ As an excersice, here is how you can determine the presence of other sinilar cli
     - Click on individual variant entries to view details
     - Relevant pathogenic (red) deletions affecting exons 6-7
 
-### Section 5 - Evaluation of Inheritance Pattern/Family History for Patient Being Studied
+#### Section 5 - Evaluation of Inheritance Pattern/Family History for Patient Being Studied
 
  This section evaluates whether the CNV is de novo, inherited, or shows segregation/non-segregation patterns in the patient's family. Points are assigned based on inheritance data and how well the patient's phenotype matches established disease presentations.
 
@@ -952,7 +952,7 @@ Limited inheritance and family history information is available for this patient
 
 **However, we can still apply criterion 5H.**
 
-### Criterion 5H: Inheritance information unavailable or uninformative, with highly specific consistent phenotype
+#### Criterion 5H: Inheritance information unavailable or uninformative, with highly specific consistent phenotype
 
 Despite lacking detailed family data, the patient presents with clinical features highly specific for Peutz-Jeghers syndrome:
 
@@ -966,7 +966,7 @@ For this case:
 
 - Assign: 0.30 points. Inheritance uninformative, but patient has highly specific phenotype consistent with similar cases
 
-## Step 6: Calculating the Final Classification
+### Step 6: Calculating the Final Classification
 
 The ClinGen calculator automatically tallies point values from all scored criteria and suggests a classification.
 
@@ -991,7 +991,7 @@ The scoring framework uses the following point thresholds:
 - **−0.90 to −0.01 points:** Likely benign
 - **≤−0.99 points:** Benign
 
-## Step 7: Clinical Recommendations and Validation
+### Step 7: Clinical Recommendations and Validation
 
 You have now completed the interpretation of a copy number loss variant using the ClinGen framework. The process comprised:
 
@@ -1020,33 +1020,33 @@ Write a **200-300 word summary** that addresses the following:
 
 ---
 
-## References
+### References
 
-### Primary Literature
+#### Primary Literature
 
 1. van Lier MG, Wagner A, Mathus-Vliegen EM, Kuipers EJ, Steyerberg EW, van Leerdam ME. High cancer risk in Peutz-Jeghers syndrome: a systematic review and surveillance recommendations. *Am J Gastroenterol*. 2010;105(6):1258-1265. doi:10.1038/ajg.2009.725. [https://pubmed.ncbi.nlm.nih.gov/20051941/](https://pubmed.ncbi.nlm.nih.gov/20051941/)
 2. Jelsig AM, Karstensen JG, Overeem Hansen TV. Progress report: Peutz–Jeghers syndrome. *Familial Cancer*. 2024;23:409-417. [https://doi.org/10.1007/s10689-024-00362-7](https://doi.org/10.1007/s10689-024-00362-7)
 3. Wang Z, Churchman M, Avizienyte E, et al. Germline mutations of the LKB1 (STK11) gene in Peutz-Jeghers patients. *J Med Genet*. 1999;36(5):365-368. [https://pmc.ncbi.nlm.nih.gov/articles/PMC1734361/](https://pmc.ncbi.nlm.nih.gov/articles/PMC1734361/)
 4. Volikos E, Robinson J, Aittomäki K, et al. LKB1 exonic and whole gene deletions are a common cause of Peutz-Jeghers syndrome. *J Med Genet*. 2006;43(5):e18. [https://ncbi.nlm.nih.gov/pmc/articles/PMC2564523/](https://ncbi.nlm.nih.gov/pmc/articles/PMC2564523/)
 
-### Software and Databases
+#### Software and Databases
 
 1. Robinson JT, Thorvaldsdóttir H, Winckler W, et al. Integrative Genomics Viewer. *Nat Biotechnol*. 2011;29(1):24-26. IGV software available at: [https://igv.org/doc/desktop/](https://igv.org/doc/desktop/)
 2. ClinGen Dosage Sensitivity Map. Clinical Genome Resource. Available at: [https://search.clinicalgenome.org/kb/gene-dosage?page=1&size=25&search](https://search.clinicalgenome.org/kb/gene-dosage?page=1&size=25&search)
 3. ClinGen CNV Interpretation Calculator. Clinical Genome Resource. Available at: [https://cnvcalc.clinicalgenome.org/cnvcalc/cnv-loss](https://cnvcalc.clinicalgenome.org/cnvcalc/cnv-loss)
 4. UCSC Genome Browser (GRCh37/hg19). University of California Santa Cruz Genomics Institute. Available at: [https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr19%3A1221191-1222025&hgsid=3296387915_3wxp93QQggeMSDa41nPThCuN6Dtf](https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr19%3A1221191-1222025&hgsid=3296387915_3wxp93QQggeMSDa41nPThCuN6Dtf)
 
-### Guidelines and Standards
+#### Guidelines and Standards
 
 1. Riggs ER, Andersen EF, Cherry AM, et al. Technical standards for the interpretation and reporting of constitutional copy-number variants: a joint consensus recommendation of the American College of Medical Genetics and Genomics (ACMG) and the Clinical Genome Resource (ClinGen). *Genet Med*. 2020;22(2):245-257.
 
-# Module 4 Lab: Microsatellite Instability Visualization
+## Lab - Microsatellite Instability Visualization
 
 Date: November 5, 2025
 Summary: The lab focuses on visualizing microsatellite instability (MSI) patterns in tumor versus normal tissue using IGV, emphasizing the significance of allelic heterogeneity and its clinical applications, including Lynch syndrome screening and immunotherapy selection. Participants will download and analyze BAM files, observe instability at specific microsatellite loci, and understand the implications of MSI in cancer diagnostics and treatment.
 Text: Microsatellite Instability Visualization Lab Overview
 
-## Learning Objectives
+### Learning Objectives
 
 By the end of this lab, you will:
 
@@ -1054,7 +1054,7 @@ By the end of this lab, you will:
 2. Recognize allelic heterogeneity as the molecular signature of mismatch repair deficiency
 3. Connect MSI testing to clinical applications including Lynch syndrome screening and immunotherapy selection
 
-## Lab Overview
+### Lab Overview
 
 **Duration:** 20 minutes
 
@@ -1062,7 +1062,7 @@ Microsatellite instability (MSI) is a hypermutator phenotype caused by defective
 
 This lab uses data from a colorectal cancer case with confirmed MSI-high status (See reference at the end). You'll visualize specific microsatellite loci where the tumor shows allelic heterogeneity compared to the patient's normal tissue.
 
-## Background: Understanding Microsatellite Instability
+### Background: Understanding Microsatellite Instability
 
 Microsatellites are repetitive DNA sequences (1-6 base pair motifs) that constitute approximately 3% of the human genome. Common types include mononucleotide repeats like (A)n, dinucleotide repeats like (CA)n, and higher-order repeats.
 
@@ -1072,9 +1072,9 @@ When MMR is deficient (via germline pathogenic variants in Lynch syndrome or som
 
 Unlike typical clonal driver mutations, MSI manifests as multiple different indel alleles at each microsatellite locus. Each tumor subclone independently acquires random polymerase slippage errors, creating a characteristic "pile-up" appearance in sequencing data with insertions, deletions, and varying allele fractions. Normal tissue shows uniform read alignment because MMR efficiently corrects rare errors.
 
-## Part 1: Data Download from Jupyter Notebook
+### Part 1: Data Download from Jupyter Notebook
 
-### Accessing the Data Directory
+#### Accessing the Data Directory
 
 1. Open your JupyterHub session in a web browser
 2. Navigate to the course data directory:
@@ -1089,7 +1089,7 @@ Unlike typical clonal driver mutations, MSI manifests as multiple different inde
     - `test.tumor.bam`
     - `test.tumor.bam.bai`
 
-### Downloading the BAM Files
+#### Downloading the BAM Files
 
 **Download the tumor sample:**
 
@@ -1132,9 +1132,9 @@ test.normal.bam
 test.normal.bam.bai
 ```
 
-## Part 2: Loading Data into IGV
+### Part 2: Loading Data into IGV
 
-### Installing and Launching IGV
+#### Installing and Launching IGV
 
 If you haven't already installed IGV from a previous lab session, refer to the previous case for installation instructions.
 
@@ -1150,7 +1150,7 @@ Ensure you're using the hg19 reference genome to match the alignment.
 3. Select **"Human (hg19)"** from the list
 4. Wait for IGV to load the reference genome (this may take 10-15 seconds)
 
-### Loading the BAM Files
+#### Loading the BAM Files
 
 **Load the normal sample:**
 
@@ -1177,11 +1177,11 @@ You should now see two tracks in the IGV viewer:
 
 </aside>
 
-## Part 3: Visualizing Microsatellite Instability
+### Part 3: Visualizing Microsatellite Instability
 
 You'll now navigate to a highly MSI-sensitive locus on chromosome 1 where the tumor shows instability compared to normal tissue.
 
-### Step 1: Navigate to the Microsatellite Locus
+#### Step 1: Navigate to the Microsatellite Locus
 
 In IGV's search box at the top of the screen, paste the coordinates below:
 
@@ -1199,7 +1199,7 @@ Press **Enter** to jump to the locus. You should see the reference sequence disp
 
 </aside>
 
-### Step 2: Configure IGV Track Display Settings
+#### Step 2: Configure IGV Track Display Settings
 
 To optimize visualization of microsatellite instability patterns, adjust the alignment track settings:
 
@@ -1215,7 +1215,7 @@ To optimize visualization of microsatellite instability patterns, adjust the ali
 
 </aside>
 
-### Step 3: Observe and Compare MSI Patterns
+#### Step 3: Observe and Compare MSI Patterns
 
 Now examine the alignment patterns in the T×19 microsatellite region. Focus on the differences between tumor and normal tissue.
 
@@ -1238,7 +1238,7 @@ Now examine the alignment patterns in the T×19 microsatellite region. Focus on 
 - **Heterogeneous appearance:** The "noisy" pattern reflects multiple tumor subclones with independent slippage errors
 - **White gaps in reads:** Deletions appear as empty spaces where bases are missing (connected by a black line, and the number of nucleotides involved.
 
-### Step 4: Understanding What You're Seeing
+#### Step 4: Understanding What You're Seeing
 
 **Why mononucleotide tracts are MSI-sensitive:**
 
@@ -1260,7 +1260,7 @@ At most mononucleotide repeats, deletions outnumber insertions due to the mechan
 
 Even observing instability at this **one** microsatellite strongly suggests genome-wide MMR deficiency. In MSI-high tumors, thousands of similar loci show comparable patterns across the genome.
 
-### Step 5: Lab Deliverable
+#### Step 5: Lab Deliverable
 
 **Take a screenshot of your IGV view showing both tracks** (tumor and normal) with the microsatellite region visible. Your screenshot should clearly show:
 
@@ -1277,7 +1277,7 @@ Even observing instability at this **one** microsatellite strongly suggests geno
 
 Save the screenshot with a descriptive filename (e.g., `MSI_chr1_T19_comparison.png`)
 
-## Summary and Clinical Significance
+### Summary and Clinical Significance
 
 By comparing tumor and normal alignments at microsatellite loci, you've visualized:
 
@@ -1285,7 +1285,7 @@ By comparing tumor and normal alignments at microsatellite loci, you've visualiz
 2. **Tumor-specific instability:** Normal tissue maintains stable repeat lengths, while tumor tissue shows widespread variation
 3. **Frameshift accumulation:** Insertions and deletions create reading frame disruptions in coding sequences
 
-### Clinical Applications of MSI Testing
+#### Clinical Applications of MSI Testing
 
 **1. Diagnostic classification:**
 
@@ -1309,6 +1309,6 @@ By comparing tumor and normal alignments at microsatellite loci, you've visualiz
 - MSI-high colorectal cancers have better stage-adjusted prognosis
 - May not benefit from 5-fluorouracil chemotherapy (standard for MSS tumors)
 
-### References
+#### References
 
 Ziegler, J., Hechtman, J.F., Rana, S. et al. A deep multiple instance learning framework improves microsatellite instability detection from tumor next generation sequencing. *Nat Commun* 16, 136 (2025).
