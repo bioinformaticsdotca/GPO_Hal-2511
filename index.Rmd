@@ -53,7 +53,7 @@ We will use **IGV** to visualize genomic variants and alignments during the lab 
 
 ## Class Photo
 
-<iframe src="https://drive.google.com/drive/folders/1D2MXwpWcPsiopcs8i9kk_CI8BNmlnEPN/preview" width="640" height="480" allow="autoplay"></iframe>
+<iframe src="https://drive.google.com/file/d/11xw0rzfqz0pnQhKSqyGwpFgsBIQ1D6Os/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Schedule
 
